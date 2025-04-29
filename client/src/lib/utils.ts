@@ -41,7 +41,11 @@ export async function readFileAsDataURL(file: File): Promise<string> {
 
 export const calculateHourlyRate = (totalAmount: number, totalHours: number): number => {
   if (totalHours === 0) return 0;
-  return totalAmount / totalHours;
+  // Calculate the hourly rate but do not round it
+  // We use parseFloat and toFixed(2) to ensure we maintain exactly 2 decimal places
+  // and prevent floating point precision issues while not rounding the value
+  const hourlyRate = totalAmount / totalHours;
+  return parseFloat(hourlyRate.toFixed(2));
 };
 
 export const calculatePayout = (hours: number, hourlyRate: number): number => {
