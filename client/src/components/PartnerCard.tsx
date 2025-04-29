@@ -3,35 +3,33 @@ import { formatCurrency } from "@/lib/utils";
 
 type PartnerCardProps = {
   partner: PartnerPayout;
+  hourlyRate: number;
 };
 
-export default function PartnerCard({ partner }: PartnerCardProps) {
+export default function PartnerCard({ partner, hourlyRate }: PartnerCardProps) {
+  // For the calculation display
+  const exactCalculation = `${partner.hours} × $${hourlyRate} = $${(partner.hours * hourlyRate).toFixed(2)} → $${partner.rounded}`;
+  
   return (
-    <div className="bg-[hsl(var(--dark-bg))] rounded-lg p-4 border border-[hsl(var(--dark-border))] card-hover animate__animated animate__fadeIn">
-      <div className="flex justify-between items-start mb-3">
-        <h3 className="font-bold text-white">{partner.name}</h3>
-        <span className="bg-[hsl(var(--starbucks-green))] bg-opacity-20 text-[hsl(var(--starbucks-light))] px-2 py-1 rounded-md text-xs">
-          {partner.hours} hrs
-        </span>
+    <div className="bg-[#2d4845] rounded-lg overflow-hidden animate__animated animate__fadeIn">
+      <div className="flex justify-between items-center p-4">
+        <h3 className="font-medium text-white text-lg">{partner.name}</h3>
+        <span className="text-[#e57697] text-2xl font-bold">${partner.rounded}</span>
       </div>
       
-      <div className="mb-4">
-        <div className="flex justify-between text-sm mb-1">
-          <span className="text-gray-400">Payout Amount</span>
-          <span className="font-mono font-bold">{formatCurrency(partner.payout)}</span>
-        </div>
-        <div className="flex justify-between text-sm">
-          <span className="text-gray-400">Rounded Amount</span>
-          <span className="font-mono font-bold">{formatCurrency(partner.rounded)}</span>
-        </div>
+      <div className="bg-[#1e3330] p-2 px-4">
+        <p className="text-white text-sm">{partner.hours} hours</p>
       </div>
       
-      <div className="border-t border-[hsl(var(--dark-border))] pt-3">
-        <p className="text-sm text-gray-400 mb-2">Bill Breakdown</p>
-        <div className="flex flex-wrap gap-2 text-xs">
+      <div className="bg-[#2a4240] p-3 px-4">
+        <p className="text-[#aad4ca] text-sm">{exactCalculation}</p>
+      </div>
+      
+      <div className="bg-[#1e3330] p-3 px-4">
+        <div className="flex flex-wrap gap-2">
           {partner.billBreakdown.map((bill, index) => (
-            <span key={index} className="bg-[hsl(var(--dark-surface))] px-2 py-1 rounded">
-              {bill.quantity} × ${bill.denomination}
+            <span key={index} className="bg-[#2a4240] text-[#aad4ca] px-3 py-1 rounded-full text-sm">
+              {bill.quantity}×${bill.denomination}
             </span>
           ))}
         </div>

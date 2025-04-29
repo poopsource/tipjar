@@ -45,9 +45,19 @@ export const calculateHourlyRate = (totalAmount: number, totalHours: number): nu
   // Calculate the hourly rate without any rounding
   const hourlyRate = totalAmount / totalHours;
   
-  // Truncate to 2 decimal places without rounding
-  // Math.floor(hourlyRate * 100) / 100 truncates to 2 decimal places
-  return Math.floor(hourlyRate * 100) / 100;
+  // Truncate to exactly 2 decimal places (1.376859286560484 becomes 1.37)
+  // Without any rounding at all
+  const hourlyRateStr = hourlyRate.toString();
+  const decimalIndex = hourlyRateStr.indexOf('.');
+  
+  if (decimalIndex === -1) {
+    return hourlyRate; // No decimal part
+  }
+  
+  // Truncate to hundredth place without rounding
+  // Make sure we have enough decimal places
+  const twoDecimalPlaces = hourlyRateStr.substring(0, decimalIndex + 3);
+  return parseFloat(twoDecimalPlaces);
 };
 
 export const calculatePayout = (hours: number, hourlyRate: number): number => {
