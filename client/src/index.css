@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 150 84.2% 19.2%;
+  --primary-foreground: 120 5.9% 90%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 240 4.9% 83.9%;
+  --radius: 0.5rem;
+  
+  /* Starbucks colors */
+  --starbucks-green: 153 100% 19.2%;
+  --starbucks-dark: 173 33.3% 19.6%;
+  --starbucks-light: 160 30% 87.1%;
+  --starbucks-gray: 0 0% 29.2%;
+  
+  --dark-bg: 0 0% 7.1%;
+  --dark-surface: 0 0% 11.8%;
+  --dark-border: 0 0% 17.6%;
+  
+  /* Chart colors */
+  --chart-1: 153 100% 19.2%;
+  --chart-2: 173 33.3% 19.6%;
+  --chart-3: 160 30% 87.1%;
+  --chart-4: 0 0% 29.2%;
+  --chart-5: 0 0% 60%;
+  
+  /* Sidebar colors */
+  --sidebar-background: 173 33.3% 19.6%;
+  --sidebar-foreground: 0 0% 98%;
+  --sidebar-primary: 153 100% 19.2%;
+  --sidebar-primary-foreground: 120 5.9% 90%;
+  --sidebar-accent: 160 30% 87.1%;
+  --sidebar-accent-foreground: 173 33.3% 19.6%;
+  --sidebar-border: 150 84.2% 25%;
+  --sidebar-ring: 153 100% 19.2%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    background-color: hsl(var(--dark-bg));
+  }
+
+  @font-face {
+    font-family: 'Lander';
+    src: local('Lander'), url('https://fonts.cdnfonts.com/css/lander') format('woff2');
+  }
+}
+
+@layer components {
+  .dropzone {
+    @apply border-2 border-dashed border-gray-500 transition-all duration-300 ease-in-out;
+  }
+  
+  .dropzone.active {
+    @apply border-[hsl(var(--starbucks-green))] bg-[hsl(var(--starbucks-green))] bg-opacity-10;
+  }
+  
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .card-hover {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  .card-hover:hover {
+    @apply -translate-y-1 shadow-lg;
+  }
+}
