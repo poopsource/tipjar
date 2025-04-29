@@ -39,12 +39,22 @@ export async function analyzeImage(imageBase64: string): Promise<{text: string |
     const apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
     
     const promptText = `
-      Extract all partner names and their work hours from this schedule image. 
-      Look for patterns like "Name: X hours" or similar formats.
-      Return each partner's name followed by their hours, one per line.
-      Example output format:
+      Extract ALL TEXT from this image first. Then identify and extract ALL partner names and their tippable hours from the text.
+      
+      Look for patterns indicating partner names followed by hours, such as:
+      - "Name: X hours" or "Name: Xh"
+      - "Name - X hours"
+      - "Name (X hours)"
+      - Any text that includes names with numeric values that could represent hours
+      
+      Return EACH partner's full name followed by their hours, with one partner per line.
+      Format the output exactly like this:
       John Smith: 32
-      Maria Garcia: 24
+      Maria Garcia: 24.5
+      Alex Johnson: 18.75
+      
+      Make sure to include ALL partners mentioned in the image, not just the first one.
+      If hours are not explicitly labeled, look for numeric values near names that could represent hours.
     `;
     
     const requestBody = {

@@ -89,9 +89,13 @@ export default function FileDropzone() {
         throw new Error(errorMsg);
       }
       
+      // Always set the extracted text if available to show everything OCR found
+      if (result.extractedText) {
+        setExtractedText(result.extractedText);
+      }
+      
       if (result.partnerHours && result.partnerHours.length > 0) {
         setPartnerHours(result.partnerHours);
-        setExtractedText(result.extractedText);
         setDropzoneState(DropzoneState.SUCCESS);
         
         setTimeout(() => {
@@ -100,12 +104,18 @@ export default function FileDropzone() {
         
         toast({
           title: "Schedule processed",
-          description: "Partner hours have been extracted successfully",
+          description: `Successfully extracted ${result.partnerHours.length} partners`,
         });
       } else {
         // No partners found in the image
         setErrorMessage("No partner information detected in the image. Please try a different image or use manual entry.");
-        throw new Error("No partner information detected");
+        setDropzoneState(DropzoneState.ERROR);
+        
+        toast({
+          title: "Processing issue",
+          description: "OCR detected text but couldn't identify partner hours. Try manual entry instead.",
+          variant: "destructive"
+        });
       }
     } catch (error: any) {
       console.error(error);

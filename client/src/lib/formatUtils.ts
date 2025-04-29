@@ -4,23 +4,24 @@
  * @returns Formatted text with each partner on a new line
  */
 export function formatOCRResult(text: string): string {
-  // First, clean up any weird spacing
-  let cleaned = text.replace(/\s+/g, ' ').trim();
-  
-  // Try to identify name and hour patterns
-  const partnerPattern = /([A-Za-z\s]+)[\s\-:]+(\d+(?:\.\d+)?)\s*(?:hours|hrs?|h)/gi;
-  
-  let matches;
-  let formattedText = '';
-  
-  // Handle matched patterns
-  while ((matches = partnerPattern.exec(cleaned)) !== null) {
-    const name = matches[1].trim();
-    const hours = matches[2].trim();
-    formattedText += `${name}: ${hours}\n`;
+  // If the text already contains line breaks, assume it's already formatted by Gemini API
+  if (text.includes('\n')) {
+    // Just clean each line
+    return text.split('\n')
+      .map(line => line.trim())
+      .filter(line => line.length > 0)
+      .join('\n');
   }
   
-  return formattedText.trim();
+  // For single-line text, try to extract and format partners
+  const partners = extractPartnerHours(text);
+  
+  if (partners.length > 0) {
+    return partners.map(p => `${p.name}: ${p.hours}`).join('\n');
+  }
+  
+  // If we couldn't extract partners in a structured way, return the original text
+  return text.trim();
 }
 
 /**
@@ -29,6 +30,71 @@ export function formatOCRResult(text: string): string {
  * @returns Array of {name, hours} objects
  */
 export function extractPartnerHours(text: string): Array<{name: string, hours: number}> {
+  // If the text contains line breaks, process each line separately
+  if (text.includes('\n')) {
+    const lines = text.split('\n');
+    const result: Array<{name: string, hours: number}> = [];
+    
+    for (const line of lines) {
+      if (line.trim()) {
+        const lineResult = extractPartnerHoursFromLine(line);
+        if (lineResult.name && !isNaN(lineResult.hours)) {
+          result.push(lineResult);
+        }
+      }
+    }
+    
+    return result;
+  }
+  
+  // For single-line text, use the traditional approach
+  return extractMultiplePartnersFromText(text);
+}
+
+// Extract name and hours from a single formatted line (e.g., "John Smith: 32")
+function extractPartnerHoursFromLine(line: string): {name: string, hours: number} {
+  line = line.trim();
+  
+  // Look for a colon separator
+  const colonIndex = line.lastIndexOf(':');
+  
+  if (colonIndex > 0) {
+    const name = line.substring(0, colonIndex).trim();
+    const hoursText = line.substring(colonIndex + 1).trim();
+    const hours = parseFloat(hoursText);
+    
+    if (name && !isNaN(hours)) {
+      return { name, hours };
+    }
+  }
+  
+  // Try other patterns if colon format doesn't match
+  const patterns = [
+    // Pattern: Name - 32
+    /^(.+?)\s+-\s+(\d+(?:\.\d+)?)$/,
+    // Pattern: Name (32)
+    /^(.+?)\s+\((\d+(?:\.\d+)?)\)$/,
+    // Last resort - extract name and trailing number
+    /^(.+?)\s+(\d+(?:\.\d+)?)$/
+  ];
+  
+  for (const pattern of patterns) {
+    const match = line.match(pattern);
+    if (match) {
+      const name = match[1].trim();
+      const hours = parseFloat(match[2]);
+      
+      if (name && !isNaN(hours)) {
+        return { name, hours };
+      }
+    }
+  }
+  
+  return { name: "", hours: NaN };
+}
+
+// Extract multiple partners from a block of text without clear line breaks
+function extractMultiplePartnersFromText(text: string): Array<{name: string, hours: number}> {
   const result: Array<{name: string, hours: number}> = [];
   
   // Clean up text
@@ -44,8 +110,10 @@ export function extractPartnerHours(text: string): Array<{name: string, hours: n
     /([A-Za-z\s]+)\s*-\s*(\d+(?:\.\d+)?)\s*(?:hours|hrs?|h)/gi,
     // Pattern: Name 32h 
     /([A-Za-z\s]+)\s+(\d+(?:\.\d+)?)\s*h(?:\b|ours|rs)/gi,
+    // Pattern: Name: 32
+    /([A-Za-z\s]+)[\s\-:]+(\d+(?:\.\d+)?)/gi,
     // Last resort - lines with name and a number
-    /([A-Za-z\s]+)[\s\-:]*(\d+(?:\.\d+)?)/gi
+    /([A-Za-z\s\.]+)\s+(\d+(?:\.\d+)?)/gi
   ];
   
   // Try each pattern until we get some results
