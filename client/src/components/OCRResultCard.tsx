@@ -36,42 +36,40 @@ export default function OCRResultCard() {
   };
   
   return (
-    <Card className="animate__animated animate__fadeIn">
-      <CardContent className="p-6">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold flex items-center">
-            <i className="fas fa-file-alt mr-2 text-[hsl(var(--starbucks-green))]"></i>
-            Extracted Data
-          </h2>
-          <div>
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={handleDownload}
-              disabled={!extractedText}
-            >
-              <i className="fas fa-download"></i>
-            </Button>
-          </div>
+    <div className="animate__animated animate__fadeIn bg-[#2d4845] rounded-lg overflow-hidden">
+      <div className="px-5 py-4 flex justify-between items-center">
+        <h2 className="text-xl font-bold text-white flex items-center">
+          Extracted Data
+        </h2>
+        <div>
+          <Button 
+            className="bg-[#437c6e] hover:bg-[#2d5e50] text-white border-none"
+            size="sm" 
+            onClick={handleDownload}
+            disabled={!extractedText}
+          >
+            <i className="fas fa-download mr-2"></i>
+            Download
+          </Button>
         </div>
-        
-        <div className="bg-[hsl(var(--dark-bg))] p-4 rounded-lg text-gray-300 h-48 overflow-y-auto font-mono text-sm">
-          {extractedText ? (
-            extractedText.split('\n').map((line, index) => (
-              <p key={index}>{line}</p>
-            ))
-          ) : (
-            <p className="text-gray-400 text-center py-4">
-              No data extracted yet. Upload a schedule or enter manually.
-            </p>
-          )}
-        </div>
-        
-        <div className="mt-4 text-sm text-gray-400 flex items-center">
-          <i className="fas fa-magic mr-2 text-[hsl(var(--starbucks-light))]"></i>
-          <span>Processed with Google Gemini 1.5 Flash</span>
-        </div>
-      </CardContent>
-    </Card>
+      </div>
+      
+      <div className="bg-[#1e3330] p-4 text-[#aad4ca] h-48 overflow-y-auto font-mono text-sm">
+        {extractedText ? (
+          extractedText.split('\n').map((line, index) => (
+            <p key={index}>{line}</p>
+          ))
+        ) : (
+          <p className="text-[#8ab5ab] text-center py-4">
+            No data extracted yet. Upload a schedule or enter manually.
+          </p>
+        )}
+      </div>
+      
+      <div className="px-5 py-3 bg-[#1e3330] text-sm text-[#8ab5ab] flex items-center">
+        <i className="fas fa-magic mr-2"></i>
+        <span>Processed with Google Gemini 1.5 Flash</span>
+      </div>
+    </div>
   );
 }

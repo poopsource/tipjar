@@ -142,62 +142,59 @@ export default function ResultsSummaryCard({
   };
   
   return (
-    <Card className="animate__animated animate__fadeIn">
-      <CardContent className="p-6">
-        <h2 className="text-xl font-bold mb-6 flex items-center">
-          <i className="fas fa-chart-pie mr-2 text-[hsl(var(--starbucks-green))]"></i>
-          Distribution Summary
-        </h2>
+    <div className="animate__animated animate__fadeIn bg-[#2d4845] rounded-lg overflow-hidden mb-8">
+      <div className="p-5">
+        <h2 className="text-xl font-bold mb-4 text-white">Distribution Summary</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div className="bg-[hsl(var(--dark-bg))] rounded-lg p-4 border border-[hsl(var(--dark-border))]">
-            <p className="text-gray-400 text-sm mb-1">Total Hours</p>
-            <p className="text-2xl font-bold">{totalHours}</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div className="bg-[#1e3330] rounded-lg p-4">
+            <p className="text-[#aad4ca] text-sm mb-1">Total Hours</p>
+            <p className="text-2xl font-bold text-white">{totalHours}</p>
           </div>
-          <div className="bg-[hsl(var(--dark-bg))] rounded-lg p-4 border border-[hsl(var(--dark-border))]">
-            <p className="text-gray-400 text-sm mb-1">Hourly Rate</p>
-            <p className="text-2xl font-bold">${(Math.floor(hourlyRate * 100) / 100).toFixed(2).replace(/\.?0+$/, '')}</p>
+          <div className="bg-[#1e3330] rounded-lg p-4">
+            <p className="text-[#aad4ca] text-sm mb-1">Hourly Rate</p>
+            <p className="text-2xl font-bold text-white">${(Math.floor(hourlyRate * 100) / 100).toFixed(2).replace(/\.?0+$/, '')}</p>
           </div>
-          <div className="bg-[hsl(var(--dark-bg))] rounded-lg p-4 border border-[hsl(var(--dark-border))]">
-            <p className="text-gray-400 text-sm mb-1">Total Distributed</p>
-            <p className="text-2xl font-bold">{formatCurrency(totalAmount)}</p>
+          <div className="bg-[#1e3330] rounded-lg p-4">
+            <p className="text-[#aad4ca] text-sm mb-1">Total Distributed</p>
+            <p className="text-2xl font-bold text-white">{formatCurrency(totalAmount)}</p>
           </div>
         </div>
         
         <div className="flex justify-between items-center mb-4">
-          <h3 className="font-semibold text-lg">Distribution Date</h3>
-          <p className="text-gray-300">{currentDate}</p>
+          <h3 className="font-medium text-[#aad4ca]">Distribution Date</h3>
+          <p className="text-white">{currentDate}</p>
         </div>
+      </div>
         
-        <div className="flex space-x-4">
-          <Button 
-            className="flex-1 bg-[hsl(var(--starbucks-dark))]"
-            onClick={handleSave}
-            disabled={isSaving}
-          >
-            {isSaving ? (
-              <i className="fas fa-spinner fa-spin mr-2"></i>
-            ) : (
-              <i className="fas fa-save mr-2"></i>
-            )}
-            Save
-          </Button>
-          <Button 
-            className="flex-1 bg-[hsl(var(--starbucks-dark))]"
-            onClick={handleDownload}
-          >
-            <i className="fas fa-download mr-2"></i>
-            Download
-          </Button>
-          <Button 
-            className="flex-1 bg-[hsl(var(--starbucks-dark))]"
-            onClick={onHistoryClick}
-          >
-            <i className="fas fa-history mr-2"></i>
-            History
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
+      <div className="bg-[#1e3330] p-4 flex space-x-4">
+        <Button 
+          className="flex-1 bg-[#437c6e] hover:bg-[#2d5e50] text-white border-none"
+          onClick={handleSave}
+          disabled={isSaving}
+        >
+          {isSaving ? (
+            <i className="fas fa-spinner fa-spin mr-2"></i>
+          ) : (
+            <i className="fas fa-save mr-2"></i>
+          )}
+          Save
+        </Button>
+        <Button 
+          className="flex-1 bg-[#437c6e] hover:bg-[#2d5e50] text-white border-none"
+          onClick={handleDownload}
+        >
+          <i className="fas fa-download mr-2"></i>
+          Download
+        </Button>
+        <Button 
+          className="flex-1 bg-[#437c6e] hover:bg-[#2d5e50] text-white border-none"
+          onClick={onHistoryClick}
+        >
+          <i className="fas fa-history mr-2"></i>
+          History
+        </Button>
+      </div>
+    </div>
   );
 }

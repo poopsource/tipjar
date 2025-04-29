@@ -198,7 +198,7 @@ export default function Home() {
                 onHistoryClick={() => setShowHistoryModal(true)}
               />
               
-              <PartnerPayoutsList partnerPayouts={distributionData.partnerPayouts} />
+              <PartnerPayoutsList distributionData={distributionData} />
             </>
           )}
         </div>
