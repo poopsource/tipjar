@@ -34,6 +34,20 @@ export default function Home() {
     setExtractedText
   } = useTipContext();
 
+  // Listen for the custom event to open manual entry modal
+  useEffect(() => {
+    const handleOpenManualEntry = () => {
+      setIsManualMode(true);
+      setShowManualEntryModal(true);
+    };
+    
+    window.addEventListener('openManualEntry', handleOpenManualEntry);
+    
+    return () => {
+      window.removeEventListener('openManualEntry', handleOpenManualEntry);
+    };
+  }, []);
+
   const handleToggleManualMode = (checked: boolean) => {
     setIsManualMode(checked);
     if (checked) {

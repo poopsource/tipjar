@@ -30,17 +30,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const imageBase64 = req.file.buffer.toString("base64");
       
       // Use Gemini API to analyze the image
-      const extractedText = await analyzeImage(imageBase64);
+      const result = await analyzeImage(imageBase64);
       
-      if (!extractedText) {
-        return res.status(500).json({ error: "Failed to extract text from image" });
+      if (!result.text) {
+        // Return a specific error message from the API if available
+        return res.status(500).json({ 
+          error: result.error || "Failed to extract text from image",
+          suggestManualEntry: true
+        });
       }
       
       // Parse extracted text to get partner hours
-      const partnerHours = extractPartnerHours(extractedText);
+      const partnerHours = extractPartnerHours(result.text);
       
       // Format the extracted text for display
-      const formattedText = formatOCRResult(extractedText);
+      const formattedText = formatOCRResult(result.text);
       
       res.json({
         extractedText: formattedText,
@@ -48,7 +52,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     } catch (error) {
       console.error("OCR processing error:", error);
-      res.status(500).json({ error: "Failed to process the image" });
+      res.status(500).json({ 
+        error: "Failed to process the image. Please try manual entry instead.",
+        suggestManualEntry: true 
+      });
     }
   });
   

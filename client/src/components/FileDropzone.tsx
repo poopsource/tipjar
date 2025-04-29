@@ -15,6 +15,7 @@ enum DropzoneState {
 export default function FileDropzone() {
   const [dropzoneState, setDropzoneState] = useState<DropzoneState>(DropzoneState.IDLE);
   const [fileName, setFileName] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   
   const { toast } = useToast();
@@ -43,6 +44,16 @@ export default function FileDropzone() {
     }
   };
   
+  const openManualEntry = () => {
+    // Dispatch a custom event to be handled by Home.tsx
+    const event = new CustomEvent('openManualEntry');
+    window.dispatchEvent(event);
+    
+    // Reset the dropzone state
+    setDropzoneState(DropzoneState.IDLE);
+    setErrorMessage(null);
+  };
+  
   const processFile = async (file: File) => {
     if (!file.type.startsWith('image/')) {
       toast({
@@ -55,6 +66,7 @@ export default function FileDropzone() {
     
     setDropzoneState(DropzoneState.PROCESSING);
     setFileName(file.name);
+    setErrorMessage(null);
     
     try {
       const dataUrl = await readFileAsDataURL(file);
@@ -68,37 +80,53 @@ export default function FileDropzone() {
         body: formData,
       });
       
-      if (!response.ok) {
-        throw new Error('OCR processing failed');
-      }
-      
       const result = await response.json();
       
-      setPartnerHours(result.partnerHours);
-      setExtractedText(result.extractedText);
-      setDropzoneState(DropzoneState.SUCCESS);
+      if (!response.ok) {
+        // Extract specific error message from the server response
+        const errorMsg = result.error || 'OCR processing failed';
+        setErrorMessage(errorMsg);
+        throw new Error(errorMsg);
+      }
       
-      setTimeout(() => {
-        setDropzoneState(DropzoneState.IDLE);
-      }, 3000);
-      
-      toast({
-        title: "Schedule processed",
-        description: "Partner hours have been extracted successfully",
-      });
-    } catch (error) {
+      if (result.partnerHours && result.partnerHours.length > 0) {
+        setPartnerHours(result.partnerHours);
+        setExtractedText(result.extractedText);
+        setDropzoneState(DropzoneState.SUCCESS);
+        
+        setTimeout(() => {
+          setDropzoneState(DropzoneState.IDLE);
+        }, 3000);
+        
+        toast({
+          title: "Schedule processed",
+          description: "Partner hours have been extracted successfully",
+        });
+      } else {
+        // No partners found in the image
+        setErrorMessage("No partner information detected in the image. Please try a different image or use manual entry.");
+        throw new Error("No partner information detected");
+      }
+    } catch (error: any) {
       console.error(error);
       setDropzoneState(DropzoneState.ERROR);
       
+      // If we have a specific error message from the API, use it
+      // Otherwise use a generic message
+      const errorMsg = errorMessage || "Failed to extract partner information from the image";
+      
+      // Check if there was a response with suggestManualEntry flag
+      const suggestManual = error.response?.suggestManualEntry || false;
+      
       toast({
         title: "Processing failed",
-        description: "Failed to extract partner information from the image",
+        description: errorMsg,
         variant: "destructive"
       });
       
       setTimeout(() => {
         setDropzoneState(DropzoneState.IDLE);
-      }, 3000);
+      }, 5000);
     }
   };
   
@@ -135,7 +163,20 @@ export default function FileDropzone() {
           <>
             <i className="fas fa-times-circle text-4xl mb-4 text-red-500"></i>
             <p className="mb-2">Processing failed</p>
-            <p className="text-sm text-gray-400">Please try again or use manual entry</p>
+            {errorMessage ? (
+              <p className="text-sm text-gray-400 mb-2">{errorMessage}</p>
+            ) : (
+              <p className="text-sm text-gray-400 mb-2">Please try again or use manual entry</p>
+            )}
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                openManualEntry();
+              }}
+              className="mt-2 px-4 py-2 bg-[hsl(var(--starbucks-green))] text-white rounded-md hover:bg-opacity-90 transition-all"
+            >
+              Switch to Manual Entry
+            </button>
           </>
         );
         
@@ -147,7 +188,10 @@ export default function FileDropzone() {
             <p className="text-sm text-gray-400">or</p>
             <button 
               className="mt-3 px-4 py-2 bg-[hsl(var(--starbucks-green))] text-white rounded-md hover:bg-opacity-90 transition-all"
-              onClick={() => fileInputRef.current?.click()}
+              onClick={(e) => {
+                e.stopPropagation();
+                fileInputRef.current?.click();
+              }}
             >
               Browse Files
             </button>
