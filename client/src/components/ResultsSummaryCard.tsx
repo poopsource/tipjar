@@ -84,7 +84,7 @@ export default function ResultsSummaryCard({
             <h2>Summary</h2>
             <p>Total Amount: ${formatCurrency(totalAmount)}</p>
             <p>Total Hours: ${totalHours}</p>
-            <p>Hourly Rate: $${hourlyRate.toFixed(2)}</p>
+            <p>Hourly Rate: $${(Math.floor(hourlyRate * 100) / 100).toFixed(2).replace(/\.?0+$/, '')}</p>
           </div>
           
           <h2>Partner Payouts</h2>
@@ -156,7 +156,7 @@ export default function ResultsSummaryCard({
           </div>
           <div className="bg-[hsl(var(--dark-bg))] rounded-lg p-4 border border-[hsl(var(--dark-border))]">
             <p className="text-gray-400 text-sm mb-1">Hourly Rate</p>
-            <p className="text-2xl font-bold">${hourlyRate.toFixed(2)}</p>
+            <p className="text-2xl font-bold">${(Math.floor(hourlyRate * 100) / 100).toFixed(2).replace(/\.?0+$/, '')}</p>
           </div>
           <div className="bg-[hsl(var(--dark-bg))] rounded-lg p-4 border border-[hsl(var(--dark-border))]">
             <p className="text-gray-400 text-sm mb-1">Total Distributed</p>
