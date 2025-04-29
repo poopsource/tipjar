@@ -144,20 +144,20 @@ export default function ResultsSummaryCard({
   return (
     <div className="animate__animated animate__fadeIn bg-[#2d4845] rounded-lg overflow-hidden mb-8">
       <div className="p-5">
-        <h2 className="text-xl font-bold mb-4 text-white">Distribution Summary</h2>
+        <h2 className="text-xl font-bold mb-4 text-white">DISTRIBUTION SUMMARY</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           <div className="bg-[#1e3330] rounded-lg p-4">
             <p className="text-[#aad4ca] text-sm mb-1">Total Hours</p>
-            <p className="text-2xl font-bold text-white">{totalHours}</p>
+            <p className="text-2xl font-bold text-[#ffcc66]">{totalHours}</p>
           </div>
           <div className="bg-[#1e3330] rounded-lg p-4">
             <p className="text-[#aad4ca] text-sm mb-1">Hourly Rate</p>
-            <p className="text-2xl font-bold text-white">${(Math.floor(hourlyRate * 100) / 100).toFixed(2).replace(/\.?0+$/, '')}</p>
+            <p className="text-2xl font-bold text-[#76d7c4]">${(Math.floor(hourlyRate * 100) / 100).toFixed(2).replace(/\.?0+$/, '')}</p>
           </div>
           <div className="bg-[#1e3330] rounded-lg p-4">
             <p className="text-[#aad4ca] text-sm mb-1">Total Distributed</p>
-            <p className="text-2xl font-bold text-white">{formatCurrency(totalAmount)}</p>
+            <p className="text-2xl font-bold text-[#e57697]">{formatCurrency(totalAmount)}</p>
           </div>
         </div>
         
