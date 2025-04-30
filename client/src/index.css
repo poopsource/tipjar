@@ -5,67 +5,54 @@
 @tailwind utilities;
 
 :root {
+  /* Main color variables */
+  --app-bg: 180 25% 25%;           /* #2F4F4F - main background */
+  --app-card: 180 22% 30%;         /* #3A5C5C - card background */
+  --app-darker: 180 30% 17%;       /* #1E3535 - header/footer background */
+  --app-input: 180 35% 25%;        /* #364949 - input background */
+  --app-border: 180 20% 35%;       /* #4C6767 - border color */
+  
+  /* Text colors */
+  --text-white: 0 0% 96%;          /* #F5F5F5 - primary text */
+  --text-yellow: 35 100% 92%;      /* #FFEED6 - accent text */
+  --text-gray: 0 0% 75%;           /* #BFBFBF - muted text */
+  
+  /* Accent colors */
+  --spring-green: 120 70% 75%;     /* #93EC93 - primary accent */
+  --spring-blue: 196 63% 77%;      /* #9FD6E9 - secondary accent */
+  --spring-accent: 340 60% 67%;    /* #DD7895 - highlight accent */
+  --spring-lavender: 280 47% 79%;  /* #D2B0E3 - tertiary accent */
+  
   /* ShadCN UI variables */
-  --background: 180 15% 25%;  /* Starbucks dark teal */
-  --foreground: 0 0% 96%;     /* Text white */
+  --background: 180 25% 25%;       /* #2F4F4F - app-bg */
+  --foreground: 0 0% 96%;          /* #F5F5F5 - text-white */
   
-  --card: 180 22% 30%;        /* App card */
-  --card-foreground: 0 0% 96%; /* Text white */
+  --card: 180 22% 30%;             /* #3A5C5C - app-card */
+  --card-foreground: 0 0% 96%;     /* #F5F5F5 - text-white */
   
-  --popover: 180 22% 30%;     /* Same as card */
-  --popover-foreground: 0 0% 96%; /* Text white */
+  --popover: 180 22% 30%;          /* #3A5C5C - app-card */
+  --popover-foreground: 0 0% 96%;  /* #F5F5F5 - text-white */
   
-  --primary: 120 70% 75%;     /* Spring green */
-  --primary-foreground: 180 15% 25%; /* Dark text on green */
+  --primary: 120 70% 75%;          /* #93EC93 - spring-green */
+  --primary-foreground: 180 35% 25%; /* #364949 - app-input */
   
-  --secondary: 35 100% 92%;   /* Spring yellow */
-  --secondary-foreground: 180 15% 25%; /* Dark text on yellow */
+  --secondary: 35 100% 92%;        /* #FFEED6 - text-yellow */
+  --secondary-foreground: 180 30% 17%; /* #1E3535 - app-darker */
   
-  --muted: 180 20% 30%;       /* Muted background */
-  --muted-foreground: 0 0% 85%; /* Slightly dimmed text */
+  --muted: 180 20% 30%;            /* #3C5D5D - slightly lighter than app-card */
+  --muted-foreground: 0 0% 75%;    /* #BFBFBF - text-gray */
   
-  --accent: 343 60% 67%;      /* Spring accent (pink) */
-  --accent-foreground: 0 0% 96%; /* Text white */
+  --accent: 340 60% 67%;           /* #DD7895 - spring-accent */
+  --accent-foreground: 0 0% 96%;   /* #F5F5F5 - text-white */
   
-  --destructive: 0 84% 60%;   /* Red for destructive actions */
-  --destructive-foreground: 0 0% 96%; /* Text white */
+  --destructive: 0 84% 60%;        /* Red for destructive actions */
+  --destructive-foreground: 0 0% 96%; /* #F5F5F5 - text-white */
   
-  --border: 180 15% 35%;      /* Border color */
-  --input: 180 15% 30%;       /* Input background */
-  --ring: 120 70% 75%;        /* Spring green for focus rings */
+  --border: 180 20% 35%;           /* #4C6767 - app-border */
+  --input: 180 35% 25%;            /* #364949 - app-input */
+  --ring: 120 70% 75%;             /* #93EC93 - spring-green */
   
-  --radius: 0.5rem;
-  
-  /* Starbucks Spring color palette */
-  --spring-green: 120 70% 75%;      /* #8fe58b */
-  --spring-blue: 196 63% 77%;       /* #a0d2eb */
-  --spring-lavender: 280 47% 79%;   /* #d1b3de */
-  --spring-pink: 351 100% 86%;      /* #ffb6c1 */
-  --spring-yellow: 35 100% 92%;     /* #ffefd6 */
-  --spring-peach: 26 100% 86%;      /* #ffd1ba */
-  --spring-accent: 343 60% 67%;     /* #dd7596 */
-  
-  --app-bg: 180 25% 25%;            /* #2f4f4f */
-  --app-darker: 180 30% 17%;        /* #1e3535 */
-  --app-card: 180 22% 30%;          /* #3a5c5c */
-  --text-white: 0 0% 96%;           /* #f5f5f5 */
-  
-  /* Chart colors - Spring theme */
-  --chart-1: 120 70% 75%;      /* Spring green */
-  --chart-2: 196 63% 77%;      /* Spring blue */
-  --chart-3: 280 47% 79%;      /* Spring lavender */
-  --chart-4: 351 100% 86%;     /* Spring pink */
-  --chart-5: 35 100% 92%;      /* Spring yellow */
-  
-  /* Sidebar colors - Spring theme */
-  --sidebar-background: 180 30% 17%;  /* App darker */
-  --sidebar-foreground: 0 0% 96%;     /* Text white */
-  --sidebar-primary: 120 70% 75%;     /* Spring green */
-  --sidebar-primary-foreground: 180 30% 17%; /* App darker */
-  --sidebar-accent: 196 63% 77%;      /* Spring blue */
-  --sidebar-accent-foreground: 180 30% 17%; /* App darker */
-  --sidebar-border: 180 22% 30%;      /* App card */
-  --sidebar-ring: 120 70% 75%;        /* Spring green */
+  --radius: 0.25rem;
 }
 
 @layer base {
@@ -80,14 +67,104 @@
 }
 
 @layer components {
+  /* Navigation */
+  .nav-link {
+    @apply text-gray-400 p-3 px-4 border-b border-transparent transition-colors duration-150 ease-in-out;
+  }
+  
+  .nav-link-active {
+    @apply text-white font-semibold p-3 px-4 border-b border-white;
+  }
+  
+  /* Dropzone */
   .dropzone {
-    @apply border-2 border-dashed border-gray-500 transition-all duration-300 ease-in-out;
+    @apply border-[1.11111px] border-dashed border-[rgba(147,236,147,0.5)] rounded-lg p-8 text-center cursor-pointer transition-all duration-300 ease-in-out bg-[#3c5d5d];
   }
   
   .dropzone.active {
-    @apply border-[hsl(var(--spring-green))] bg-[hsl(var(--spring-green))] bg-opacity-10;
+    @apply border-[#93ec93] bg-[#93ec93] bg-opacity-10;
   }
   
+  /* Input and Label */
+  .input-label {
+    @apply mb-1 block text-sm font-medium text-gray-400;
+  }
+  
+  .input-field {
+    @apply h-10 w-full bg-[#364949] text-[#f5f5f5] border-[1.11111px] border-[#415858] rounded-md py-2 px-3;
+  }
+  
+  .input-field-dollar {
+    @apply pl-8;
+  }
+  
+  /* Buttons */
+  .btn {
+    @apply inline-flex h-10 justify-center gap-2 whitespace-nowrap text-sm font-medium rounded-md px-4 py-2 transition-all;
+  }
+  
+  .btn-primary {
+    @apply bg-[#93ec93] text-[#364949] hover:bg-opacity-90;
+  }
+  
+  .btn-secondary {
+    @apply bg-[#9fd6e9] text-[#364949] hover:bg-opacity-90;
+  }
+  
+  .btn-accent {
+    @apply bg-[#dd7895] text-[#364949] hover:bg-opacity-90;
+  }
+  
+  .btn-lavender {
+    @apply bg-[#d2b0e3] text-[#1e3838] hover:bg-opacity-90;
+  }
+  
+  .btn-transparent {
+    @apply bg-transparent border border-[#4c6767] text-[#f5f5f5] hover:bg-[#364949];
+  }
+  
+  .btn-full {
+    @apply w-full;
+  }
+  
+  /* Cards */
+  .card {
+    @apply bg-[#3c5d5d] text-[#f5f5f5] shadow-sm border-[1.11111px] border-[#4c6767] rounded-lg overflow-hidden;
+  }
+  
+  .card-header {
+    @apply p-6 bg-[#1e3535] flex items-center justify-between rounded-t-lg;
+  }
+  
+  .card-body {
+    @apply p-6 bg-[#3a5c5c];
+  }
+  
+  .card-footer {
+    @apply p-6 bg-[#1e3535] flex items-center rounded-b-lg;
+  }
+  
+  .summary-box {
+    @apply bg-[#3c5d5d] rounded-lg p-4;
+  }
+  
+  .summary-label {
+    @apply text-sm text-[#ffeed6] m-0 mb-1;
+  }
+  
+  .summary-value {
+    @apply text-2xl font-bold text-[#f5f5f5] m-0;
+  }
+  
+  .summary-value-blue {
+    @apply text-2xl font-bold text-[#9fd6e9] m-0;
+  }
+  
+  .summary-value-accent {
+    @apply text-2xl font-bold text-[#dd7895] m-0;
+  }
+  
+  /* Utilities */
   .scrollbar-hidden::-webkit-scrollbar {
     display: none;
   }
@@ -96,58 +173,24 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-
-  .card-hover {
-    @apply transition-all duration-200 ease-in-out;
+  
+  .divider-with-text {
+    @apply flex items-center justify-between;
   }
   
-  .card-hover:hover {
-    @apply -translate-y-1 shadow-lg;
+  .divider-with-text::before,
+  .divider-with-text::after {
+    @apply h-[0.989583px] flex-grow bg-transparent;
+    content: "";
   }
   
-  /* Spring theme components */
-  .spring-card {
-    @apply rounded-lg bg-[#3a5c5c] text-[#f5f5f5] shadow-sm;
+  .divider-text {
+    @apply px-4 text-gray-400;
   }
   
-  .spring-header {
-    @apply bg-[#1e3535] p-4 rounded-t-lg;
-  }
-  
-  .spring-body {
-    @apply bg-[#3a5c5c] p-4;
-  }
-  
-  .spring-footer {
-    @apply bg-[#1e3535] p-4 rounded-b-lg;
-  }
-  
-  .spring-button-primary {
-    @apply bg-[#8fe58b] text-[#1e3535] font-medium px-4 py-2 rounded-md hover:opacity-90 transition-opacity;
-  }
-  
-  .spring-button-secondary {
-    @apply bg-[#a0d2eb] text-[#1e3535] font-medium px-4 py-2 rounded-md hover:opacity-90 transition-opacity;
-  }
-  
-  .spring-button-accent {
-    @apply bg-[#dd7596] text-[#1e3535] font-medium px-4 py-2 rounded-md hover:opacity-90 transition-opacity;
-  }
-  
-  .spring-input {
-    @apply bg-[#2f4f4f] border border-[#1e3535] rounded-md p-2 text-[#f5f5f5] focus:ring-2 focus:ring-[#8fe58b] focus:outline-none;
-  }
-  
-  .spring-label {
-    @apply text-[#ffefd6] font-medium mb-1 block;
-  }
-  
-  .animate-fade-in {
+  /* Animations */
+  .animate-fadeIn {
     animation: fadeIn 0.3s ease-in-out;
-  }
-  
-  .animate-fade-up {
-    animation: fadeUp 0.3s ease-in-out;
   }
 }
 

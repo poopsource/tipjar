@@ -2,8 +2,6 @@ import { useRef, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useTipContext } from "@/context/TipContext";
 import { readFileAsDataURL } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import {
   UploadCloudIcon,
   Loader2Icon,
@@ -150,86 +148,86 @@ export default function FileDropzone() {
       case DropzoneState.DRAGGING:
         return (
           <>
-            <UploadCloudIcon className="h-16 w-16 mb-4 text-spring-green" />
-            <p className="mb-2 text-text-white">Release to upload</p>
+            <div className="mb-4 h-16 w-16 text-[#93ec93] mx-auto">
+              <UploadCloudIcon className="h-full w-full" />
+            </div>
+            <p className="text-[#f5f5f5] m-0 mb-2">Release to upload</p>
           </>
         );
         
       case DropzoneState.PROCESSING:
         return (
           <>
-            <Loader2Icon className="h-16 w-16 mb-4 text-spring-green animate-spin" />
-            <p className="mb-2 text-text-white">Processing image...</p>
-            <p className="text-sm text-spring-yellow">Using Gemini API for OCR</p>
+            <div className="mb-4 h-16 w-16 text-[#93ec93] mx-auto">
+              <Loader2Icon className="h-full w-full animate-spin" />
+            </div>
+            <p className="text-[#f5f5f5] m-0 mb-2">Processing image...</p>
+            <p className="text-sm text-[#ffeed6] m-0">Using Gemini API for OCR</p>
           </>
         );
         
       case DropzoneState.SUCCESS:
         return (
           <>
-            <CheckCircleIcon className="h-16 w-16 mb-4 text-spring-green" />
-            <p className="mb-2 text-text-white">File processed successfully!</p>
-            {fileName && <p className="text-sm text-spring-yellow">{fileName}</p>}
+            <div className="mb-4 h-16 w-16 text-[#93ec93] mx-auto">
+              <CheckCircleIcon className="h-full w-full" />
+            </div>
+            <p className="text-[#f5f5f5] m-0 mb-2">File processed successfully!</p>
+            {fileName && <p className="text-sm text-[#ffeed6] m-0">{fileName}</p>}
           </>
         );
         
       case DropzoneState.ERROR:
         return (
           <>
-            <XCircleIcon className="h-16 w-16 mb-4 text-spring-pink" />
-            <p className="mb-2 text-text-white">Processing failed</p>
+            <div className="mb-4 h-16 w-16 text-red-500 mx-auto">
+              <XCircleIcon className="h-full w-full" />
+            </div>
+            <p className="text-[#f5f5f5] m-0 mb-2">Processing failed</p>
             {errorMessage ? (
-              <p className="text-sm text-spring-yellow mb-2">{errorMessage}</p>
+              <p className="text-sm text-[#ffeed6] m-0 mb-2">{errorMessage}</p>
             ) : (
-              <p className="text-sm text-spring-yellow mb-2">Please try again or use manual entry</p>
+              <p className="text-sm text-[#ffeed6] m-0 mb-2">Please try again or use manual entry</p>
             )}
-            <Button 
+            <button 
               onClick={(e) => {
                 e.stopPropagation();
                 openManualEntry();
               }}
-              className="mt-2 spring-button-primary"
+              className="text-sm font-medium text-[#364949] bg-[#93ec93] inline-flex h-10 justify-center gap-2 whitespace-nowrap border-0 rounded-md px-4 py-2 mt-3"
             >
               <FileTextIcon className="h-4 w-4 mr-2" />
               Switch to Manual Entry
-            </Button>
+            </button>
           </>
         );
         
       default:
         return (
           <>
-            <UploadCloudIcon className="h-16 w-16 mb-4 text-spring-green" />
-            <p className="mb-2 text-text-white">Drag & drop your schedule image here</p>
-            <p className="text-sm text-spring-yellow">or</p>
-            <Button 
-              className="mt-3 spring-button-primary"
+            <div className="mb-4 h-16 w-16 text-[#93ec93] mx-auto">
+              <UploadCloudIcon className="h-full w-full" />
+            </div>
+            <p className="text-[#f5f5f5] m-0 mb-2">Drag & drop your schedule image here</p>
+            <p className="text-sm text-[#ffeed6] m-0">or</p>
+            <button 
+              className="text-sm font-medium text-[#364949] bg-[#93ec93] inline-flex h-10 justify-center gap-2 whitespace-nowrap border-0 rounded-md px-4 py-2 mt-3"
               onClick={(e) => {
                 e.stopPropagation();
                 fileInputRef.current?.click();
               }}
             >
               Browse Files
-            </Button>
+            </button>
           </>
         );
     }
   };
   
-  const getDropzoneClasses = () => {
-    const baseClasses = "border-2 border-dashed border-spring-green/50 rounded-lg p-8 mb-6 text-center cursor-pointer transition-all duration-300 animate-fade-in bg-app-card hover:bg-app-card/90";
-    
-    if (dropzoneState === DropzoneState.DRAGGING) {
-      return `${baseClasses} border-spring-green bg-spring-green/10`;
-    }
-    
-    return baseClasses;
-  };
-  
   return (
     <>
       <div
-        className={getDropzoneClasses()}
+        className="animate-fadeIn mb-6 cursor-pointer bg-[#3c5d5d] text-center transition-all duration-300 ease-in-out border-[1.11111px] border-dashed border-[rgba(147,236,147,0.5)] rounded-lg p-8"
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}

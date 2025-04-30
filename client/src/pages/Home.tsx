@@ -111,52 +111,60 @@ export default function Home() {
   };
 
   return (
-    <main className="container mx-auto px-4 pt-6 pb-16">
-      <AppTabs />
-      
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
+    <main>
+      <div className="mt-8 grid grid-cols-3 gap-6">
         {/* Left Column - Input Section */}
-        <div className="lg:col-span-1 space-y-6">
-          <Card className="animate__animated animate__fadeIn">
-            <CardContent className="p-6">
-              <h2 className="text-xl font-bold mb-4 flex items-center">
-                <i className="fas fa-file-upload mr-2 text-[hsl(var(--starbucks-green))]"></i>
+        <div className="col-span-1">
+          <div className="card animate-fadeIn">
+            <div className="card-body">
+              <h2 className="flex items-center mb-4 text-xl font-bold">
                 Upload Schedule
               </h2>
               
               <FileDropzone />
               
-              <div className="flex items-center justify-between my-6">
-                <div className="h-px bg-[hsl(var(--dark-border))] flex-grow"></div>
-                <span className="px-4 text-gray-400">or</span>
-                <div className="h-px bg-[hsl(var(--dark-border))] flex-grow"></div>
+              <div className="divider-with-text mt-6 mb-6">
+                <span className="divider-text">or</span>
               </div>
               
               <div className="mb-6 flex items-center justify-between">
-                <Label htmlFor="manual-mode" className="font-medium text-white">
+                <label htmlFor="manual-mode" className="text-sm font-medium text-white">
                   Manual Partner Entry
-                </Label>
-                <Switch
+                </label>
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={isManualMode}
                   id="manual-mode"
-                  checked={isManualMode}
-                  onCheckedChange={handleToggleManualMode}
-                />
+                  className={`flex h-6 w-11 flex-shrink-0 border border-transparent rounded-full ${
+                    isManualMode 
+                      ? "bg-[#93ec93]" 
+                      : "bg-[#415858]"
+                  }`}
+                  onClick={() => handleToggleManualMode(!isManualMode)}
+                >
+                  <span 
+                    className={`pointer-events-none block h-5 w-5 bg-[#364949] rounded-full shadow-md transition-transform duration-150 ease-in-out transform ${
+                      isManualMode ? "translate-x-5" : "translate-x-0"
+                    }`}
+                  ></span>
+                </button>
               </div>
               
               <div className="mb-6">
-                <Label htmlFor="tipAmount" className="block text-sm font-medium text-gray-400 mb-1">
+                <label htmlFor="tipAmount" className="input-label">
                   Total Tip Amount ($)
-                </Label>
+                </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <div className="pointer-events-none absolute top-0 bottom-0 left-0 flex items-center pl-3">
                     <span className="text-gray-400">$</span>
                   </div>
-                  <Input
+                  <input
                     id="tipAmount"
                     type="number"
                     value={tipAmount}
                     onChange={(e) => setTipAmount(e.target.value ? Number(e.target.value) : '')}
-                    className="pl-8"
+                    className="input-field input-field-dollar"
                     placeholder="0.00"
                     min="0"
                     step="0.01"
@@ -164,31 +172,30 @@ export default function Home() {
                 </div>
               </div>
               
-              <Button 
+              <button 
                 onClick={handleCalculate} 
-                className="w-full bg-[hsl(var(--starbucks-green))]"
+                className="btn btn-primary btn-full"
                 disabled={isCalculating}
               >
                 {isCalculating ? (
                   <>
-                    <i className="fas fa-spinner fa-spin mr-2"></i>
+                    <span className="animate-spin mr-2">↻</span>
                     Calculating...
                   </>
                 ) : (
                   <>
-                    <i className="fas fa-calculator mr-2"></i>
                     Calculate Distribution
                   </>
                 )}
-              </Button>
-            </CardContent>
-          </Card>
+              </button>
+            </div>
+          </div>
           
           <OCRResultCard />
         </div>
         
         {/* Middle/Right Column - Results Section */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="col-span-2">
           {distributionData && (
             <>
               <ResultsSummaryCard 
@@ -203,7 +210,7 @@ export default function Home() {
           )}
         </div>
       </div>
-      
+        
       {showManualEntryModal && (
         <ManualEntryModal
           isOpen={showManualEntryModal}

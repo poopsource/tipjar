@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { useTipContext } from "@/context/TipContext";
 import { DownloadIcon, SparklesIcon } from "lucide-react";
@@ -37,38 +35,37 @@ export default function OCRResultCard() {
   };
   
   return (
-    <Card className="animate-fade-in overflow-hidden">
-      <CardHeader className="spring-header flex flex-row justify-between items-center">
-        <CardTitle className="text-text-white">
+    <div className="card animate-fadeIn mt-6">
+      <div className="card-header">
+        <div className="text-2xl font-semibold tracking-tight text-[#f5f5f5]">
           Extracted Data
-        </CardTitle>
-        <Button 
-          size="sm" 
+        </div>
+        <button 
+          className="btn btn-lavender h-9 mt-1.5"
           onClick={handleDownload}
           disabled={!extractedText}
-          className="bg-spring-lavender text-app-darker hover:bg-spring-lavender/90"
         >
           <DownloadIcon className="h-4 w-4 mr-2" />
           Download
-        </Button>
-      </CardHeader>
+        </button>
+      </div>
       
-      <CardContent className="spring-body p-4 h-48 overflow-y-auto font-mono text-sm">
+      <div className="bg-[#3a5c5c] h-48 overflow-y-auto font-mono text-sm p-4">
         {extractedText ? (
           extractedText.split('\n').map((line, index) => (
-            <p key={index} className="text-text-white">{line}</p>
+            <p key={index} className="text-[#f5f5f5] m-0">{line}</p>
           ))
         ) : (
-          <p className="text-center py-4 text-spring-yellow">
+          <p className="text-center py-4 text-[#ffeed6]">
             No data extracted yet. Upload a schedule or enter manually.
           </p>
         )}
-      </CardContent>
+      </div>
       
-      <CardFooter className="spring-footer text-sm flex items-center">
-        <SparklesIcon className="h-4 w-4 mr-2 text-spring-yellow" />
-        <span className="text-spring-yellow">Processed with Google Gemini 1.5 Flash</span>
-      </CardFooter>
-    </Card>
+      <div className="card-footer p-4 pb-6">
+        <SparklesIcon className="h-4 w-4 mr-2 text-[#ffeed6]" />
+        <span className="text-[#ffeed6]">Processed with Google Gemini 1.5 Flash</span>
+      </div>
+    </div>
   );
 }
