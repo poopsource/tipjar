@@ -144,32 +144,32 @@ export default function ResultsSummaryCard({
   return (
     <div className="animate__animated animate__fadeIn bg-[#2d4845] rounded-lg overflow-hidden mb-8">
       <div className="p-5">
-        <h2 className="text-xl font-bold mb-4 text-white">DISTRIBUTION SUMMARY</h2>
+        <h2 className="text-xl font-bold mb-4 text-white">Distribution Summary</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <div className="bg-[#1e3330] rounded-lg p-4">
-            <p className="text-[#aad4ca] text-sm mb-1">Total Hours</p>
-            <p className="text-2xl font-bold text-[#ffcc66]">{totalHours}</p>
+          <div className="bg-[#3a5a56] rounded-lg p-4">
+            <p className="text-[#b3d1cb] text-sm mb-1">Total Hours</p>
+            <p className="text-2xl font-bold text-white">{totalHours}</p>
           </div>
-          <div className="bg-[#1e3330] rounded-lg p-4">
-            <p className="text-[#aad4ca] text-sm mb-1">Hourly Rate</p>
-            <p className="text-2xl font-bold text-[#76d7c4]">${(Math.floor(hourlyRate * 100) / 100).toFixed(2).replace(/\.?0+$/, '')}</p>
+          <div className="bg-[#3a5a56] rounded-lg p-4">
+            <p className="text-[#b3d1cb] text-sm mb-1">Hourly Rate</p>
+            <p className="text-2xl font-bold text-white">${(Math.floor(hourlyRate * 100) / 100).toFixed(2).replace(/\.?0+$/, '')}</p>
           </div>
-          <div className="bg-[#1e3330] rounded-lg p-4">
-            <p className="text-[#aad4ca] text-sm mb-1">Total Distributed</p>
-            <p className="text-2xl font-bold text-[#e57697]">{formatCurrency(totalAmount)}</p>
+          <div className="bg-[#3a5a56] rounded-lg p-4">
+            <p className="text-[#b3d1cb] text-sm mb-1">Total Distributed</p>
+            <p className="text-2xl font-bold text-white">{formatCurrency(totalAmount)}</p>
           </div>
         </div>
         
         <div className="flex justify-between items-center mb-4">
-          <h3 className="font-medium text-[#aad4ca]">Distribution Date</h3>
+          <h3 className="font-medium text-[#b3d1cb]">Distribution Date</h3>
           <p className="text-white">{currentDate}</p>
         </div>
       </div>
         
-      <div className="bg-[#1e3330] p-4 flex space-x-4">
+      <div className="bg-[#3a5a56] p-4 flex space-x-4">
         <Button 
-          className="flex-1 bg-[#437c6e] hover:bg-[#2d5e50] text-white border-none"
+          className="flex-1 bg-[#2d4845] hover:bg-[#375753] text-white border-none"
           onClick={handleSave}
           disabled={isSaving}
         >
@@ -181,14 +181,14 @@ export default function ResultsSummaryCard({
           Save
         </Button>
         <Button 
-          className="flex-1 bg-[#437c6e] hover:bg-[#2d5e50] text-white border-none"
+          className="flex-1 bg-[#2d4845] hover:bg-[#375753] text-white border-none"
           onClick={handleDownload}
         >
           <i className="fas fa-download mr-2"></i>
           Download
         </Button>
         <Button 
-          className="flex-1 bg-[#437c6e] hover:bg-[#2d5e50] text-white border-none"
+          className="flex-1 bg-[#2d4845] hover:bg-[#375753] text-white border-none"
           onClick={onHistoryClick}
         >
           <i className="fas fa-history mr-2"></i>

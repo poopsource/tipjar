@@ -43,7 +43,7 @@ export default function OCRResultCard() {
         </h2>
         <div>
           <Button 
-            className="bg-[#437c6e] hover:bg-[#2d5e50] text-white border-none"
+            className="bg-[#3a5a56] hover:bg-[#486c67] text-white border-none"
             size="sm" 
             onClick={handleDownload}
             disabled={!extractedText}
@@ -54,19 +54,19 @@ export default function OCRResultCard() {
         </div>
       </div>
       
-      <div className="bg-[#1e3330] p-4 text-[#aad4ca] h-48 overflow-y-auto font-mono text-sm">
+      <div className="bg-[#3a5a56] p-4 text-white h-48 overflow-y-auto font-mono text-sm">
         {extractedText ? (
           extractedText.split('\n').map((line, index) => (
             <p key={index}>{line}</p>
           ))
         ) : (
-          <p className="text-[#8ab5ab] text-center py-4">
+          <p className="text-[#b3d1cb] text-center py-4">
             No data extracted yet. Upload a schedule or enter manually.
           </p>
         )}
       </div>
       
-      <div className="px-5 py-3 bg-[#1e3330] text-sm text-[#8ab5ab] flex items-center">
+      <div className="px-5 py-3 bg-[#3a5a56] text-sm text-[#b3d1cb] flex items-center">
         <i className="fas fa-magic mr-2"></i>
         <span>Processed with Google Gemini 1.5 Flash</span>
       </div>
