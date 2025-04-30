@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import AppTabs from "@/components/AppTabs";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Partner } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { UserPlusIcon, Loader2Icon } from "lucide-react";
 
 export default function Partners() {
   const [newPartnerName, setNewPartnerName] = useState("");
@@ -46,67 +43,65 @@ export default function Partners() {
   };
   
   return (
-    <main className="container mx-auto px-4 pt-6 pb-16">
-      <AppTabs />
-      
+    <main>
       <div className="max-w-3xl mx-auto mt-8">
-        <Card>
-          <CardContent className="p-6">
-            <h2 className="text-xl font-bold mb-6 flex items-center">
-              <i className="fas fa-users mr-2 text-[hsl(var(--starbucks-green))]"></i>
+        <div className="card">
+          <div className="card-header">
+            <div className="text-2xl font-semibold tracking-tight text-[#f5f5f5]">
               Manage Partners
-            </h2>
-            
+            </div>
+          </div>
+          
+          <div className="card-body p-6">
             <div className="flex gap-4 mb-8">
-              <Input
+              <input
+                type="text"
                 placeholder="Enter partner name"
                 value={newPartnerName}
                 onChange={(e) => setNewPartnerName(e.target.value)}
-                className="flex-grow"
+                className="input-field flex-grow"
               />
-              <Button 
+              <button 
                 onClick={handleAddPartner}
-                className="bg-[hsl(var(--starbucks-green))]"
+                className="btn btn-primary"
               >
-                <i className="fas fa-plus mr-2"></i>
+                <UserPlusIcon className="h-4 w-4 mr-2" />
                 Add Partner
-              </Button>
+              </button>
             </div>
             
             <div className="space-y-4">
-              <h3 className="font-semibold text-lg">Partner List</h3>
+              <h3 className="font-semibold text-lg text-[#f5f5f5]">Partner List</h3>
               
               {isLoading ? (
                 <div className="text-center py-8">
-                  <i className="fas fa-spinner fa-spin text-2xl text-[hsl(var(--starbucks-green))]"></i>
-                  <p className="mt-2">Loading partners...</p>
+                  <Loader2Icon className="h-8 w-8 text-[#93ec93] animate-spin mx-auto" />
+                  <p className="mt-2 text-[#f5f5f5]">Loading partners...</p>
                 </div>
               ) : partners && partners.length > 0 ? (
                 <div className="grid gap-4">
                   {partners.map((partner) => (
                     <div 
                       key={partner.id}
-                      className="flex items-center justify-between p-4 bg-[hsl(var(--dark-bg))] rounded-lg border border-[hsl(var(--dark-border))]"
+                      className="flex items-center justify-between p-4 bg-[#364949] rounded-lg border border-[#4c6767]"
                     >
                       <div className="flex items-center gap-3">
-                        <Avatar>
-                          <AvatarFallback className="bg-[hsl(var(--starbucks-dark))] text-white">
-                            {partner.name.substring(0, 2).toUpperCase()}
-                          </AvatarFallback>
-                        </Avatar>
-                        <span className="font-medium">{partner.name}</span>
+                        <div className="bg-[#1e3535] text-[#f5f5f5] h-10 w-10 rounded-full flex items-center justify-center text-sm font-medium">
+                          {partner.name.substring(0, 2).toUpperCase()}
+                        </div>
+                        <span className="font-medium text-[#f5f5f5]">{partner.name}</span>
                       </div>
                     </div>
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-8 bg-[hsl(var(--dark-bg))] rounded-lg border border-[hsl(var(--dark-border))]">
-                  <p className="text-gray-400">No partners added yet</p>
+                <div className="text-center py-8 bg-[#364949] rounded-lg border border-[#4c6767]">
+                  <p className="text-[#bfbfbf]">No partners added yet</p>
                 </div>
               )}
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </main>
   );

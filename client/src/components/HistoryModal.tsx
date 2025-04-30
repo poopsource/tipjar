@@ -6,9 +6,9 @@ import {
   DialogHeader, 
   DialogTitle 
 } from "@/components/ui/dialog";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Distribution } from "@shared/schema";
 import { formatCurrency, formatDate } from "@/lib/utils";
+import { UsersIcon } from "lucide-react";
 
 type HistoryModalProps = {
   isOpen: boolean;
@@ -23,22 +23,22 @@ export default function HistoryModal({ isOpen, onClose }: HistoryModalProps) {
   
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="bg-[hsl(var(--dark-surface))] text-white sm:max-w-3xl max-h-[80vh] overflow-hidden flex flex-col">
+      <DialogContent className="bg-[#3a5c5c] border border-[#4c6767] text-[#f5f5f5] sm:max-w-3xl max-h-[80vh] overflow-hidden flex flex-col">
         <DialogHeader>
-          <DialogTitle className="text-xl font-bold">Distribution History</DialogTitle>
+          <DialogTitle className="text-xl font-bold text-[#f5f5f5]">Distribution History</DialogTitle>
         </DialogHeader>
         
         <div className="overflow-y-auto flex-grow scrollbar-hidden mt-4">
           <div className="space-y-4">
             {isLoading ? (
               Array(3).fill(0).map((_, i) => (
-                <div key={i} className="p-4 rounded-lg">
+                <div key={i} className="p-4 rounded-lg bg-[#364949] animate-pulse">
                   <div className="flex justify-between items-center mb-2">
-                    <Skeleton className="h-6 w-32" />
-                    <Skeleton className="h-6 w-20" />
+                    <div className="h-6 w-32 bg-[#4c6767] rounded" />
+                    <div className="h-6 w-20 bg-[#4c6767] rounded" />
                   </div>
                   <div className="flex items-center">
-                    <Skeleton className="h-4 w-48" />
+                    <div className="h-4 w-48 bg-[#4c6767] rounded" />
                   </div>
                 </div>
               ))
@@ -46,20 +46,22 @@ export default function HistoryModal({ isOpen, onClose }: HistoryModalProps) {
               distributions.map((dist) => (
                 <div 
                   key={dist.id}
-                  className="bg-[hsl(var(--dark-bg))] rounded-lg p-4 border border-[hsl(var(--dark-border))] hover:border-[hsl(var(--starbucks-green))] transition-colors cursor-pointer"
+                  className="bg-[#364949] rounded-lg p-4 border border-[#4c6767] hover:border-[#93ec93] transition-colors cursor-pointer"
                 >
                   <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-semibold">{formatDate(dist.date)}</h3>
-                    <span className="bg-[hsl(var(--starbucks-green))] bg-opacity-20 text-[hsl(var(--starbucks-light))] px-2 py-1 rounded-md text-xs">
+                    <h3 className="font-semibold text-[#f5f5f5]">{formatDate(dist.date)}</h3>
+                    <span className="bg-[rgba(147,236,147,0.2)] text-[#93ec93] px-2 py-1 rounded-md text-xs">
                       {formatCurrency(dist.totalAmount)}
                     </span>
                   </div>
-                  <div className="flex items-center text-sm text-gray-400">
-                    <i className="fas fa-users mr-2"></i>
+                  <div className="flex items-center text-sm text-[#bfbfbf]">
+                    <UsersIcon className="h-4 w-4 mr-2" />
                     <span>
                       {Array.isArray(dist.partnerData) 
                         ? dist.partnerData.length 
-                        : Object.keys(dist.partnerData).length} partners
+                        : (dist.partnerData && typeof dist.partnerData === 'object' 
+                            ? Object.keys(dist.partnerData as Record<string, unknown>).length 
+                            : 0)} partners
                     </span>
                     <span className="mx-2">•</span>
                     <span>{dist.totalHours} total hours</span>
@@ -67,11 +69,20 @@ export default function HistoryModal({ isOpen, onClose }: HistoryModalProps) {
                 </div>
               ))
             ) : (
-              <div className="bg-[hsl(var(--dark-bg))] rounded-lg p-6 text-center">
-                <p className="text-gray-400">No distribution history yet</p>
+              <div className="bg-[#364949] rounded-lg p-6 text-center">
+                <p className="text-[#bfbfbf]">No distribution history yet</p>
               </div>
             )}
           </div>
+        </div>
+        
+        <div className="mt-4 pt-4 border-t border-[#4c6767] flex justify-end">
+          <button 
+            className="btn btn-transparent"
+            onClick={onClose}
+          >
+            Close
+          </button>
         </div>
       </DialogContent>
     </Dialog>
