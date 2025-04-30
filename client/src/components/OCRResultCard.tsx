@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { useTipContext } from "@/context/TipContext";
-import { starbucksTheme } from "@/lib/colorTheme";
+import { DownloadIcon, SparklesIcon } from "lucide-react";
 
 export default function OCRResultCard() {
   const { extractedText } = useTipContext();
@@ -37,52 +37,38 @@ export default function OCRResultCard() {
   };
   
   return (
-    <div className="animate__animated animate__fadeIn rounded-lg overflow-hidden" style={{ backgroundColor: starbucksTheme.secondaryGreen }}>
-      <div className="px-5 py-4 flex justify-between items-center">
-        <h2 className="text-xl font-bold flex items-center" style={{ color: starbucksTheme.textLight }}>
+    <Card className="animate-fade-in overflow-hidden">
+      <CardHeader className="spring-header flex flex-row justify-between items-center">
+        <CardTitle className="text-text-white">
           Extracted Data
-        </h2>
-        <div>
-          <Button 
-            className="border-none"
-            size="sm" 
-            onClick={handleDownload}
-            disabled={!extractedText}
-            style={{ 
-              backgroundColor: starbucksTheme.springLavender, 
-              color: "#333" 
-            }}
-          >
-            <i className="fas fa-download mr-2"></i>
-            Download
-          </Button>
-        </div>
-      </div>
+        </CardTitle>
+        <Button 
+          size="sm" 
+          onClick={handleDownload}
+          disabled={!extractedText}
+          className="bg-spring-lavender text-app-darker hover:bg-spring-lavender/90"
+        >
+          <DownloadIcon className="h-4 w-4 mr-2" />
+          Download
+        </Button>
+      </CardHeader>
       
-      <div className="p-4 h-48 overflow-y-auto font-mono text-sm" 
-           style={{ 
-             backgroundColor: starbucksTheme.primaryGreen,
-             color: starbucksTheme.textLight
-           }}>
+      <CardContent className="spring-body p-4 h-48 overflow-y-auto font-mono text-sm">
         {extractedText ? (
           extractedText.split('\n').map((line, index) => (
-            <p key={index}>{line}</p>
+            <p key={index} className="text-text-white">{line}</p>
           ))
         ) : (
-          <p className="text-center py-4" style={{ color: starbucksTheme.springYellow }}>
+          <p className="text-center py-4 text-spring-yellow">
             No data extracted yet. Upload a schedule or enter manually.
           </p>
         )}
-      </div>
+      </CardContent>
       
-      <div className="px-5 py-3 text-sm flex items-center" 
-           style={{ 
-             backgroundColor: starbucksTheme.darkBg,
-             color: starbucksTheme.springYellow
-           }}>
-        <i className="fas fa-magic mr-2"></i>
-        <span>Processed with Google Gemini 1.5 Flash</span>
-      </div>
-    </div>
+      <CardFooter className="spring-footer text-sm flex items-center">
+        <SparklesIcon className="h-4 w-4 mr-2 text-spring-yellow" />
+        <span className="text-spring-yellow">Processed with Google Gemini 1.5 Flash</span>
+      </CardFooter>
+    </Card>
   );
 }

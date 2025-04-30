@@ -44,6 +44,20 @@ export default {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
+        
+        // Spring colors
+        "spring-green": "hsl(var(--spring-green))",
+        "spring-blue": "hsl(var(--spring-blue))",
+        "spring-lavender": "hsl(var(--spring-lavender))",
+        "spring-pink": "hsl(var(--spring-pink))",
+        "spring-yellow": "hsl(var(--spring-yellow))",
+        "spring-peach": "hsl(var(--spring-peach))",
+        "spring-accent": "hsl(var(--spring-accent))",
+        "app-bg": "hsl(var(--app-bg))",
+        "app-darker": "hsl(var(--app-darker))",
+        "app-card": "hsl(var(--app-card))",
+        "text-white": "hsl(var(--text-white))",
+        
         chart: {
           "1": "hsl(var(--chart-1))",
           "2": "hsl(var(--chart-2))",
