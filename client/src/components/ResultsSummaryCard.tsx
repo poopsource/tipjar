@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { apiRequest } from "@/lib/queryClient";
@@ -143,38 +141,40 @@ export default function ResultsSummaryCard({
   };
   
   return (
-    <Card className="animate-fade-in overflow-hidden mb-8">
-      <CardHeader className="spring-header">
-        <CardTitle className="text-text-white">Distribution Summary</CardTitle>
-      </CardHeader>
+    <div className="card animate-fadeIn mb-8">
+      <div className="card-header">
+        <div className="text-2xl font-semibold tracking-tight text-[#f5f5f5]">
+          Distribution Summary
+        </div>
+      </div>
       
-      <CardContent className="spring-body p-5">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <div className="rounded-lg p-4 bg-app-card">
-            <p className="text-sm mb-1 text-spring-yellow">Total Hours</p>
-            <p className="text-2xl font-bold text-text-white">{totalHours}</p>
+      <div className="card-body p-5">
+        <div className="mb-6 grid grid-cols-3 gap-6">
+          <div className="summary-box">
+            <p className="summary-label">Total Hours</p>
+            <p className="summary-value">{totalHours}</p>
           </div>
-          <div className="rounded-lg p-4 bg-app-card">
-            <p className="text-sm mb-1 text-spring-yellow">Hourly Rate</p>
-            <p className="text-2xl font-bold text-spring-blue">
+          <div className="summary-box">
+            <p className="summary-label">Hourly Rate</p>
+            <p className="summary-value-blue">
               ${(Math.floor(hourlyRate * 100) / 100).toFixed(2).replace(/\.?0+$/, '')}
             </p>
           </div>
-          <div className="rounded-lg p-4 bg-app-card">
-            <p className="text-sm mb-1 text-spring-yellow">Total Distributed</p>
-            <p className="text-2xl font-bold text-spring-accent">{formatCurrency(totalAmount)}</p>
+          <div className="summary-box">
+            <p className="summary-label">Total Distributed</p>
+            <p className="summary-value-accent">{formatCurrency(totalAmount)}</p>
           </div>
         </div>
         
-        <div className="flex justify-between items-center">
-          <h3 className="font-medium text-spring-yellow">Distribution Date</h3>
-          <p className="text-text-white">{currentDate}</p>
+        <div className="flex items-center justify-between">
+          <h3 className="text-base font-medium text-[#ffeed6] m-0">Distribution Date</h3>
+          <p className="text-[#f5f5f5] m-0">{currentDate}</p>
         </div>
-      </CardContent>
+      </div>
         
-      <CardFooter className="spring-footer flex justify-between space-x-4">
-        <Button 
-          className="flex-1 spring-button-primary"
+      <div className="card-footer p-4 flex justify-between space-x-4">
+        <button 
+          className="btn btn-primary flex-1"
           onClick={handleSave}
           disabled={isSaving}
         >
@@ -184,22 +184,22 @@ export default function ResultsSummaryCard({
             <SaveIcon className="h-4 w-4 mr-2" />
           )}
           Save
-        </Button>
-        <Button 
-          className="flex-1 spring-button-secondary"
+        </button>
+        <button 
+          className="btn btn-secondary flex-1"
           onClick={handleDownload}
         >
           <DownloadIcon className="h-4 w-4 mr-2" />
           Download
-        </Button>
-        <Button 
-          className="flex-1 bg-spring-peach text-app-darker hover:bg-spring-peach/90"
+        </button>
+        <button 
+          className="btn flex-1 bg-[#ffd1ba] text-[#364949] hover:bg-opacity-90"
           onClick={onHistoryClick}
         >
           <HistoryIcon className="h-4 w-4 mr-2" />
           History
-        </Button>
-      </CardFooter>
-    </Card>
+        </button>
+      </div>
+    </div>
   );
 }
