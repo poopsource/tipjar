@@ -1,20 +1,24 @@
-// Official Starbucks Spring color palette
+// Starbucks Spring color palette - User Specified
 export const starbucksTheme = {
   // Main colors
-  primaryGreen: "#006241", // Starbucks deep green
-  secondaryGreen: "#1E3932", // Dark green
-  accentGreen: "#D4E9E2", // Light mint/seafoam green
+  primaryGreen: "#3a5c5c", // App card color
+  secondaryGreen: "#2f4f4f", // App background color
+  accentGreen: "#8fe58b", // Spring green
   
   // Text colors
-  textLight: "#ffffff",
-  textMedium: "#D4E9E2", // Light mint for secondary text
+  textLight: "#f5f5f5", // Text white
+  textMedium: "#ffefd6", // Spring yellow as medium text
   
   // Spring accent colors
-  springPink: "#EB81A5", // Spring collection pink
-  springYellow: "#F1FF67", // Spring collection yellow
+  springPink: "#ffb6c1", // Spring pink
+  springYellow: "#ffefd6", // Spring yellow
+  springBlue: "#a0d2eb", // Spring blue
+  springLavender: "#d1b3de", // Spring lavender
+  springPeach: "#ffd1ba", // Spring peach
+  springAccent: "#dd7596", // Spring accent
   
   // Backgrounds
-  darkBg: "#1E3932",
-  lightBg: "#D4E9E2",
-  cardBg: "#006241",
+  darkBg: "#1e3535", // App darker
+  lightBg: "#f5f5f5", // Text white
+  cardBg: "#3a5c5c", // App card
 }

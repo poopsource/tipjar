@@ -149,31 +149,31 @@ export default function ResultsSummaryCard({
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           <div className="rounded-lg p-4" style={{ backgroundColor: starbucksTheme.primaryGreen }}>
-            <p className="text-sm mb-1" style={{ color: starbucksTheme.accentGreen }}>Total Hours</p>
+            <p className="text-sm mb-1" style={{ color: starbucksTheme.springYellow }}>Total Hours</p>
             <p className="text-2xl font-bold" style={{ color: starbucksTheme.textLight }}>{totalHours}</p>
           </div>
           <div className="rounded-lg p-4" style={{ backgroundColor: starbucksTheme.primaryGreen }}>
-            <p className="text-sm mb-1" style={{ color: starbucksTheme.accentGreen }}>Hourly Rate</p>
-            <p className="text-2xl font-bold" style={{ color: starbucksTheme.springYellow }}>${(Math.floor(hourlyRate * 100) / 100).toFixed(2).replace(/\.?0+$/, '')}</p>
+            <p className="text-sm mb-1" style={{ color: starbucksTheme.springYellow }}>Hourly Rate</p>
+            <p className="text-2xl font-bold" style={{ color: starbucksTheme.springBlue }}>${(Math.floor(hourlyRate * 100) / 100).toFixed(2).replace(/\.?0+$/, '')}</p>
           </div>
           <div className="rounded-lg p-4" style={{ backgroundColor: starbucksTheme.primaryGreen }}>
-            <p className="text-sm mb-1" style={{ color: starbucksTheme.accentGreen }}>Total Distributed</p>
-            <p className="text-2xl font-bold" style={{ color: starbucksTheme.springPink }}>{formatCurrency(totalAmount)}</p>
+            <p className="text-sm mb-1" style={{ color: starbucksTheme.springYellow }}>Total Distributed</p>
+            <p className="text-2xl font-bold" style={{ color: starbucksTheme.springAccent }}>{formatCurrency(totalAmount)}</p>
           </div>
         </div>
         
         <div className="flex justify-between items-center mb-4">
-          <h3 className="font-medium" style={{ color: starbucksTheme.accentGreen }}>Distribution Date</h3>
+          <h3 className="font-medium" style={{ color: starbucksTheme.springYellow }}>Distribution Date</h3>
           <p style={{ color: starbucksTheme.textLight }}>{currentDate}</p>
         </div>
       </div>
         
-      <div className="p-4 flex space-x-4" style={{ backgroundColor: starbucksTheme.primaryGreen }}>
+      <div className="p-4 flex space-x-4" style={{ backgroundColor: starbucksTheme.darkBg }}>
         <Button 
           className="flex-1 border-none"
           style={{ 
-            backgroundColor: starbucksTheme.secondaryGreen, 
-            color: starbucksTheme.textLight
+            backgroundColor: starbucksTheme.accentGreen, 
+            color: "#333"
           }}
           onClick={handleSave}
           disabled={isSaving}
@@ -188,8 +188,8 @@ export default function ResultsSummaryCard({
         <Button 
           className="flex-1 border-none"
           style={{ 
-            backgroundColor: starbucksTheme.secondaryGreen, 
-            color: starbucksTheme.textLight
+            backgroundColor: starbucksTheme.springBlue, 
+            color: "#333"
           }}
           onClick={handleDownload}
         >
@@ -199,8 +199,8 @@ export default function ResultsSummaryCard({
         <Button 
           className="flex-1 border-none"
           style={{ 
-            backgroundColor: starbucksTheme.secondaryGreen, 
-            color: starbucksTheme.textLight
+            backgroundColor: starbucksTheme.springPeach, 
+            color: "#333"
           }}
           onClick={onHistoryClick}
         >

@@ -49,8 +49,8 @@ export default function OCRResultCard() {
             onClick={handleDownload}
             disabled={!extractedText}
             style={{ 
-              backgroundColor: starbucksTheme.primaryGreen, 
-              color: starbucksTheme.textLight 
+              backgroundColor: starbucksTheme.springLavender, 
+              color: "#333" 
             }}
           >
             <i className="fas fa-download mr-2"></i>
@@ -69,7 +69,7 @@ export default function OCRResultCard() {
             <p key={index}>{line}</p>
           ))
         ) : (
-          <p className="text-center py-4" style={{ color: starbucksTheme.accentGreen }}>
+          <p className="text-center py-4" style={{ color: starbucksTheme.springYellow }}>
             No data extracted yet. Upload a schedule or enter manually.
           </p>
         )}
@@ -77,8 +77,8 @@ export default function OCRResultCard() {
       
       <div className="px-5 py-3 text-sm flex items-center" 
            style={{ 
-             backgroundColor: starbucksTheme.primaryGreen,
-             color: starbucksTheme.accentGreen
+             backgroundColor: starbucksTheme.darkBg,
+             color: starbucksTheme.springYellow
            }}>
         <i className="fas fa-magic mr-2"></i>
         <span>Processed with Google Gemini 1.5 Flash</span>
