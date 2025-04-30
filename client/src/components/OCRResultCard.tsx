@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { useTipContext } from "@/context/TipContext";
+import { starbucksTheme } from "@/lib/colorTheme";
 
 export default function OCRResultCard() {
   const { extractedText } = useTipContext();
@@ -36,17 +37,21 @@ export default function OCRResultCard() {
   };
   
   return (
-    <div className="animate__animated animate__fadeIn bg-[#2d4845] rounded-lg overflow-hidden">
+    <div className="animate__animated animate__fadeIn rounded-lg overflow-hidden" style={{ backgroundColor: starbucksTheme.secondaryGreen }}>
       <div className="px-5 py-4 flex justify-between items-center">
-        <h2 className="text-xl font-bold text-white flex items-center">
+        <h2 className="text-xl font-bold flex items-center" style={{ color: starbucksTheme.textLight }}>
           Extracted Data
         </h2>
         <div>
           <Button 
-            className="bg-[#3a5a56] hover:bg-[#486c67] text-white border-none"
+            className="border-none"
             size="sm" 
             onClick={handleDownload}
             disabled={!extractedText}
+            style={{ 
+              backgroundColor: starbucksTheme.primaryGreen, 
+              color: starbucksTheme.textLight 
+            }}
           >
             <i className="fas fa-download mr-2"></i>
             Download
@@ -54,19 +59,27 @@ export default function OCRResultCard() {
         </div>
       </div>
       
-      <div className="bg-[#3a5a56] p-4 text-white h-48 overflow-y-auto font-mono text-sm">
+      <div className="p-4 h-48 overflow-y-auto font-mono text-sm" 
+           style={{ 
+             backgroundColor: starbucksTheme.primaryGreen,
+             color: starbucksTheme.textLight
+           }}>
         {extractedText ? (
           extractedText.split('\n').map((line, index) => (
             <p key={index}>{line}</p>
           ))
         ) : (
-          <p className="text-[#b3d1cb] text-center py-4">
+          <p className="text-center py-4" style={{ color: starbucksTheme.accentGreen }}>
             No data extracted yet. Upload a schedule or enter manually.
           </p>
         )}
       </div>
       
-      <div className="px-5 py-3 bg-[#3a5a56] text-sm text-[#b3d1cb] flex items-center">
+      <div className="px-5 py-3 text-sm flex items-center" 
+           style={{ 
+             backgroundColor: starbucksTheme.primaryGreen,
+             color: starbucksTheme.accentGreen
+           }}>
         <i className="fas fa-magic mr-2"></i>
         <span>Processed with Google Gemini 1.5 Flash</span>
       </div>

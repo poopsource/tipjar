@@ -1,5 +1,6 @@
 import { PartnerPayout } from "@shared/schema";
 import { formatCurrency } from "@/lib/utils";
+import { starbucksTheme } from "@/lib/colorTheme";
 
 type PartnerCardProps = {
   partner: PartnerPayout;
@@ -8,30 +9,34 @@ type PartnerCardProps = {
 
 export default function PartnerCard({ partner, hourlyRate }: PartnerCardProps) {  
   return (
-    <div className="bg-[#2d4845] rounded-lg overflow-hidden animate__animated animate__fadeIn">
+    <div className="rounded-lg overflow-hidden animate__animated animate__fadeIn" style={{ backgroundColor: starbucksTheme.secondaryGreen }}>
       <div className="flex justify-between items-center p-4">
-        <h3 className="font-medium text-white text-lg">{partner.name}</h3>
-        <span className="text-white text-2xl font-bold">${partner.rounded}</span>
+        <h3 className="font-medium text-lg" style={{ color: starbucksTheme.textLight }}>{partner.name}</h3>
+        <span className="text-2xl font-bold" style={{ color: starbucksTheme.springPink }}>${partner.rounded}</span>
       </div>
       
-      <div className="bg-[#3a5a56] p-3">
+      <div className="p-3" style={{ backgroundColor: starbucksTheme.primaryGreen }}>
         <div className="flex items-center mb-2">
-          <span className="text-[#b3d1cb] font-medium">Hours:</span>
-          <span className="ml-2 text-white">{partner.hours}</span>
+          <span className="font-medium" style={{ color: starbucksTheme.accentGreen }}>Hours:</span>
+          <span className="ml-2" style={{ color: starbucksTheme.textLight }}>{partner.hours}</span>
         </div>
         
-        <div className="text-[#b3d1cb] text-sm">
+        <div className="text-sm" style={{ color: starbucksTheme.accentGreen }}>
           {partner.hours} × ${hourlyRate} = ${(partner.hours * hourlyRate).toFixed(2)} → ${partner.rounded}
         </div>
       </div>
       
-      <div className="p-3 bg-[#2d4845]">
-        <div className="text-[#b3d1cb] mb-2 text-sm font-medium">Bills:</div>
+      <div className="p-3" style={{ backgroundColor: starbucksTheme.secondaryGreen }}>
+        <div className="mb-2 text-sm font-medium" style={{ color: starbucksTheme.accentGreen }}>Bills:</div>
         <div className="flex flex-wrap gap-2">
           {partner.billBreakdown.map((bill, index) => (
             <span 
               key={index} 
-              className="bg-[#3a5a56] text-white px-3 py-1 rounded text-sm"
+              className="px-3 py-1 rounded text-sm"
+              style={{ 
+                backgroundColor: starbucksTheme.primaryGreen, 
+                color: starbucksTheme.textLight 
+              }}
             >
               {bill.quantity}×${bill.denomination}
             </span>

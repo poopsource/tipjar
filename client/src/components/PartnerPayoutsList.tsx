@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { DistributionData, PartnerPayout } from "@shared/schema";
 import PartnerCard from "./PartnerCard";
+import { starbucksTheme } from "@/lib/colorTheme";
 
 type PartnerPayoutsListProps = {
   distributionData: DistributionData;
@@ -25,33 +26,37 @@ export default function PartnerPayoutsList({ distributionData }: PartnerPayoutsL
   
   return (
     <div className="animate__animated animate__fadeIn">
-      <div className="mb-8 p-5 bg-[#2d4845] rounded-lg">
-        <h2 className="text-xl font-bold mb-4 text-white">Calculation</h2>
+      <div className="mb-8 p-5 rounded-lg" style={{ backgroundColor: starbucksTheme.secondaryGreen }}>
+        <h2 className="text-xl font-bold mb-4" style={{ color: starbucksTheme.textLight }}>Calculation</h2>
         
-        <div className="bg-[#3a5a56] p-4 rounded-lg mb-5">
+        <div className="p-4 rounded-lg mb-5" style={{ backgroundColor: starbucksTheme.primaryGreen }}>
           <div className="flex flex-wrap items-center">
-            <span className="text-[#b3d1cb] mr-1">Total Tips:</span> 
-            <span className="text-white font-bold mr-4">${totalAmount.toFixed(2)}</span>
+            <span className="mr-1" style={{ color: starbucksTheme.accentGreen }}>Total Tips:</span> 
+            <span className="font-bold mr-4" style={{ color: starbucksTheme.textLight }}>${totalAmount.toFixed(2)}</span>
             
-            <span className="text-[#b3d1cb] mx-1">÷</span>
+            <span className="mx-1" style={{ color: starbucksTheme.accentGreen }}>÷</span>
             
-            <span className="text-[#b3d1cb] mx-1">Total Hours:</span>
-            <span className="text-white font-bold mr-4">{totalHours}</span>
+            <span className="mx-1" style={{ color: starbucksTheme.accentGreen }}>Total Hours:</span>
+            <span className="font-bold mr-4" style={{ color: starbucksTheme.textLight }}>{totalHours}</span>
             
-            <span className="text-[#b3d1cb] mx-1">=</span>
+            <span className="mx-1" style={{ color: starbucksTheme.accentGreen }}>=</span>
             
-            <span className="text-white font-bold mx-1">${hourlyRate}</span>
-            <span className="text-[#b3d1cb]">per hour</span>
+            <span className="font-bold mx-1" style={{ color: starbucksTheme.springYellow }}>${hourlyRate}</span>
+            <span style={{ color: starbucksTheme.accentGreen }}>per hour</span>
           </div>
         </div>
         
-        <h3 className="text-white font-medium mb-2">Total Bills Needed:</h3>
-        <div className="bg-[#3a5a56] p-4 rounded-lg">
+        <h3 className="font-medium mb-2" style={{ color: starbucksTheme.textLight }}>Total Bills Needed:</h3>
+        <div className="p-4 rounded-lg" style={{ backgroundColor: starbucksTheme.primaryGreen }}>
           <div className="flex flex-wrap gap-3">
             {Object.entries(billsNeeded).map(([bill, count], index) => (
               <span 
                 key={index} 
-                className="px-4 py-2 rounded bg-[#2d4845] text-white text-sm"
+                className="px-4 py-2 rounded text-sm"
+                style={{ 
+                  backgroundColor: starbucksTheme.secondaryGreen, 
+                  color: starbucksTheme.textLight 
+                }}
               >
                 {count} × {bill}
               </span>

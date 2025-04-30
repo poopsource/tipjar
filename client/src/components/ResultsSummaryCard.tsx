@@ -6,6 +6,7 @@ import { formatCurrency, formatDate } from "@/lib/utils";
 import { apiRequest } from "@/lib/queryClient";
 import { queryClient } from "@/lib/queryClient";
 import { useTipContext } from "@/context/TipContext";
+import { starbucksTheme } from "@/lib/colorTheme";
 
 type ResultsSummaryCardProps = {
   totalHours: number;
@@ -142,34 +143,38 @@ export default function ResultsSummaryCard({
   };
   
   return (
-    <div className="animate__animated animate__fadeIn bg-[#2d4845] rounded-lg overflow-hidden mb-8">
+    <div className="animate__animated animate__fadeIn rounded-lg overflow-hidden mb-8" style={{ backgroundColor: starbucksTheme.secondaryGreen }}>
       <div className="p-5">
-        <h2 className="text-xl font-bold mb-4 text-white">Distribution Summary</h2>
+        <h2 className="text-xl font-bold mb-4" style={{ color: starbucksTheme.textLight }}>Distribution Summary</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <div className="bg-[#3a5a56] rounded-lg p-4">
-            <p className="text-[#b3d1cb] text-sm mb-1">Total Hours</p>
-            <p className="text-2xl font-bold text-white">{totalHours}</p>
+          <div className="rounded-lg p-4" style={{ backgroundColor: starbucksTheme.primaryGreen }}>
+            <p className="text-sm mb-1" style={{ color: starbucksTheme.accentGreen }}>Total Hours</p>
+            <p className="text-2xl font-bold" style={{ color: starbucksTheme.textLight }}>{totalHours}</p>
           </div>
-          <div className="bg-[#3a5a56] rounded-lg p-4">
-            <p className="text-[#b3d1cb] text-sm mb-1">Hourly Rate</p>
-            <p className="text-2xl font-bold text-white">${(Math.floor(hourlyRate * 100) / 100).toFixed(2).replace(/\.?0+$/, '')}</p>
+          <div className="rounded-lg p-4" style={{ backgroundColor: starbucksTheme.primaryGreen }}>
+            <p className="text-sm mb-1" style={{ color: starbucksTheme.accentGreen }}>Hourly Rate</p>
+            <p className="text-2xl font-bold" style={{ color: starbucksTheme.springYellow }}>${(Math.floor(hourlyRate * 100) / 100).toFixed(2).replace(/\.?0+$/, '')}</p>
           </div>
-          <div className="bg-[#3a5a56] rounded-lg p-4">
-            <p className="text-[#b3d1cb] text-sm mb-1">Total Distributed</p>
-            <p className="text-2xl font-bold text-white">{formatCurrency(totalAmount)}</p>
+          <div className="rounded-lg p-4" style={{ backgroundColor: starbucksTheme.primaryGreen }}>
+            <p className="text-sm mb-1" style={{ color: starbucksTheme.accentGreen }}>Total Distributed</p>
+            <p className="text-2xl font-bold" style={{ color: starbucksTheme.springPink }}>{formatCurrency(totalAmount)}</p>
           </div>
         </div>
         
         <div className="flex justify-between items-center mb-4">
-          <h3 className="font-medium text-[#b3d1cb]">Distribution Date</h3>
-          <p className="text-white">{currentDate}</p>
+          <h3 className="font-medium" style={{ color: starbucksTheme.accentGreen }}>Distribution Date</h3>
+          <p style={{ color: starbucksTheme.textLight }}>{currentDate}</p>
         </div>
       </div>
         
-      <div className="bg-[#3a5a56] p-4 flex space-x-4">
+      <div className="p-4 flex space-x-4" style={{ backgroundColor: starbucksTheme.primaryGreen }}>
         <Button 
-          className="flex-1 bg-[#2d4845] hover:bg-[#375753] text-white border-none"
+          className="flex-1 border-none"
+          style={{ 
+            backgroundColor: starbucksTheme.secondaryGreen, 
+            color: starbucksTheme.textLight
+          }}
           onClick={handleSave}
           disabled={isSaving}
         >
@@ -181,14 +186,22 @@ export default function ResultsSummaryCard({
           Save
         </Button>
         <Button 
-          className="flex-1 bg-[#2d4845] hover:bg-[#375753] text-white border-none"
+          className="flex-1 border-none"
+          style={{ 
+            backgroundColor: starbucksTheme.secondaryGreen, 
+            color: starbucksTheme.textLight
+          }}
           onClick={handleDownload}
         >
           <i className="fas fa-download mr-2"></i>
           Download
         </Button>
         <Button 
-          className="flex-1 bg-[#2d4845] hover:bg-[#375753] text-white border-none"
+          className="flex-1 border-none"
+          style={{ 
+            backgroundColor: starbucksTheme.secondaryGreen, 
+            color: starbucksTheme.textLight
+          }}
           onClick={onHistoryClick}
         >
           <i className="fas fa-history mr-2"></i>
