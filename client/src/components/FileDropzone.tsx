@@ -2,7 +2,15 @@ import { useRef, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useTipContext } from "@/context/TipContext";
 import { readFileAsDataURL } from "@/lib/utils";
-import { apiRequest } from "@/lib/queryClient";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import {
+  UploadCloudIcon,
+  Loader2Icon,
+  CheckCircleIcon,
+  XCircleIcon,
+  FileTextIcon
+} from "lucide-react";
 
 enum DropzoneState {
   IDLE = "idle",
@@ -125,9 +133,6 @@ export default function FileDropzone() {
       // Otherwise use a generic message
       const errorMsg = errorMessage || "Failed to extract partner information from the image";
       
-      // Check if there was a response with suggestManualEntry flag
-      const suggestManual = error.response?.suggestManualEntry || false;
-      
       toast({
         title: "Processing failed",
         description: errorMsg,
@@ -145,76 +150,77 @@ export default function FileDropzone() {
       case DropzoneState.DRAGGING:
         return (
           <>
-            <i className="fas fa-cloud-upload-alt text-4xl mb-4 text-[hsl(var(--starbucks-green))]"></i>
-            <p className="mb-2">Release to upload</p>
+            <UploadCloudIcon className="h-16 w-16 mb-4 text-spring-green" />
+            <p className="mb-2 text-text-white">Release to upload</p>
           </>
         );
         
       case DropzoneState.PROCESSING:
         return (
           <>
-            <i className="fas fa-spinner fa-spin text-4xl mb-4 text-[hsl(var(--starbucks-green))]"></i>
-            <p className="mb-2">Processing image...</p>
-            <p className="text-sm text-gray-400">Using Gemini API for OCR</p>
+            <Loader2Icon className="h-16 w-16 mb-4 text-spring-green animate-spin" />
+            <p className="mb-2 text-text-white">Processing image...</p>
+            <p className="text-sm text-spring-yellow">Using Gemini API for OCR</p>
           </>
         );
         
       case DropzoneState.SUCCESS:
         return (
           <>
-            <i className="fas fa-check-circle text-4xl mb-4 text-[hsl(var(--starbucks-green))]"></i>
-            <p className="mb-2">File processed successfully!</p>
-            {fileName && <p className="text-sm text-gray-400">{fileName}</p>}
+            <CheckCircleIcon className="h-16 w-16 mb-4 text-spring-green" />
+            <p className="mb-2 text-text-white">File processed successfully!</p>
+            {fileName && <p className="text-sm text-spring-yellow">{fileName}</p>}
           </>
         );
         
       case DropzoneState.ERROR:
         return (
           <>
-            <i className="fas fa-times-circle text-4xl mb-4 text-red-500"></i>
-            <p className="mb-2">Processing failed</p>
+            <XCircleIcon className="h-16 w-16 mb-4 text-spring-pink" />
+            <p className="mb-2 text-text-white">Processing failed</p>
             {errorMessage ? (
-              <p className="text-sm text-gray-400 mb-2">{errorMessage}</p>
+              <p className="text-sm text-spring-yellow mb-2">{errorMessage}</p>
             ) : (
-              <p className="text-sm text-gray-400 mb-2">Please try again or use manual entry</p>
+              <p className="text-sm text-spring-yellow mb-2">Please try again or use manual entry</p>
             )}
-            <button 
+            <Button 
               onClick={(e) => {
                 e.stopPropagation();
                 openManualEntry();
               }}
-              className="mt-2 px-4 py-2 bg-[hsl(var(--starbucks-green))] text-white rounded-md hover:bg-opacity-90 transition-all"
+              className="mt-2 spring-button-primary"
             >
+              <FileTextIcon className="h-4 w-4 mr-2" />
               Switch to Manual Entry
-            </button>
+            </Button>
           </>
         );
         
       default:
         return (
           <>
-            <i className="fas fa-cloud-upload-alt text-4xl mb-4 text-[hsl(var(--starbucks-green))]"></i>
-            <p className="mb-2">Drag & drop your schedule image here</p>
-            <p className="text-sm text-gray-400">or</p>
-            <button 
-              className="mt-3 px-4 py-2 bg-[hsl(var(--starbucks-green))] text-white rounded-md hover:bg-opacity-90 transition-all"
+            <UploadCloudIcon className="h-16 w-16 mb-4 text-spring-green" />
+            <p className="mb-2 text-text-white">Drag & drop your schedule image here</p>
+            <p className="text-sm text-spring-yellow">or</p>
+            <Button 
+              className="mt-3 spring-button-primary"
               onClick={(e) => {
                 e.stopPropagation();
                 fileInputRef.current?.click();
               }}
             >
               Browse Files
-            </button>
+            </Button>
           </>
         );
     }
   };
   
   const getDropzoneClasses = () => {
-    const baseClasses = "dropzone rounded-lg p-8 mb-6 text-center cursor-pointer hover:bg-opacity-30 transition-all animate__animated animate__fadeIn";
+    const baseClasses = "border-2 border-dashed border-spring-green/50 rounded-lg p-8 mb-6 text-center cursor-pointer transition-all duration-300 animate-fade-in bg-app-card hover:bg-app-card/90";
     
     if (dropzoneState === DropzoneState.DRAGGING) {
-      return `${baseClasses} active`;
+      return `${baseClasses} border-spring-green bg-spring-green/10`;
     }
     
     return baseClasses;

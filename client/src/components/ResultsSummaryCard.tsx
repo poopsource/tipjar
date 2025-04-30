@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { apiRequest } from "@/lib/queryClient";
 import { queryClient } from "@/lib/queryClient";
 import { useTipContext } from "@/context/TipContext";
-import { starbucksTheme } from "@/lib/colorTheme";
+import { DownloadIcon, SaveIcon, HistoryIcon, Loader2Icon } from "lucide-react";
 
 type ResultsSummaryCardProps = {
   totalHours: number;
@@ -143,71 +143,63 @@ export default function ResultsSummaryCard({
   };
   
   return (
-    <div className="animate__animated animate__fadeIn rounded-lg overflow-hidden mb-8" style={{ backgroundColor: starbucksTheme.secondaryGreen }}>
-      <div className="p-5">
-        <h2 className="text-xl font-bold mb-4" style={{ color: starbucksTheme.textLight }}>Distribution Summary</h2>
-        
+    <Card className="animate-fade-in overflow-hidden mb-8">
+      <CardHeader className="spring-header">
+        <CardTitle className="text-text-white">Distribution Summary</CardTitle>
+      </CardHeader>
+      
+      <CardContent className="spring-body p-5">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <div className="rounded-lg p-4" style={{ backgroundColor: starbucksTheme.primaryGreen }}>
-            <p className="text-sm mb-1" style={{ color: starbucksTheme.springYellow }}>Total Hours</p>
-            <p className="text-2xl font-bold" style={{ color: starbucksTheme.textLight }}>{totalHours}</p>
+          <div className="rounded-lg p-4 bg-app-card">
+            <p className="text-sm mb-1 text-spring-yellow">Total Hours</p>
+            <p className="text-2xl font-bold text-text-white">{totalHours}</p>
           </div>
-          <div className="rounded-lg p-4" style={{ backgroundColor: starbucksTheme.primaryGreen }}>
-            <p className="text-sm mb-1" style={{ color: starbucksTheme.springYellow }}>Hourly Rate</p>
-            <p className="text-2xl font-bold" style={{ color: starbucksTheme.springBlue }}>${(Math.floor(hourlyRate * 100) / 100).toFixed(2).replace(/\.?0+$/, '')}</p>
+          <div className="rounded-lg p-4 bg-app-card">
+            <p className="text-sm mb-1 text-spring-yellow">Hourly Rate</p>
+            <p className="text-2xl font-bold text-spring-blue">
+              ${(Math.floor(hourlyRate * 100) / 100).toFixed(2).replace(/\.?0+$/, '')}
+            </p>
           </div>
-          <div className="rounded-lg p-4" style={{ backgroundColor: starbucksTheme.primaryGreen }}>
-            <p className="text-sm mb-1" style={{ color: starbucksTheme.springYellow }}>Total Distributed</p>
-            <p className="text-2xl font-bold" style={{ color: starbucksTheme.springAccent }}>{formatCurrency(totalAmount)}</p>
+          <div className="rounded-lg p-4 bg-app-card">
+            <p className="text-sm mb-1 text-spring-yellow">Total Distributed</p>
+            <p className="text-2xl font-bold text-spring-accent">{formatCurrency(totalAmount)}</p>
           </div>
         </div>
         
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="font-medium" style={{ color: starbucksTheme.springYellow }}>Distribution Date</h3>
-          <p style={{ color: starbucksTheme.textLight }}>{currentDate}</p>
+        <div className="flex justify-between items-center">
+          <h3 className="font-medium text-spring-yellow">Distribution Date</h3>
+          <p className="text-text-white">{currentDate}</p>
         </div>
-      </div>
+      </CardContent>
         
-      <div className="p-4 flex space-x-4" style={{ backgroundColor: starbucksTheme.darkBg }}>
+      <CardFooter className="spring-footer flex justify-between space-x-4">
         <Button 
-          className="flex-1 border-none"
-          style={{ 
-            backgroundColor: starbucksTheme.accentGreen, 
-            color: "#333"
-          }}
+          className="flex-1 spring-button-primary"
           onClick={handleSave}
           disabled={isSaving}
         >
           {isSaving ? (
-            <i className="fas fa-spinner fa-spin mr-2"></i>
+            <Loader2Icon className="h-4 w-4 mr-2 animate-spin" />
           ) : (
-            <i className="fas fa-save mr-2"></i>
+            <SaveIcon className="h-4 w-4 mr-2" />
           )}
           Save
         </Button>
         <Button 
-          className="flex-1 border-none"
-          style={{ 
-            backgroundColor: starbucksTheme.springBlue, 
-            color: "#333"
-          }}
+          className="flex-1 spring-button-secondary"
           onClick={handleDownload}
         >
-          <i className="fas fa-download mr-2"></i>
+          <DownloadIcon className="h-4 w-4 mr-2" />
           Download
         </Button>
         <Button 
-          className="flex-1 border-none"
-          style={{ 
-            backgroundColor: starbucksTheme.springPeach, 
-            color: "#333"
-          }}
+          className="flex-1 bg-spring-peach text-app-darker hover:bg-spring-peach/90"
           onClick={onHistoryClick}
         >
-          <i className="fas fa-history mr-2"></i>
+          <HistoryIcon className="h-4 w-4 mr-2" />
           History
         </Button>
-      </div>
-    </div>
+      </CardFooter>
+    </Card>
   );
 }
