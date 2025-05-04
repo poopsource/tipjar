@@ -19,16 +19,7 @@ export default function AppHeader() {
           </div>
         </Link>
         
-        <div className="flex items-center space-x-2 sm:space-x-4">
-          <Button
-            variant="outline"
-            className="flex items-center bg-[hsl(var(--dark-surface))] hover:bg-opacity-80 transition-all border-none px-2 sm:px-3 py-1 sm:py-2 h-auto"
-            onClick={() => setShowHistoryModal(true)}
-          >
-            <i className="fas fa-history mr-1 sm:mr-2"></i>
-            <span className="hidden sm:inline">History</span>
-          </Button>
-          
+        <div className="flex items-center">
           <Button 
             variant="outline"
             className="p-1 sm:p-2 rounded-full bg-[hsl(var(--dark-surface))] hover:bg-opacity-80 transition-all border-none"

@@ -172,7 +172,6 @@ export default function Home() {
                 totalHours={distributionData.totalHours}
                 hourlyRate={distributionData.hourlyRate}
                 totalAmount={distributionData.totalAmount}
-                onHistoryClick={() => setShowHistoryModal(true)}
               />
               
               <PartnerPayoutsList distributionData={distributionData} />
