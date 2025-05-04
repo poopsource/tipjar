@@ -1,63 +1,28 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import FileDropzone from "@/components/FileDropzone";
 import ResultsSummaryCard from "@/components/ResultsSummaryCard";
 import PartnerPayoutsList from "@/components/PartnerPayoutsList";
-import ManualEntryModal from "@/components/ManualEntryModal";
-import HistoryModal from "@/components/HistoryModal";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { useTipContext } from "@/context/TipContext";
 import { apiRequest } from "@/lib/queryClient";
-import { PartnerHours } from "@shared/schema";
 import { calculateHourlyRate } from "@/lib/utils";
 
 export default function Home() {
-  const [showHistoryModal, setShowHistoryModal] = useState(false);
-  const [showManualEntryModal, setShowManualEntryModal] = useState(false);
-  const [isManualMode, setIsManualMode] = useState(false);
   const [tipAmount, setTipAmount] = useState<number | ''>('');
   const [isCalculating, setIsCalculating] = useState(false);
   
   const { toast } = useToast();
   const { 
     partnerHours, 
-    setPartnerHours, 
     distributionData, 
-    setDistributionData,
-    extractedText,
-    setExtractedText
+    setDistributionData
   } = useTipContext();
-
-  // Listen for the custom event to open manual entry modal
-  useEffect(() => {
-    const handleOpenManualEntry = () => {
-      setIsManualMode(true);
-      setShowManualEntryModal(true);
-    };
-    
-    window.addEventListener('openManualEntry', handleOpenManualEntry);
-    
-    return () => {
-      window.removeEventListener('openManualEntry', handleOpenManualEntry);
-    };
-  }, []);
-
-  const handleToggleManualMode = (checked: boolean) => {
-    setIsManualMode(checked);
-    if (checked) {
-      setShowManualEntryModal(true);
-    }
-  };
 
   const handleCalculate = async () => {
     if (!partnerHours.length) {
       toast({
         title: "No partner data",
-        description: "Please upload a schedule or enter partner information manually",
+        description: "Please upload a schedule with partner information",
         variant: "destructive"
       });
       return;
@@ -179,25 +144,6 @@ export default function Home() {
           )}
         </div>
       </div>
-        
-      {showManualEntryModal && (
-        <ManualEntryModal
-          isOpen={showManualEntryModal}
-          onClose={() => {
-            setShowManualEntryModal(false);
-            if (!partnerHours.length) {
-              setIsManualMode(false);
-            }
-          }}
-        />
-      )}
-      
-      {showHistoryModal && (
-        <HistoryModal
-          isOpen={showHistoryModal}
-          onClose={() => setShowHistoryModal(false)}
-        />
-      )}
     </main>
   );
 }

@@ -50,15 +50,7 @@ export default function FileDropzone() {
     }
   };
   
-  const openManualEntry = () => {
-    // Dispatch a custom event to be handled by Home.tsx
-    const event = new CustomEvent('openManualEntry');
-    window.dispatchEvent(event);
-    
-    // Reset the dropzone state
-    setState(DropzoneState.IDLE);
-    setErrorMessage(null);
-  };
+
   
   const processFile = async (file: File) => {
     if (!file.type.startsWith('image/')) {
