@@ -121,33 +121,7 @@ export default function Home() {
               
               <FileDropzone />
               
-              <div className="divider-with-text mt-6 mb-6">
-                <span className="divider-text">or</span>
-              </div>
-              
-              <div className="mb-6 flex items-center justify-between">
-                <label htmlFor="manual-mode" className="text-sm font-medium text-white">
-                  Manual Partner Entry
-                </label>
-                <button
-                  type="button"
-                  role="switch"
-                  aria-checked={isManualMode}
-                  id="manual-mode"
-                  className={`flex h-6 w-11 flex-shrink-0 border border-transparent rounded-full ${
-                    isManualMode 
-                      ? "bg-[#93ec93]" 
-                      : "bg-[#415858]"
-                  }`}
-                  onClick={() => handleToggleManualMode(!isManualMode)}
-                >
-                  <span 
-                    className={`pointer-events-none block h-5 w-5 bg-[#364949] rounded-full shadow-md transition-transform duration-150 ease-in-out transform ${
-                      isManualMode ? "translate-x-5" : "translate-x-0"
-                    }`}
-                  ></span>
-                </button>
-              </div>
+
               
               <div className="mb-6">
                 <label htmlFor="tipAmount" className="input-label">

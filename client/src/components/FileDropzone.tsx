@@ -19,7 +19,7 @@ enum DropzoneState {
 }
 
 export default function FileDropzone() {
-  const [dropzoneState, setDropzoneState] = useState<DropzoneState>(DropzoneState.IDLE);
+  const [state, setState] = useState<DropzoneState>(DropzoneState.IDLE);
   const [fileName, setFileName] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -29,11 +29,11 @@ export default function FileDropzone() {
   
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    setDropzoneState(DropzoneState.DRAGGING);
+    setState(DropzoneState.DRAGGING);
   };
   
   const handleDragLeave = () => {
-    setDropzoneState(DropzoneState.IDLE);
+    setState(DropzoneState.IDLE);
   };
   
   const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
@@ -56,7 +56,7 @@ export default function FileDropzone() {
     window.dispatchEvent(event);
     
     // Reset the dropzone state
-    setDropzoneState(DropzoneState.IDLE);
+    setState(DropzoneState.IDLE);
     setErrorMessage(null);
   };
   
@@ -70,7 +70,7 @@ export default function FileDropzone() {
       return;
     }
     
-    setDropzoneState(DropzoneState.PROCESSING);
+    setState(DropzoneState.PROCESSING);
     setFileName(file.name);
     setErrorMessage(null);
     
@@ -102,10 +102,10 @@ export default function FileDropzone() {
       
       if (result.partnerHours && result.partnerHours.length > 0) {
         setPartnerHours(result.partnerHours);
-        setDropzoneState(DropzoneState.SUCCESS);
+        setState(DropzoneState.SUCCESS);
         
         setTimeout(() => {
-          setDropzoneState(DropzoneState.IDLE);
+          setState(DropzoneState.IDLE);
         }, 3000);
         
         toast({
@@ -114,18 +114,18 @@ export default function FileDropzone() {
         });
       } else {
         // No partners found in the image
-        setErrorMessage("No partner information detected in the image. Please try a different image or use manual entry.");
-        setDropzoneState(DropzoneState.ERROR);
+        setErrorMessage("No partner information detected in the image. Please try a different image.");
+        setState(DropzoneState.ERROR);
         
         toast({
           title: "Processing issue",
-          description: "OCR detected text but couldn't identify partner hours. Try manual entry instead.",
+          description: "OCR detected text but couldn't identify partner hours.",
           variant: "destructive"
         });
       }
     } catch (error: any) {
       console.error(error);
-      setDropzoneState(DropzoneState.ERROR);
+      setState(DropzoneState.ERROR);
       
       // If we have a specific error message from the API, use it
       // Otherwise use a generic message
@@ -138,13 +138,13 @@ export default function FileDropzone() {
       });
       
       setTimeout(() => {
-        setDropzoneState(DropzoneState.IDLE);
+        setState(DropzoneState.IDLE);
       }, 5000);
     }
   };
   
   const renderDropzoneContent = () => {
-    switch (dropzoneState) {
+    switch (state) {
       case DropzoneState.DRAGGING:
         return (
           <>
@@ -162,7 +162,6 @@ export default function FileDropzone() {
               <Loader2Icon className="h-full w-full animate-spin" />
             </div>
             <p className="text-[#f5f5f5] m-0 mb-1 sm:mb-2 text-sm sm:text-base">Processing image...</p>
-            <p className="text-xs sm:text-sm text-[#ffeed6] m-0">Using Gemini API for OCR</p>
           </>
         );
         
@@ -187,17 +186,17 @@ export default function FileDropzone() {
             {errorMessage ? (
               <p className="text-xs sm:text-sm text-[#ffeed6] m-0 mb-1 sm:mb-2">{errorMessage}</p>
             ) : (
-              <p className="text-xs sm:text-sm text-[#ffeed6] m-0 mb-1 sm:mb-2">Please try again or use manual entry</p>
+              <p className="text-xs sm:text-sm text-[#ffeed6] m-0 mb-1 sm:mb-2">Please try again with a different image</p>
             )}
             <button 
               onClick={(e) => {
                 e.stopPropagation();
-                openManualEntry();
+                setState(DropzoneState.IDLE);
               }}
               className="text-xs sm:text-sm font-medium text-[#364949] bg-[#93ec93] inline-flex h-8 sm:h-10 justify-center gap-2 whitespace-nowrap border-0 rounded-md px-3 sm:px-4 py-1 sm:py-2 mt-2 sm:mt-3"
             >
-              <FileTextIcon className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-              Switch to Manual Entry
+              <XCircleIcon className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+              Try Again
             </button>
           </>
         );
