@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
-import AppTabs from "@/components/AppTabs";
 import FileDropzone from "@/components/FileDropzone";
-import OCRResultCard from "@/components/OCRResultCard";
 import ResultsSummaryCard from "@/components/ResultsSummaryCard";
 import PartnerPayoutsList from "@/components/PartnerPayoutsList";
 import ManualEntryModal from "@/components/ManualEntryModal";
@@ -190,8 +188,6 @@ export default function Home() {
               </button>
             </div>
           </div>
-          
-          <OCRResultCard />
         </div>
         
         {/* Middle/Right Column - Results Section */}

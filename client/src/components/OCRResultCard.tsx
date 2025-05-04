@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useTipContext } from "@/context/TipContext";
-import { DownloadIcon, SparklesIcon } from "lucide-react";
+import { DownloadIcon } from "lucide-react";
 
 export default function OCRResultCard() {
   const { extractedText } = useTipContext();
@@ -34,38 +34,7 @@ export default function OCRResultCard() {
     });
   };
   
-  return (
-    <div className="card animate-fadeIn mt-6">
-      <div className="card-header">
-        <div className="text-2xl font-semibold tracking-tight text-[#f5f5f5]">
-          Extracted Data
-        </div>
-        <button 
-          className="btn btn-lavender h-9 mt-1.5"
-          onClick={handleDownload}
-          disabled={!extractedText}
-        >
-          <DownloadIcon className="h-4 w-4 mr-2" />
-          Download
-        </button>
-      </div>
-      
-      <div className="bg-[#3a5c5c] h-48 overflow-y-auto font-mono text-sm p-4">
-        {extractedText ? (
-          extractedText.split('\n').map((line, index) => (
-            <p key={index} className="text-[#f5f5f5] m-0">{line}</p>
-          ))
-        ) : (
-          <p className="text-center py-4 text-[#ffeed6]">
-            No data extracted yet. Upload a schedule or enter manually.
-          </p>
-        )}
-      </div>
-      
-      <div className="card-footer p-4 pb-6">
-        <SparklesIcon className="h-4 w-4 mr-2 text-[#ffeed6]" />
-        <span className="text-[#ffeed6]">Processed with Google Gemini 1.5 Flash</span>
-      </div>
-    </div>
-  );
+  // We're not displaying the OCR card anymore as requested
+  // but keep the component for its functionality
+  return null;
 }

@@ -1,11 +1,10 @@
-import { Switch, Route, Link, useLocation } from "wouter";
+import { Switch, Route, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
-import Partners from "@/pages/Partners";
 import { TipContextProvider } from "@/context/TipContext";
 
 function AppNav() {
@@ -19,11 +18,6 @@ function AppNav() {
            className={location === "/" ? "nav-link-active" : "nav-link"}>
           Tip Distribution
         </a>
-        <a href="/partners" 
-           onClick={(e) => { e.preventDefault(); window.location.href='/partners' }}
-           className={location === "/partners" ? "nav-link-active" : "nav-link"}>
-          Partners
-        </a>
       </div>
     </div>
   );
@@ -33,7 +27,6 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/partners" component={Partners} />
       <Route component={NotFound} />
     </Switch>
   );
