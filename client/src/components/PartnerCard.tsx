@@ -23,8 +23,8 @@ export default function PartnerCard({ partner, hourlyRate }: PartnerCardProps) {
   return (
     <div className="card animate-fadeIn overflow-hidden">
       <div className="card-header flex flex-row justify-between items-center py-3">
-        <h3 className="font-medium text-lg text-[#f5f5f5] m-0">{partner.name}</h3>
-        <span className="text-2xl font-bold text-[#dd7895]">${partner.rounded}</span>
+        <h3 className="font-medium text-lg text-[#f5f5f5] m-0 truncate pr-2">{partner.name}</h3>
+        <span className="text-2xl font-bold text-[#dd7895] whitespace-nowrap">${partner.rounded}</span>
       </div>
       
       <div className="card-body p-3">
@@ -33,10 +33,10 @@ export default function PartnerCard({ partner, hourlyRate }: PartnerCardProps) {
           <span className="ml-2 text-[#f5f5f5]">{partner.hours}</span>
         </div>
         
-        <div className="text-sm flex flex-wrap items-center text-[#f5f5f5]">
+        <div className="text-sm flex flex-wrap items-center text-[#f5f5f5] break-words">
           <span className="mr-1">{partner.hours}</span> × 
-          <span className="mx-1 text-[#9fd6e9]">${(Math.floor(hourlyRate * 100) / 100).toFixed(2)}</span> = 
-          <span className="mx-1 text-[#ffeed6]">${(partner.hours * hourlyRate).toFixed(2)}</span> → 
+          <span className="mx-1 text-[#9fd6e9]">${(Math.floor(hourlyRate * 100) / 100).toFixed(2)}</span><span> = </span>
+          <span className="mx-1 text-[#ffeed6]">${(partner.hours * hourlyRate).toFixed(2)}</span><span> → </span>
           <span className="ml-1 font-bold text-[#dd7895]">${partner.rounded}</span>
         </div>
       </div>

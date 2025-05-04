@@ -149,7 +149,7 @@ export default function ResultsSummaryCard({
       </div>
       
       <div className="card-body p-5">
-        <div className="mb-6 grid grid-cols-3 gap-6">
+        <div className="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
           <div className="summary-box">
             <p className="summary-label">Total Hours</p>
             <p className="summary-value">{totalHours}</p>
@@ -172,9 +172,9 @@ export default function ResultsSummaryCard({
         </div>
       </div>
         
-      <div className="card-footer p-4 flex justify-between space-x-4">
+      <div className="card-footer p-4 flex flex-col sm:flex-row justify-between sm:space-x-4 space-y-3 sm:space-y-0">
         <button 
-          className="btn btn-primary flex-1"
+          className="btn btn-primary w-full sm:flex-1"
           onClick={handleSave}
           disabled={isSaving}
         >
@@ -186,14 +186,14 @@ export default function ResultsSummaryCard({
           Save
         </button>
         <button 
-          className="btn btn-secondary flex-1"
+          className="btn btn-secondary w-full sm:flex-1"
           onClick={handleDownload}
         >
           <DownloadIcon className="h-4 w-4 mr-2" />
           Download
         </button>
         <button 
-          className="btn flex-1 bg-[#ffd1ba] text-[#364949] hover:bg-opacity-90"
+          className="btn w-full sm:flex-1 bg-[#ffd1ba] text-[#364949] hover:bg-opacity-90"
           onClick={onHistoryClick}
         >
           <HistoryIcon className="h-4 w-4 mr-2" />

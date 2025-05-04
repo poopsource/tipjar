@@ -38,7 +38,7 @@ function App() {
       <TooltipProvider>
         <TipContextProvider>
           <div className="flex-grow w-full bg-[#2F4F4F] text-[#f5f5f5] min-h-screen">
-            <main className="max-w-7xl mx-auto py-6 px-4">
+            <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6">
               <AppNav />
               <div className="flex-grow">
                 <Router />

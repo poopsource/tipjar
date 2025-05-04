@@ -110,9 +110,9 @@ export default function Home() {
 
   return (
     <main>
-      <div className="mt-8 grid grid-cols-3 gap-6">
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Left Column - Input Section */}
-        <div className="col-span-1">
+        <div className="md:col-span-1">
           <div className="card animate-fadeIn">
             <div className="card-body">
               <h2 className="flex items-center mb-4 text-xl font-bold">
@@ -191,7 +191,7 @@ export default function Home() {
         </div>
         
         {/* Middle/Right Column - Results Section */}
-        <div className="col-span-2">
+        <div className="md:col-span-2">
           {distributionData && (
             <>
               <ResultsSummaryCard 
