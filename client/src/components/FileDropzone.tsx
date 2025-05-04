@@ -148,55 +148,55 @@ export default function FileDropzone() {
       case DropzoneState.DRAGGING:
         return (
           <>
-            <div className="mb-4 h-16 w-16 text-[#93ec93] mx-auto">
+            <div className="mb-3 sm:mb-4 h-12 w-12 sm:h-16 sm:w-16 text-[#93ec93] mx-auto">
               <UploadCloudIcon className="h-full w-full" />
             </div>
-            <p className="text-[#f5f5f5] m-0 mb-2">Release to upload</p>
+            <p className="text-[#f5f5f5] m-0 mb-1 sm:mb-2 text-sm sm:text-base">Release to upload</p>
           </>
         );
         
       case DropzoneState.PROCESSING:
         return (
           <>
-            <div className="mb-4 h-16 w-16 text-[#93ec93] mx-auto">
+            <div className="mb-3 sm:mb-4 h-12 w-12 sm:h-16 sm:w-16 text-[#93ec93] mx-auto">
               <Loader2Icon className="h-full w-full animate-spin" />
             </div>
-            <p className="text-[#f5f5f5] m-0 mb-2">Processing image...</p>
-            <p className="text-sm text-[#ffeed6] m-0">Using Gemini API for OCR</p>
+            <p className="text-[#f5f5f5] m-0 mb-1 sm:mb-2 text-sm sm:text-base">Processing image...</p>
+            <p className="text-xs sm:text-sm text-[#ffeed6] m-0">Using Gemini API for OCR</p>
           </>
         );
         
       case DropzoneState.SUCCESS:
         return (
           <>
-            <div className="mb-4 h-16 w-16 text-[#93ec93] mx-auto">
+            <div className="mb-3 sm:mb-4 h-12 w-12 sm:h-16 sm:w-16 text-[#93ec93] mx-auto">
               <CheckCircleIcon className="h-full w-full" />
             </div>
-            <p className="text-[#f5f5f5] m-0 mb-2">File processed successfully!</p>
-            {fileName && <p className="text-sm text-[#ffeed6] m-0">{fileName}</p>}
+            <p className="text-[#f5f5f5] m-0 mb-1 sm:mb-2 text-sm sm:text-base">File processed successfully!</p>
+            {fileName && <p className="text-xs sm:text-sm text-[#ffeed6] m-0 truncate max-w-full">{fileName}</p>}
           </>
         );
         
       case DropzoneState.ERROR:
         return (
           <>
-            <div className="mb-4 h-16 w-16 text-red-500 mx-auto">
+            <div className="mb-3 sm:mb-4 h-12 w-12 sm:h-16 sm:w-16 text-red-500 mx-auto">
               <XCircleIcon className="h-full w-full" />
             </div>
-            <p className="text-[#f5f5f5] m-0 mb-2">Processing failed</p>
+            <p className="text-[#f5f5f5] m-0 mb-1 sm:mb-2 text-sm sm:text-base">Processing failed</p>
             {errorMessage ? (
-              <p className="text-sm text-[#ffeed6] m-0 mb-2">{errorMessage}</p>
+              <p className="text-xs sm:text-sm text-[#ffeed6] m-0 mb-1 sm:mb-2">{errorMessage}</p>
             ) : (
-              <p className="text-sm text-[#ffeed6] m-0 mb-2">Please try again or use manual entry</p>
+              <p className="text-xs sm:text-sm text-[#ffeed6] m-0 mb-1 sm:mb-2">Please try again or use manual entry</p>
             )}
             <button 
               onClick={(e) => {
                 e.stopPropagation();
                 openManualEntry();
               }}
-              className="text-sm font-medium text-[#364949] bg-[#93ec93] inline-flex h-10 justify-center gap-2 whitespace-nowrap border-0 rounded-md px-4 py-2 mt-3"
+              className="text-xs sm:text-sm font-medium text-[#364949] bg-[#93ec93] inline-flex h-8 sm:h-10 justify-center gap-2 whitespace-nowrap border-0 rounded-md px-3 sm:px-4 py-1 sm:py-2 mt-2 sm:mt-3"
             >
-              <FileTextIcon className="h-4 w-4 mr-2" />
+              <FileTextIcon className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
               Switch to Manual Entry
             </button>
           </>
@@ -205,13 +205,13 @@ export default function FileDropzone() {
       default:
         return (
           <>
-            <div className="mb-4 h-16 w-16 text-[#93ec93] mx-auto">
+            <div className="mb-3 sm:mb-4 h-12 w-12 sm:h-16 sm:w-16 text-[#93ec93] mx-auto">
               <UploadCloudIcon className="h-full w-full" />
             </div>
-            <p className="text-[#f5f5f5] m-0 mb-2">Drag & drop your schedule image here</p>
-            <p className="text-sm text-[#ffeed6] m-0">or</p>
+            <p className="text-[#f5f5f5] m-0 mb-1 sm:mb-2 text-sm sm:text-base">Drag & drop your schedule image here</p>
+            <p className="text-xs sm:text-sm text-[#ffeed6] m-0">or</p>
             <button 
-              className="text-sm font-medium text-[#364949] bg-[#93ec93] inline-flex h-10 justify-center gap-2 whitespace-nowrap border-0 rounded-md px-4 py-2 mt-3"
+              className="text-xs sm:text-sm font-medium text-[#364949] bg-[#93ec93] inline-flex h-8 sm:h-10 justify-center gap-2 whitespace-nowrap border-0 rounded-md px-3 sm:px-4 py-1 sm:py-2 mt-2 sm:mt-3"
               onClick={(e) => {
                 e.stopPropagation();
                 fileInputRef.current?.click();
