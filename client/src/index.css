@@ -209,3 +209,70 @@
     transform: translateY(0);
   }
 }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card-body {
+    padding: 1rem;
+  }
+  
+  .summary-box {
+    padding: 0.75rem;
+  }
+  
+  .summary-value, .summary-value-blue, .summary-value-accent {
+    font-size: 1.25rem;
+  }
+  
+  .card-header {
+    padding: 0.75rem 1rem;
+  }
+  
+  .card-footer {
+    padding: 0.75rem 1rem;
+  }
+  
+  h1, h2 {
+    font-size: 1.5rem;
+  }
+  
+  .btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    border-radius: 0.75rem;
+  }
+  
+  .card-header {
+    padding: 0.75rem;
+  }
+  
+  .card-body {
+    padding: 0.75rem;
+  }
+  
+  .card-footer {
+    padding: 0.75rem;
+  }
+  
+  .summary-box {
+    padding: 0.5rem;
+  }
+  
+  .summary-value, .summary-value-blue, .summary-value-accent {
+    font-size: 1.125rem;
+  }
+  
+  .input-field {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  .input-field-dollar {
+    padding-left: 1.5rem;
+  }
+}

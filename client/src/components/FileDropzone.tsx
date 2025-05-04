@@ -227,7 +227,7 @@ export default function FileDropzone() {
   return (
     <>
       <div
-        className="animate-fadeIn mb-6 cursor-pointer bg-[#3c5d5d] text-center transition-all duration-300 ease-in-out border-[1.11111px] border-dashed border-[rgba(147,236,147,0.5)] rounded-lg p-8"
+        className="animate-fadeIn mb-6 cursor-pointer bg-[#3c5d5d] text-center transition-all duration-300 ease-in-out border-[1.11111px] border-dashed border-[rgba(147,236,147,0.5)] rounded-lg p-4 sm:p-6 md:p-8"
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}

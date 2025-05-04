@@ -9,32 +9,32 @@ export default function AppHeader() {
   
   return (
     <header className="bg-[hsl(var(--starbucks-dark))] shadow-md animate__animated animate__fadeIn">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div className="container mx-auto px-4 py-3 sm:py-4 flex justify-between items-center">
         <Link href="/">
           <div className="flex items-center space-x-2 cursor-pointer">
-            <div className="w-10 h-10 bg-[hsl(var(--starbucks-green))] rounded-full flex items-center justify-center">
-              <i className="fas fa-mug-hot text-white text-xl"></i>
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[hsl(var(--starbucks-green))] rounded-full flex items-center justify-center">
+              <i className="fas fa-mug-hot text-white text-sm sm:text-xl"></i>
             </div>
-            <h1 className="text-2xl font-bold text-white">TipJar</h1>
+            <h1 className="text-xl sm:text-2xl font-bold text-white">TipJar</h1>
           </div>
         </Link>
         
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 sm:space-x-4">
           <Button
             variant="outline"
-            className="flex items-center bg-[hsl(var(--dark-surface))] hover:bg-opacity-80 transition-all border-none"
+            className="flex items-center bg-[hsl(var(--dark-surface))] hover:bg-opacity-80 transition-all border-none px-2 sm:px-3 py-1 sm:py-2 h-auto"
             onClick={() => setShowHistoryModal(true)}
           >
-            <i className="fas fa-history mr-2"></i>
+            <i className="fas fa-history mr-1 sm:mr-2"></i>
             <span className="hidden sm:inline">History</span>
           </Button>
           
           <Button 
             variant="outline"
-            className="p-2 rounded-full bg-[hsl(var(--dark-surface))] hover:bg-opacity-80 transition-all border-none" 
+            className="p-1 sm:p-2 rounded-full bg-[hsl(var(--dark-surface))] hover:bg-opacity-80 transition-all border-none"
             size="icon"
           >
-            <i className="fas fa-cog"></i>
+            <i className="fas fa-cog text-sm sm:text-base"></i>
           </Button>
         </div>
       </div>
