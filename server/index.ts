@@ -2,6 +2,18 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
+// Check for required environment variables in production
+if (process.env.NODE_ENV === "production") {
+  const requiredEnvVars = ["SESSION_SECRET", "GEMINI_API_KEY"];
+  const missingEnvVars = requiredEnvVars.filter(envVar => !process.env[envVar]);
+  
+  if (missingEnvVars.length > 0) {
+    console.error(`Error: Missing required environment variables: ${missingEnvVars.join(", ")}`);
+    console.error("Please set these variables in your deployment configuration.");
+    process.exit(1);
+  }
+}
+
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
