@@ -196,19 +196,15 @@ export default function FileDropzone() {
       default:
         return (
           <>
-            <div className="mb-3 sm:mb-4 h-12 w-12 sm:h-16 sm:w-16 text-[#93ec93] mx-auto">
-              <UploadCloudIcon className="h-full w-full" />
-            </div>
-            <p className="text-[#f5f5f5] m-0 mb-1 sm:mb-2 text-sm sm:text-base">Drag & drop your schedule image here</p>
-            <p className="text-xs sm:text-sm text-[#ffeed6] m-0">or</p>
             <button 
-              className="text-xs sm:text-sm font-medium text-[#364949] bg-[#93ec93] inline-flex h-8 sm:h-10 justify-center gap-2 whitespace-nowrap border-0 rounded-md px-3 sm:px-4 py-1 sm:py-2 mt-2 sm:mt-3"
+              className="text-sm sm:text-base font-medium text-[#364949] bg-[#93ec93] inline-flex h-10 sm:h-12 justify-center items-center whitespace-nowrap border-0 rounded-md px-6 sm:px-8 py-2 sm:py-3 mx-auto"
               onClick={(e) => {
                 e.stopPropagation();
                 fileInputRef.current?.click();
               }}
             >
-              Browse Files
+              <UploadCloudIcon className="h-5 w-5 sm:h-6 sm:w-6 mr-2" />
+              Upload Schedule
             </button>
           </>
         );
@@ -218,11 +214,7 @@ export default function FileDropzone() {
   return (
     <>
       <div
-        className="animate-fadeIn mb-6 cursor-pointer bg-[#3c5d5d] text-center transition-all duration-300 ease-in-out border-[1.11111px] border-dashed border-[rgba(147,236,147,0.5)] rounded-lg p-4 sm:p-6 md:p-8"
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        onDrop={handleDrop}
-        onClick={() => fileInputRef.current?.click()}
+        className="animate-fadeIn mb-6 bg-[#3c5d5d] text-center rounded-lg p-4 sm:p-5 flex justify-center items-center"
       >
         {renderDropzoneContent()}
       </div>

@@ -80,10 +80,6 @@ export default function Home() {
         <div className="md:col-span-1">
           <div className="card animate-fadeIn">
             <div className="card-body">
-              <h2 className="flex items-center mb-4 text-xl font-bold">
-                Upload Schedule
-              </h2>
-              
               <FileDropzone />
               
 
