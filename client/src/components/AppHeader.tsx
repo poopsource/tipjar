@@ -19,6 +19,7 @@ export default function AppHeader() {
             </div>
             <div className="transition-all">
               <h1 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#93EC93] transition-colors duration-300">TipJar</h1>
+              <div className="hidden sm:block text-xs text-[#9fd6e9] opacity-80">Smart Tip Distribution</div>
               <div className="h-0.5 bg-[#93EC93] w-0 group-hover:w-full transition-all duration-500"></div>
             </div>
           </div>
