@@ -11,16 +11,19 @@ function AppNav() {
   const [location] = useLocation();
   
   return (
-    <div className="mb-8 border-b border-[#006241]">
-      <div className="flex items-center justify-center relative">
+    <div className="mb-8 border-b border-[#f5f5f5]">
+      <div className="flex items-center justify-center relative px-20">
+        <div className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2">
+          <img 
+            src="/starbucks-logo-transparent.svg" 
+            alt="Starbucks Logo" 
+            className="h-8 sm:h-10 sb-logo animate-fadeIn"
+          />
+        </div>
         <a href="/" 
            onClick={(e) => { e.preventDefault(); window.location.href='/' }}
-           className="py-3">
-          <img 
-            src="/tipjar-logo.png" 
-            alt="TipJar Logo" 
-            className="h-12 sm:h-14 animate-fadeIn"
-          />
+           className={location === "/" ? "nav-link-active" : "nav-link"}>
+          TipJar
         </a>
       </div>
     </div>
@@ -41,7 +44,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <TipContextProvider>
-          <div className="flex-grow w-full bg-transparent text-[#006241] min-h-screen">
+          <div className="flex-grow w-full bg-[#2F4F4F] text-[#f5f5f5] min-h-screen">
             <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6">
               <AppNav />
               <div className="flex-grow">
