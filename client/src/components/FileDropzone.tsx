@@ -222,7 +222,7 @@ export default function FileDropzone() {
               </div>
               <p className="text-[#ffeed6] m-0 mb-4 text-sm opacity-80">Upload your partner hours report</p>
               <button 
-                className="text-sm font-medium text-[#364949] bg-[#93ec93] hover:bg-opacity-90 inline-flex h-12 justify-center items-center whitespace-nowrap border-0 rounded-full px-8 py-3 transition-all duration-300 shadow-md hover:shadow-lg group"
+                className="text-sm font-medium text-[#364949] bg-[#93ec93] hover:bg-opacity-90 inline-flex h-10 sm:h-12 justify-center items-center whitespace-nowrap border-0 rounded-full px-6 sm:px-8 py-2 sm:py-3 transition-all duration-300 shadow-md hover:shadow-lg group file-dropzone-btn"
                 onClick={(e) => {
                   e.stopPropagation();
                   fileInputRef.current?.click();
@@ -243,7 +243,7 @@ export default function FileDropzone() {
   return (
     <>
       <div
-        className="gradient-border mb-6 bg-[#3a5c5c] text-center rounded-lg p-6 sm:p-7 flex justify-center items-center min-h-[220px] shadow-soft"
+        className="gradient-border mb-4 sm:mb-6 bg-[#3a5c5c] text-center rounded-lg p-4 sm:p-6 flex justify-center items-center min-h-[200px] sm:min-h-[220px] shadow-soft"
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}

@@ -310,25 +310,41 @@
 }
 
 /* Responsive adjustments */
+/* Tablet Styles */
 @media (max-width: 768px) {
+  body {
+    font-size: 0.95rem;
+  }
+  
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .card {
+    margin-bottom: 1rem;
+  }
+  
   .card-body {
-    padding: 0.875rem;
+    padding: 1rem;
   }
   
   .summary-box {
-    padding: 0.625rem;
+    padding: 0.75rem;
   }
   
   .summary-value, .summary-value-blue, .summary-value-accent {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
   }
   
   .card-header {
-    padding: 0.625rem 0.875rem;
+    padding: 0.75rem 1rem;
   }
   
   .card-footer {
-    padding: 0.625rem 0.875rem;
+    padding: 0.75rem 1rem;
   }
   
   h1, h2 {
@@ -336,98 +352,188 @@
   }
   
   .btn {
-    padding: 0.375rem 0.625rem;
-    font-size: 0.8125rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+  
+  /* Make grids stack on tablet */
+  .grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Make summary boxes grid for tablets */
+  .grid-cols-1.sm\\:grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+  
+  /* Adjust partner cards for tablet */
+  .grid-cols-1.sm\\:grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
   }
 }
 
-@media (max-width: 480px) {
-  .card {
-    border-radius: 0.5rem;
+/* Mobile Styles */
+@media (max-width: 640px) {
+  html {
+    font-size: 15px;
   }
   
-  .card-header {
-    padding: 0.5rem;
-  }
-  
-  .card-body {
-    padding: 0.5rem;
-  }
-  
-  .card-footer {
-    padding: 0.5rem;
-  }
-  
-  .summary-box {
-    padding: 0.375rem;
-  }
-  
-  .summary-value, .summary-value-blue, .summary-value-accent {
-    font-size: 0.875rem;
-  }
-  
-  .summary-label {
-    font-size: 0.75rem;
-  }
-  
-  .input-field {
-    padding: 0.3125rem 0.5rem;
-    font-size: 0.75rem;
-    height: 2rem;
-  }
-  
-  .input-field-dollar {
-    padding-left: 1.25rem;
-  }
-  
-  /* Smaller icons on mobile */
-  .card-header .fas,
-  .card-header .far,
-  .card-footer .fas,
-  .card-footer .far {
-    font-size: 0.75rem;
-  }
-  
-  /* Adjust spacing for mobile to be more compact */
-  .mt-8 {
-    margin-top: 1rem;
-  }
-  
-  .mb-6 {
-    margin-bottom: 0.75rem;
-  }
-  
-  .gap-6 {
-    gap: 0.5rem;
-  }
-  
-  /* Make dropzone more compact */
-  .dropzone {
-    padding: 0.75rem !important;
-  }
-  
-  /* Smaller partner cards */
-  .grid-cols-1 {
-    gap: 0.5rem !important;
-  }
-  
-  /* Smaller text in partner cards */
-  h3.text-lg {
-    font-size: 0.875rem;
-  }
-  
-  /* Smaller text on mobile */
   body {
     font-size: 0.875rem;
   }
   
-  /* App header with smaller padding */
-  header.shadow-md {
-    padding: 0.5rem 0;
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
   
-  /* Header reduced in size */
-  h1.text-xl {
-    font-size: 1rem; 
+  .card {
+    border-radius: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .card-header {
+    padding: 0.75rem;
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+  }
+  
+  .card-body {
+    padding: 0.75rem;
+  }
+  
+  .card-footer {
+    padding: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+  }
+  
+  /* Single column layout for mobile */
+  .grid-cols-1.sm\\:grid-cols-3,
+  .grid-cols-1.sm\\:grid-cols-2 {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  /* Summary boxes on mobile */
+  .summary-box {
+    padding: 0.625rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .summary-value, .summary-value-blue, .summary-value-accent {
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+  
+  .summary-label {
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  /* Input field adjustments */
+  .input-field {
+    padding: 0.5rem;
+    font-size: 0.875rem;
+    height: 2.5rem;
+  }
+  
+  .input-field-dollar {
+    padding-left: 1.5rem;
+  }
+  
+  /* Smaller icons on mobile */
+  svg.h-5 {
+    height: 1rem !important;
+    width: 1rem !important;
+  }
+  
+  svg.h-4 {
+    height: 0.875rem !important;
+    width: 0.875rem !important;
+  }
+  
+  /* Adjust spacing for mobile to be more compact but still readable */
+  .mt-8 {
+    margin-top: 1.25rem;
+  }
+  
+  .mb-6 {
+    margin-bottom: 1rem;
+  }
+  
+  .gap-6 {
+    gap: 0.75rem;
+  }
+  
+  /* Make dropzone more compact but still visible */
+  .gradient-border.mb-6 {
+    min-height: 180px !important;
+    padding: 1rem !important;
+  }
+  
+  /* Smaller text in cards */
+  h3.text-lg, .text-lg {
+    font-size: 0.9375rem;
+    line-height: 1.25;
+  }
+  
+  .text-2xl {
+    font-size: 1.25rem !important;
+  }
+  
+  .text-xl {
+    font-size: 1.125rem !important;
+  }
+  
+  /* Header adjustments */
+  header.animate-fadeIn {
+    padding: 0.625rem 0;
+  }
+  
+  header h1.text-xl {
+    font-size: 1.125rem !important;
+  }
+  
+  /* Button adjustments */
+  button {
+    min-height: 2.5rem;
+  }
+  
+  /* File dropzone optimizations */
+  .file-dropzone-btn {
+    padding: 0.5rem 1rem !important;
+    height: auto !important;
+  }
+  
+  /* Responsive calculations */
+  .formula-item {
+    padding: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  /* Zoom out slightly on small screens for better overall view */
+  @media (max-width: 380px) {
+    html {
+      font-size: 14px;
+    }
+    
+    body {
+      zoom: 0.95;
+    }
+    
+    .card {
+      margin-bottom: 0.5rem;
+    }
+    
+    .card-body {
+      padding: 0.625rem;
+    }
+    
+    .gradient-border.mb-6 {
+      min-height: 160px !important;
+    }
   }
 }

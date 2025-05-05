@@ -74,8 +74,8 @@ export default function Home() {
   };
 
   return (
-    <main>
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+    <main className="px-2 sm:px-4 max-w-full overflow-hidden">
+      <div className="mt-4 sm:mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
         {/* Left Column - Input Section */}
         <div className="md:col-span-1">
           <div className="card animate-fadeIn shadow-soft">
@@ -92,7 +92,7 @@ export default function Home() {
             <div className="card-body">
               <FileDropzone />
               
-              <div className="mb-6 mt-4">
+              <div className="mb-4 sm:mb-6 mt-4">
                 <label htmlFor="tipAmount" className="flex items-center text-sm font-medium text-[#ffeed6] mb-2">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1 text-[#93EC93]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -118,7 +118,7 @@ export default function Home() {
               
               <button 
                 onClick={handleCalculate} 
-                className="text-[#364949] bg-[#93ec93] hover:bg-opacity-90 transition-all duration-300 inline-flex h-12 w-full justify-center items-center gap-2 whitespace-nowrap font-medium rounded-md px-4 py-3 shadow-md hover:shadow-lg"
+                className="text-[#364949] bg-[#93ec93] hover:bg-opacity-90 transition-all duration-300 inline-flex h-12 w-full justify-center items-center gap-2 whitespace-nowrap font-medium rounded-md px-4 py-3 shadow-md hover:shadow-lg file-dropzone-btn"
                 disabled={isCalculating}
               >
                 {isCalculating ? (
@@ -140,12 +140,22 @@ export default function Home() {
               </button>
             </div>
           </div>
+          
+          {/* Mobile-only results instruction */}
+          {distributionData && (
+            <div className="block md:hidden mt-4 p-3 rounded-md bg-[#364949] text-[#ffeed6] text-sm text-center animate-fadeIn">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-auto mb-1 text-[#93EC93]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
+              </svg>
+              Scroll down to see your distribution results
+            </div>
+          )}
         </div>
         
         {/* Middle/Right Column - Results Section */}
         <div className="md:col-span-2">
           {distributionData && (
-            <>
+            <div className="results-container">
               <ResultsSummaryCard 
                 totalHours={distributionData.totalHours}
                 hourlyRate={distributionData.hourlyRate}
@@ -153,7 +163,7 @@ export default function Home() {
               />
               
               <PartnerPayoutsList distributionData={distributionData} />
-            </>
+            </div>
           )}
         </div>
       </div>

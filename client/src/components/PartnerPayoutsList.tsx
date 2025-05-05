@@ -53,21 +53,21 @@ export default function PartnerPayoutsList({ distributionData }: PartnerPayoutsL
           <div className="p-5 rounded-lg mb-5 bg-[#364949] gradient-border animate-fadeUp">
             <div className="text-xs text-[#9fd6e9] mb-2">Formula</div>
             <div className="flex flex-wrap items-center">
-              <div className="bg-[#1E3535] px-4 py-2 rounded-md mr-3 mb-2">
+              <div className="bg-[#1E3535] px-4 py-2 rounded-md mr-3 mb-2 formula-item">
                 <span className="text-[#ffeed6] text-sm mr-1">Total Tips:</span> 
                 <span className="font-bold text-[#dd7895]">${totalAmount.toFixed(2)}</span>
               </div>
               
               <span className="mx-2 text-[#ffeed6] text-lg mb-2">÷</span>
               
-              <div className="bg-[#1E3535] px-4 py-2 rounded-md mr-3 mb-2">
+              <div className="bg-[#1E3535] px-4 py-2 rounded-md mr-3 mb-2 formula-item">
                 <span className="text-[#ffeed6] text-sm mr-1">Total Hours:</span>
                 <span className="font-bold text-[#f5f5f5]">{totalHours}</span>
               </div>
               
               <span className="mx-2 text-[#ffeed6] text-lg mb-2">=</span>
               
-              <div className="bg-[#1E3535] px-4 py-2 rounded-md mb-2">
+              <div className="bg-[#1E3535] px-4 py-2 rounded-md mb-2 formula-item">
                 <span className="font-bold text-[#9fd6e9]">
                   ${(Math.floor(hourlyRate * 100) / 100).toFixed(2)}
                 </span>
