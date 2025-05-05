@@ -71,17 +71,19 @@ export default function PartnerCard({ partner, hourlyRate }: PartnerCardProps) {
             Bill Breakdown:
           </div>
           <div className="flex flex-wrap gap-2">
-            {partner.billBreakdown.map((bill, index) => {
-              const billClass = getBillClass(bill.denomination);
-              return (
-                <div 
-                  key={index} 
-                  className={`px-3 py-1 rounded-full text-sm font-medium shadow-sm transition-all hover:shadow-md hover:scale-105 ${billClass}`}
-                >
-                  {bill.quantity}×${bill.denomination}
-                </div>
-              );
-            })}
+            {[...partner.billBreakdown]
+              .sort((a, b) => b.denomination - a.denomination) // Sort in descending order
+              .map((bill, index) => {
+                const billClass = getBillClass(bill.denomination);
+                return (
+                  <div 
+                    key={index} 
+                    className={`px-3 py-1 rounded-full text-sm font-medium shadow-sm transition-all hover:shadow-md hover:scale-105 ${billClass}`}
+                  >
+                    {bill.quantity}×${bill.denomination}
+                  </div>
+                );
+              })}
           </div>
         </div>
       </div>

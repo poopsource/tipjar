@@ -39,12 +39,12 @@ export default function PartnerPayoutsList({ distributionData }: PartnerPayoutsL
     <div className="animate-fadeIn">
       <div className="card mb-8 shadow-soft">
         <div className="card-header">
-          <div className="flex items-center">
+          <div className="flex items-center justify-center w-full">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-[#93EC93]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             <div className="text-xl font-semibold tracking-tight text-[#f5f5f5]">
-              Calculation Details
+              TipJar
             </div>
           </div>
         </div>
@@ -85,20 +85,28 @@ export default function PartnerPayoutsList({ distributionData }: PartnerPayoutsL
             </h3>
             <div className="p-5 rounded-lg bg-[#364949] shadow-soft">
               <div className="flex flex-wrap gap-3">
-                {Object.entries(billsNeeded).map(([bill, count], index) => {
-                  const billClass = getBillClass(bill);
-                  return (
-                    <div 
-                      key={index} 
-                      className={`px-4 py-2 rounded-full text-sm font-medium shadow-sm transition-all hover:shadow-md hover:scale-105 ${billClass}`}
-                      style={{animationDelay: `${0.1 + (index * 0.05)}s`}}
-                    >
-                      <div className="flex items-center">
-                        <span className="font-bold mr-1">{count}</span> × {bill}
+                {Object.entries(billsNeeded)
+                  .sort(([billA], [billB]) => {
+                    // Extract denominationA and denominationB from the keys (e.g., "$20" -> 20)
+                    const denominationA = parseInt(billA.replace('$', ''));
+                    const denominationB = parseInt(billB.replace('$', ''));
+                    // Sort in descending order (largest denomination first)
+                    return denominationB - denominationA;
+                  })
+                  .map(([bill, count], index) => {
+                    const billClass = getBillClass(bill);
+                    return (
+                      <div 
+                        key={index} 
+                        className={`px-4 py-2 rounded-full text-sm font-medium shadow-sm transition-all hover:shadow-md hover:scale-105 ${billClass}`}
+                        style={{animationDelay: `${0.1 + (index * 0.05)}s`}}
+                      >
+                        <div className="flex items-center">
+                          <span className="font-bold mr-1">{count}</span> × {bill}
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
               </div>
             </div>
           </div>
