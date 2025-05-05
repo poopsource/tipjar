@@ -12,11 +12,11 @@ function AppNav() {
   
   return (
     <div className="mb-8 border-b border-[#f5f5f5]">
-      <div className="flex">
+      <div className="flex justify-center">
         <a href="/" 
            onClick={(e) => { e.preventDefault(); window.location.href='/' }}
            className={location === "/" ? "nav-link-active" : "nav-link"}>
-          Tip Distribution
+          TipJar
         </a>
       </div>
     </div>
