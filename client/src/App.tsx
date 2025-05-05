@@ -12,7 +12,14 @@ function AppNav() {
   
   return (
     <div className="mb-8 border-b border-[#f5f5f5]">
-      <div className="flex justify-center">
+      <div className="flex items-center justify-center relative">
+        <div className="absolute left-0">
+          <img 
+            src="/starbucks-logo.svg" 
+            alt="Starbucks Logo" 
+            className="h-10 w-10 sm:h-12 sm:w-12 sb-logo animate-fadeIn"
+          />
+        </div>
         <a href="/" 
            onClick={(e) => { e.preventDefault(); window.location.href='/' }}
            className={location === "/" ? "nav-link-active" : "nav-link"}>

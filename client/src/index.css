@@ -69,11 +69,20 @@
 @layer components {
   /* Navigation */
   .nav-link {
-    @apply text-gray-400 p-3 px-4 border-b border-transparent transition-colors duration-150 ease-in-out;
+    @apply text-gray-400 p-3 px-4 border-b border-transparent transition-colors duration-150 ease-in-out text-2xl;
   }
   
   .nav-link-active {
-    @apply text-white font-semibold p-3 px-4 border-b border-white;
+    @apply text-white font-semibold p-3 px-4 border-b border-white text-2xl;
+  }
+  
+  /* Logo animation */
+  .sb-logo {
+    @apply transition-all duration-300;
+  }
+  
+  .sb-logo:hover {
+    @apply transform scale-110;
   }
   
   /* Dropzone */
