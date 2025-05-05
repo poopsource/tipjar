@@ -15,7 +15,7 @@ function AppNav() {
       <div className="flex items-center justify-center relative px-20">
         <div className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2">
           <img 
-            src="/starbucks-ar21~bgwhite.svg" 
+            src="/starbucks-logo-transparent.svg" 
             alt="Starbucks Logo" 
             className="h-8 sm:h-10 sb-logo animate-fadeIn"
           />
