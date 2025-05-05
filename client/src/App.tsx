@@ -12,12 +12,12 @@ function AppNav() {
   
   return (
     <div className="mb-8 border-b border-[#f5f5f5]">
-      <div className="flex items-center justify-center relative">
-        <div className="absolute left-0">
+      <div className="flex items-center justify-center relative px-20">
+        <div className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2">
           <img 
-            src="/starbucks-logo.svg" 
+            src="/starbucks-ar21~bgwhite.svg" 
             alt="Starbucks Logo" 
-            className="h-10 w-10 sm:h-12 sm:w-12 sb-logo animate-fadeIn"
+            className="h-8 sm:h-10 sb-logo animate-fadeIn"
           />
         </div>
         <a href="/" 
