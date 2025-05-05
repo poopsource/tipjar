@@ -22,7 +22,7 @@ export default function Home() {
     if (!partnerHours.length) {
       toast({
         title: "No partner data",
-        description: "Please upload a schedule with partner information",
+        description: "Please upload a report with partner information",
         variant: "destructive"
       });
       return;

@@ -56,7 +56,7 @@ export default function FileDropzone() {
     if (!file.type.startsWith('image/')) {
       toast({
         title: "Invalid file type",
-        description: "Please select an image file",
+        description: "Please select a report image file",
         variant: "destructive"
       });
       return;
@@ -101,12 +101,12 @@ export default function FileDropzone() {
         }, 3000);
         
         toast({
-          title: "Schedule processed",
+          title: "Report processed",
           description: `Successfully extracted ${result.partnerHours.length} partners`,
         });
       } else {
-        // No partners found in the image
-        setErrorMessage("No partner information detected in the image. Please try a different image.");
+        // No partners found in the report
+        setErrorMessage("No partner information detected in the report. Please try a different file.");
         setState(DropzoneState.ERROR);
         
         toast({
@@ -121,7 +121,7 @@ export default function FileDropzone() {
       
       // If we have a specific error message from the API, use it
       // Otherwise use a generic message
-      const errorMsg = errorMessage || "Failed to extract partner information from the image";
+      const errorMsg = errorMessage || "Failed to extract partner information from the report";
       
       toast({
         title: "Processing failed",
@@ -153,7 +153,7 @@ export default function FileDropzone() {
             <div className="mb-3 sm:mb-4 h-12 w-12 sm:h-16 sm:w-16 text-[#93ec93] mx-auto">
               <Loader2Icon className="h-full w-full animate-spin" />
             </div>
-            <p className="text-[#f5f5f5] m-0 mb-1 sm:mb-2 text-sm sm:text-base">Processing image...</p>
+            <p className="text-[#f5f5f5] m-0 mb-1 sm:mb-2 text-sm sm:text-base">Processing report...</p>
           </>
         );
         
@@ -178,7 +178,7 @@ export default function FileDropzone() {
             {errorMessage ? (
               <p className="text-xs sm:text-sm text-[#ffeed6] m-0 mb-1 sm:mb-2">{errorMessage}</p>
             ) : (
-              <p className="text-xs sm:text-sm text-[#ffeed6] m-0 mb-1 sm:mb-2">Please try again with a different image</p>
+              <p className="text-xs sm:text-sm text-[#ffeed6] m-0 mb-1 sm:mb-2">Please try again with a different report</p>
             )}
             <button 
               onClick={(e) => {
@@ -204,7 +204,7 @@ export default function FileDropzone() {
               }}
             >
               <UploadCloudIcon className="h-5 w-5 sm:h-6 sm:w-6 mr-2" />
-              Upload Schedule
+              Upload Report
             </button>
           </>
         );
