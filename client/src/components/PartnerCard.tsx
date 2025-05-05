@@ -9,13 +9,11 @@ type PartnerCardProps = {
 // Get a CSS class based on denomination
 const getBillClass = (denomination: number): string => {
   switch(denomination) {
-    case 100: return "bg-[#93ec93] text-[#364949]";
-    case 50: return "bg-[#9fd6e9] text-[#364949]";
-    case 20: return "bg-[#d2b0e3] text-[#364949]";
-    case 10: return "bg-[#dd7895] text-[#364949]";
-    case 5: return "bg-[#ffd1ba] text-[#364949]";
-    case 1: return "bg-[#ffeed6] text-[#364949]";
-    default: return "bg-[#93ec93] text-[#364949]";
+    case 20: return "bg-[#d2b0e3] text-[#364949]"; // Purple for $20
+    case 10: return "bg-[#dd7895] text-[#364949]"; // Pink for $10
+    case 5: return "bg-[#ffd1ba] text-[#364949]";  // Orange for $5
+    case 1: return "bg-[#ffeed6] text-[#364949]";  // Yellow for $1
+    default: return "bg-[#93ec93] text-[#364949]"; // Green fallback
   }
 };
 

@@ -1,7 +1,7 @@
 import { roundToNearestDollar } from "./utils";
 
-// Available bill denominations
-const DENOMINATIONS = [100, 50, 20, 10, 5, 1];
+// Available bill denominations - only using $20, $10, $5, $1 as requested
+const DENOMINATIONS = [20, 10, 5, 1];
 
 /**
  * Calculates the optimal bill breakdown for a given amount
