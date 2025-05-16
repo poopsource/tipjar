@@ -1,6 +1,5 @@
-# TipJar Local Setup with LM Studio and Puter.js Integration
+# TipJar Local Setup with LM Studio Integration
 # Assumes LM Studio is already installed
-# Uses Puter.js for client-side OCR and AI capabilities
 
 # Set console colors for better readability
 $host.UI.RawUI.ForegroundColor = "White"
@@ -59,17 +58,14 @@ else {
 
 # Set environment variables
 $env:NODE_ENV = "development"
-# No need for GEMINI_API_KEY as we're using Puter.js for OCR on the client side
-# $env:GEMINI_API_KEY = "NOT_REQUIRED"
-$env:USE_PUTER_JS = "true"
+$env:GEMINI_API_KEY = "NOT_REQUIRED_FOR_LM_STUDIO"
 $env:LM_STUDIO_ENABLED = "true"
 $env:LM_STUDIO_URL = "http://localhost:1234/v1" # Default LM Studio API endpoint
 
 Write-Host ""
-Write-Host "Starting TipJar application with enhanced AI capabilities..." -ForegroundColor Green
+Write-Host "Starting TipJar application with LM Studio integration..." -ForegroundColor Green
 Write-Host "  * Application URL: http://localhost:5000" -ForegroundColor Cyan
 Write-Host "  * LM Studio API endpoint: $env:LM_STUDIO_URL" -ForegroundColor Cyan
-Write-Host "  * Using Puter.js for client-side OCR (no API key needed)" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "Press Ctrl+C to stop the application" -ForegroundColor Yellow
 Write-Host ""

@@ -2,8 +2,6 @@ import { useRef, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useTipContext } from "@/context/TipContext";
 import { readFileAsDataURL } from "@/lib/utils";
-import { extractTextFromImage } from "@/lib/puterService";
-import { extractPartnerHours } from "@/lib/formatUtils";
 import {
   UploadCloudIcon,
   Loader2Icon,
@@ -69,21 +67,33 @@ export default function FileDropzone() {
     setErrorMessage(null);
     
     try {
-      // Convert the file to a data URL for Puter.js to process
       const dataUrl = await readFileAsDataURL(file);
       
-      // Use Puter.js to extract text from the image (client-side OCR)
-      const extractedText = await extractTextFromImage(dataUrl);
+      // Send the image to the server for OCR processing
+      const formData = new FormData();
+      formData.append('image', file);
       
-      // Set the extracted text in the context
-      setExtractedText(extractedText);
+      const response = await fetch('/api/ocr', {
+        method: 'POST',
+        body: formData,
+      });
       
-      // Extract partner hours from the extracted text using our existing utility
-      const partnerHours = extractPartnerHours(extractedText);
+      const result = await response.json();
       
-      if (partnerHours && partnerHours.length > 0) {
-        // Update the partner hours in the context
-        setPartnerHours(partnerHours);
+      if (!response.ok) {
+        // Extract specific error message from the server response
+        const errorMsg = result.error || 'OCR processing failed';
+        setErrorMessage(errorMsg);
+        throw new Error(errorMsg);
+      }
+      
+      // Always set the extracted text if available to show everything OCR found
+      if (result.extractedText) {
+        setExtractedText(result.extractedText);
+      }
+      
+      if (result.partnerHours && result.partnerHours.length > 0) {
+        setPartnerHours(result.partnerHours);
         setState(DropzoneState.SUCCESS);
         
         setTimeout(() => {
@@ -92,7 +102,7 @@ export default function FileDropzone() {
         
         toast({
           title: "Report processed",
-          description: `Successfully extracted ${partnerHours.length} partners`,
+          description: `Successfully extracted ${result.partnerHours.length} partners`,
         });
       } else {
         // No partners found in the report
@@ -109,9 +119,9 @@ export default function FileDropzone() {
       console.error(error);
       setState(DropzoneState.ERROR);
       
-      // Puter.js error message or fallback to generic message
-      const errorMsg = error.message || "Failed to extract partner information from the report";
-      setErrorMessage(errorMsg);
+      // If we have a specific error message from the API, use it
+      // Otherwise use a generic message
+      const errorMsg = errorMessage || "Failed to extract partner information from the report";
       
       toast({
         title: "Processing failed",
@@ -224,12 +234,6 @@ export default function FileDropzone() {
             </div>
             <div className="text-xs text-[#9fd6e9] mt-4 opacity-70">
               Supported formats: PNG, JPG, JPEG, GIF
-            </div>
-            <div className="mt-2 text-xs text-[#93ec93] opacity-80 flex items-center justify-center">
-              <svg className="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              Using client-side OCR powered by Puter.js
             </div>
           </div>
         );

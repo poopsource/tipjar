@@ -1,7 +1,6 @@
 @echo off
 echo ===================================
 echo TipJar Local Setup and Startup
-echo with Puter.js Integration for OCR
 echo ===================================
 
 :: Check if Node.js is installed
@@ -42,14 +41,12 @@ if %ERRORLEVEL% neq 0 (
     exit /b 1
 )
 
-:: Set environment variables for development
+:: Set environment variable for development
 set NODE_ENV=development
-set USE_PUTER_JS=true
 
 :: Start the server
 echo Starting TipJar application...
 echo Application will be available at http://localhost:5000
-echo Using Puter.js for client-side OCR (no API key needed)
 npx tsx server/index.ts
 
 echo Application has stopped
