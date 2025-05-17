@@ -139,9 +139,9 @@ export default function Home() {
                 )}
               </button>
               
-              <div className="mt-3 text-center text-xs text-[#f5f5f5]">
-                Made by William Walsh<br />
-                Starbucks Store #66900
+              <div className="mt-3 text-center text-[#f5f5f5]">
+                <div className="font-medium">Made by William Walsh</div>
+                <div className="text-xs text-[#9fd6e9]">Starbucks Store# 66900</div>
               </div>
             </div>
           </div>
