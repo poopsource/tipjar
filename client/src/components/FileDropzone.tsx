@@ -222,7 +222,7 @@ export default function FileDropzone() {
               </div>
               <p className="text-[#ffeed6] m-0 mb-4 text-sm opacity-80">Upload your partner hours report</p>
               <button 
-                className="text-sm font-medium text-[#364949] bg-[#93ec93] hover:bg-opacity-90 inline-flex h-10 sm:h-12 justify-center items-center whitespace-nowrap border-0 rounded-full px-6 sm:px-8 py-2 sm:py-3 transition-all duration-300 shadow-md hover:shadow-lg group file-dropzone-btn"
+                className="text-sm font-medium bg-primary text-primary-foreground inline-flex h-10 sm:h-12 justify-center items-center whitespace-nowrap border-0 rounded-md px-6 sm:px-8 py-2 shadow-md-1 hover:shadow-md-2 transition-all duration-300 group file-dropzone-btn"
                 onClick={(e) => {
                   e.stopPropagation();
                   fileInputRef.current?.click();
@@ -232,7 +232,7 @@ export default function FileDropzone() {
                 <span className="font-medium">Upload Report</span>
               </button>
             </div>
-            <div className="text-xs text-[#9fd6e9] mt-4 opacity-70">
+            <div className="text-xs text-muted-foreground mt-4">
               Supported formats: PNG, JPG, JPEG, GIF
             </div>
           </div>
@@ -243,7 +243,7 @@ export default function FileDropzone() {
   return (
     <>
       <div
-        className="gradient-border mb-4 sm:mb-6 bg-[#3a5c5c] text-center rounded-lg p-4 sm:p-6 flex justify-center items-center min-h-[200px] sm:min-h-[220px] shadow-soft"
+        className="border-2 border-dashed border-border mb-4 sm:mb-6 bg-background text-center rounded-lg p-6 sm:p-8 flex justify-center items-center min-h-[220px] sm:min-h-[240px] shadow-md-1 hover:border-primary hover:bg-primary hover:bg-opacity-5 transition-all duration-300"
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
