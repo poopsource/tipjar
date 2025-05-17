@@ -3,12 +3,9 @@ import { useToast } from "@/hooks/use-toast";
 import FileDropzone from "@/components/FileDropzone";
 import ResultsSummaryCard from "@/components/ResultsSummaryCard";
 import PartnerPayoutsList from "@/components/PartnerPayoutsList";
-import QuickPreviewWidget from "@/components/QuickPreviewWidget";
 import { useTipContext } from "@/context/TipContext";
 import { apiRequest } from "@/lib/queryClient";
 import { calculateHourlyRate } from "@/lib/utils";
-import { ArrowRight } from "lucide-react";
-import starbucksLogoGlow from "../assets/starbucks-logo-glow.png";
 
 export default function Home() {
   const [tipAmount, setTipAmount] = useState<number | ''>('');
@@ -77,111 +74,99 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-6 px-4 bg-[#004324]">
-      <div className="w-full max-w-md">
-        <div className="bg-[#00523a] rounded-2xl shadow-xl overflow-hidden animate-fadeIn">
-          {/* Starbucks Logo */}
-          <div className="flex flex-col items-center justify-center pt-8 pb-4">
-            <div className="relative w-20 h-20 flex items-center justify-center mb-2">
-              <img 
-                src={starbucksLogoGlow} 
-                alt="Starbucks Logo" 
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <h1 className="text-3xl font-bold text-[#f0e1c1]">Partner Report</h1>
-          </div>
-
-          {/* Dropzone Section */}
-          <div className="px-6 py-4">
-            <div className="bg-[#003c28] rounded-xl p-6 mb-6">
-              <div className="flex flex-col items-center justify-center">
-                <div className="w-12 h-12 bg-[#f0e1c1] rounded-full flex items-center justify-center mb-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#004324]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                  </svg>
-                </div>
-                <p className="text-white text-lg mb-4">Upload your partner hours report</p>
-                <FileDropzone />
-                <p className="text-xs text-center text-[#f0e1c1] opacity-70 mt-3">
-                  Supported formats: PNG, JPG, GIF
-                </p>
-              </div>
-            </div>
-
-            {/* Total Tip Amount */}
-            <div className="bg-[#003c28] rounded-xl p-6 mb-6">
-              <div className="flex items-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#f0e1c1] mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clipRule="evenodd" />
+    <main className="px-2 sm:px-4 max-w-full overflow-hidden">
+      <div className="mt-4 sm:mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+        {/* Left Column - Input Section */}
+        <div className="md:col-span-1">
+          <div className="card animate-fadeIn shadow-soft">
+            <div className="card-header">
+              <div className="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-[#93EC93]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
-                <h2 className="text-[#f0e1c1] text-lg font-medium">Total Tip Amount</h2>
-              </div>
-              <div className="relative">
-                <div className="pointer-events-none absolute top-0 bottom-0 left-0 flex items-center pl-4">
-                  <span className="text-[#f0e1c1] font-medium">$</span>
+                <div className="text-lg font-semibold tracking-tight text-[#f5f5f5]">
+                  Partner Report
                 </div>
-                <input
-                  id="tipAmount"
-                  type="number"
-                  value={tipAmount}
-                  onChange={(e) => setTipAmount(e.target.value ? Number(e.target.value) : '')}
-                  className="h-12 w-full bg-[#002e1e] text-white border border-[#00523a] rounded-lg py-2 px-3 pl-8 focus:outline-none focus:ring-2 focus:ring-[#f0e1c1] focus:border-transparent transition-all"
-                  placeholder="0.00"
-                  min="0"
-                  step="0.01"
-                />
               </div>
             </div>
-            
-            {/* Quick Preview Widget */}
-            <div>
-              <QuickPreviewWidget />
-            </div>
+            <div className="card-body">
+              <FileDropzone />
               
-            {/* Calculate Button */}
-            <button 
-              onClick={handleCalculate} 
-              className="bg-[#f0e1c1] text-[#004324] hover:bg-[#e6d2a8] transition-all duration-300 inline-flex h-12 w-full justify-center items-center gap-2 whitespace-nowrap font-medium rounded-full px-6 py-3 shadow-md hover:shadow-lg mb-6"
-              disabled={isCalculating}
-            >
-              {isCalculating ? (
-                <div className="flex items-center justify-center">
-                  <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-[#004324]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              <div className="mb-4 sm:mb-6 mt-4">
+                <label htmlFor="tipAmount" className="flex items-center text-sm font-medium text-[#ffeed6] mb-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1 text-[#93EC93]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  Calculating...
+                  Total Tip Amount
+                </label>
+                <div className="relative">
+                  <div className="pointer-events-none absolute top-0 bottom-0 left-0 flex items-center pl-4">
+                    <span className="text-[#9fd6e9] font-medium">$</span>
+                  </div>
+                  <input
+                    id="tipAmount"
+                    type="number"
+                    value={tipAmount}
+                    onChange={(e) => setTipAmount(e.target.value ? Number(e.target.value) : '')}
+                    className="h-12 w-full bg-[#364949] text-[#f5f5f5] border-[1.11111px] border-[#415858] rounded-md py-2 px-3 pl-8 focus:outline-none focus:ring-2 focus:ring-[#93ec93] focus:border-transparent transition-all"
+                    placeholder="0.00"
+                    min="0"
+                    step="0.01"
+                  />
                 </div>
-              ) : (
-                <div className="flex items-center justify-center">
-                  <ArrowRight className="h-5 w-5 mr-2" />
-                  Calculate Distribution
-                </div>
-              )}
-            </button>
+              </div>
+              
+              <button 
+                onClick={handleCalculate} 
+                className="text-[#364949] bg-[#93ec93] hover:bg-opacity-90 transition-all duration-300 inline-flex h-12 w-full justify-center items-center gap-2 whitespace-nowrap font-medium rounded-md px-4 py-3 shadow-md hover:shadow-lg file-dropzone-btn"
+                disabled={isCalculating}
+              >
+                {isCalculating ? (
+                  <div className="flex items-center justify-center">
+                    <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-[#364949]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Calculating...
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                    Calculate Distribution
+                  </div>
+                )}
+              </button>
+            </div>
           </div>
-
-          {/* Footer */}
-          <div className="text-center text-[#f0e1c1] py-4 text-sm mt-4">
-            <p>Made by William Walsh</p>
-          </div>
+          
+          {/* Mobile-only results instruction */}
+          {distributionData && (
+            <div className="block md:hidden mt-4 p-3 rounded-md bg-[#364949] text-[#ffeed6] text-sm text-center animate-fadeIn">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-auto mb-1 text-[#93EC93]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
+              </svg>
+              Scroll down to see your distribution results
+            </div>
+          )}
         </div>
         
-        {/* Results Section */}
-        {distributionData && (
-          <div className="mt-6 animate-fadeIn">
-            <ResultsSummaryCard 
-              totalHours={distributionData.totalHours}
-              hourlyRate={distributionData.hourlyRate}
-              totalAmount={distributionData.totalAmount}
-            />
-            
-            <PartnerPayoutsList distributionData={distributionData} />
-          </div>
-        )}
+        {/* Middle/Right Column - Results Section */}
+        <div className="md:col-span-2">
+          {distributionData && (
+            <div className="results-container">
+              <ResultsSummaryCard 
+                totalHours={distributionData.totalHours}
+                hourlyRate={distributionData.hourlyRate}
+                totalAmount={distributionData.totalAmount}
+              />
+              
+              <PartnerPayoutsList distributionData={distributionData} />
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </main>
   );
 }

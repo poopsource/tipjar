@@ -3,11 +3,11 @@ import { useToast } from "@/hooks/use-toast";
 import { useTipContext } from "@/context/TipContext";
 import { readFileAsDataURL } from "@/lib/utils";
 import {
-  Upload,
-  Loader2,
-  CheckCircle,
-  XCircle,
-  FileText
+  UploadCloudIcon,
+  Loader2Icon,
+  CheckCircleIcon,
+  XCircleIcon,
+  FileTextIcon
 } from "lucide-react";
 
 enum DropzoneState {
@@ -140,26 +140,26 @@ export default function FileDropzone() {
       case DropzoneState.DRAGGING:
         return (
           <>
-            <div className="mb-4 h-16 w-16 text-white mx-auto animate-pulse">
-              <div className="h-full w-full rounded-full bg-[#143d2a] p-3 shadow-[0_0_15px_rgba(240,225,193,0.3)]">
-                <Upload className="h-full w-full" />
+            <div className="mb-4 h-16 w-16 text-[#93ec93] mx-auto animate-pulse">
+              <div className="h-full w-full rounded-full bg-[#364949] p-3 shadow-[0_0_15px_rgba(147,236,147,0.4)]">
+                <UploadCloudIcon className="h-full w-full" />
               </div>
             </div>
-            <p className="text-white m-0 mb-2 text-sm sm:text-base font-medium">Release to upload</p>
+            <p className="text-[#f5f5f5] m-0 mb-2 text-sm sm:text-base font-medium">Release to upload</p>
           </>
         );
         
       case DropzoneState.PROCESSING:
         return (
           <>
-            <div className="mb-4 h-16 w-16 text-white mx-auto">
-              <div className="h-full w-full rounded-full bg-[#143d2a] p-3 shadow-[0_0_15px_rgba(240,225,193,0.3)]">
-                <Loader2 className="h-full w-full animate-spin" />
+            <div className="mb-4 h-16 w-16 text-[#9fd6e9] mx-auto">
+              <div className="h-full w-full rounded-full bg-[#364949] p-3 shadow-[0_0_15px_rgba(159,214,233,0.4)]">
+                <Loader2Icon className="h-full w-full animate-spin" />
               </div>
             </div>
-            <p className="text-white m-0 mb-2 text-sm sm:text-base font-medium">Processing report...</p>
-            <div className="w-48 h-2 bg-[#143d2a] rounded-full overflow-hidden mt-2">
-              <div className="h-full bg-[#f0e1c1] shimmer"></div>
+            <p className="text-[#f5f5f5] m-0 mb-2 text-sm sm:text-base font-medium">Processing report...</p>
+            <div className="w-48 h-2 bg-[#364949] rounded-full overflow-hidden mt-2">
+              <div className="h-full bg-[#9fd6e9] shimmer"></div>
             </div>
           </>
         );
@@ -167,16 +167,16 @@ export default function FileDropzone() {
       case DropzoneState.SUCCESS:
         return (
           <div className="animate-scaleIn">
-            <div className="mb-4 h-16 w-16 text-[#f0e1c1] mx-auto">
-              <div className="h-full w-full rounded-full bg-[#143d2a] p-3 shadow-[0_0_15px_rgba(240,225,193,0.3)]">
-                <CheckCircle className="h-full w-full" />
+            <div className="mb-4 h-16 w-16 text-[#93ec93] mx-auto">
+              <div className="h-full w-full rounded-full bg-[#364949] p-3 shadow-[0_0_15px_rgba(147,236,147,0.5)]">
+                <CheckCircleIcon className="h-full w-full" />
               </div>
             </div>
-            <p className="text-white m-0 mb-2 text-sm sm:text-base font-medium">File processed successfully!</p>
+            <p className="text-[#f5f5f5] m-0 mb-2 text-sm sm:text-base font-medium">File processed successfully!</p>
             {fileName && (
-              <div className="flex items-center justify-center bg-[#143d2a] rounded-full px-4 py-2 mx-auto max-w-max">
-                <FileText className="h-4 w-4 text-[#f0e1c1] mr-2" />
-                <p className="text-xs sm:text-sm text-[#f0e1c1] m-0 truncate max-w-[180px]">{fileName}</p>
+              <div className="flex items-center justify-center bg-[#364949] rounded-full px-4 py-2 mx-auto max-w-max">
+                <FileTextIcon className="h-4 w-4 text-[#ffeed6] mr-2" />
+                <p className="text-xs sm:text-sm text-[#ffeed6] m-0 truncate max-w-[180px]">{fileName}</p>
               </div>
             )}
           </div>
@@ -186,13 +186,13 @@ export default function FileDropzone() {
         return (
           <div className="animate-scaleIn">
             <div className="mb-4 h-16 w-16 text-red-500 mx-auto">
-              <div className="h-full w-full rounded-full bg-[#143d2a] p-3 shadow-[0_0_15px_rgba(220,38,38,0.4)]">
-                <XCircle className="h-full w-full" />
+              <div className="h-full w-full rounded-full bg-[#364949] p-3 shadow-[0_0_15px_rgba(220,38,38,0.4)]">
+                <XCircleIcon className="h-full w-full" />
               </div>
             </div>
-            <p className="text-white m-0 mb-2 text-sm sm:text-base font-medium">Processing failed</p>
-            <div className="bg-[#143d2a] rounded-lg p-3 mb-3 max-w-[280px] mx-auto">
-              <p className="text-xs sm:text-sm text-[#f0e1c1] m-0">
+            <p className="text-[#f5f5f5] m-0 mb-2 text-sm sm:text-base font-medium">Processing failed</p>
+            <div className="bg-[#364949] rounded-lg p-3 mb-3 max-w-[280px] mx-auto">
+              <p className="text-xs sm:text-sm text-[#ffeed6] m-0">
                 {errorMessage || "Please try again with a different report"}
               </p>
             </div>
@@ -201,7 +201,7 @@ export default function FileDropzone() {
                 e.stopPropagation();
                 setState(DropzoneState.IDLE);
               }}
-              className="text-sm font-medium text-[#164734] bg-[#f0e1c1] hover:bg-[#e6d2a8] inline-flex h-10 justify-center items-center whitespace-nowrap border-0 rounded-full px-6 py-2 transition-all duration-300 shadow-md hover:shadow-lg"
+              className="text-sm font-medium text-[#364949] bg-[#93ec93] hover:bg-opacity-90 inline-flex h-10 justify-center items-center whitespace-nowrap border-0 rounded-full px-6 py-2 transition-all duration-300 shadow-md hover:shadow-lg"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -215,21 +215,25 @@ export default function FileDropzone() {
         return (
           <div className="animate-fadeIn w-full">
             <div className="flex flex-col items-center">
-              <div className="mb-4 h-16 w-16 text-white mx-auto">
-                <div className="h-full w-full rounded-full bg-[#143d2a] p-3 group-hover:shadow-[0_0_25px_rgba(240,225,193,0.3)] transition-all duration-300">
-                  <Upload className="h-full w-full" />
+              <div className="mb-4 h-16 w-16 text-[#93ec93] mx-auto">
+                <div className="h-full w-full rounded-full bg-[#364949] p-3 group-hover:shadow-[0_0_25px_rgba(147,236,147,0.4)] transition-all duration-300">
+                  <UploadCloudIcon className="h-full w-full" />
                 </div>
               </div>
+              <p className="text-[#ffeed6] m-0 mb-4 text-sm opacity-80">Upload your partner hours report</p>
               <button 
-                className="text-sm font-medium text-[#164734] bg-[#f0e1c1] hover:bg-[#e6d2a8] inline-flex h-10 sm:h-12 justify-center items-center whitespace-nowrap border-0 rounded-full px-6 sm:px-8 py-2 sm:py-3 transition-all duration-300 shadow-md hover:shadow-lg group file-dropzone-btn"
+                className="text-sm font-medium text-[#364949] bg-[#93ec93] hover:bg-opacity-90 inline-flex h-10 sm:h-12 justify-center items-center whitespace-nowrap border-0 rounded-full px-6 sm:px-8 py-2 sm:py-3 transition-all duration-300 shadow-md hover:shadow-lg group file-dropzone-btn"
                 onClick={(e) => {
                   e.stopPropagation();
                   fileInputRef.current?.click();
                 }}
               >
-                <Upload className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform duration-300" />
+                <UploadCloudIcon className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform duration-300" />
                 <span className="font-medium">Upload Report</span>
               </button>
+            </div>
+            <div className="text-xs text-[#9fd6e9] mt-4 opacity-70">
+              Supported formats: PNG, JPG, JPEG, GIF
             </div>
           </div>
         );
@@ -239,24 +243,12 @@ export default function FileDropzone() {
   return (
     <>
       <div
-        className="bg-transparent text-center border-2 border-dashed border-[#275343] rounded-xl p-4 flex justify-center items-center shadow-inner hover:border-[#f0e1c1] transition-colors duration-300"
+        className="gradient-border mb-4 sm:mb-6 bg-[#3a5c5c] text-center rounded-lg p-4 sm:p-6 flex justify-center items-center min-h-[200px] sm:min-h-[220px] shadow-soft"
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
-        onClick={() => fileInputRef.current?.click()}
       >
-        {state === DropzoneState.IDLE ? (
-          <button 
-            className="text-sm font-medium text-[#004324] bg-[#f0e1c1] hover:bg-[#e6d2a8] inline-flex h-10 justify-center items-center whitespace-nowrap border-0 rounded-full px-6 py-2 transition-all duration-300 shadow-md hover:shadow-lg"
-            onClick={(e) => {
-              e.stopPropagation();
-              fileInputRef.current?.click();
-            }}
-          >
-            <Upload className="h-4 w-4 mr-2" />
-            <span className="font-medium">Upload Report</span>
-          </button>
-        ) : renderDropzoneContent()}
+        {renderDropzoneContent()}
       </div>
       <input
         type="file"
