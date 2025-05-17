@@ -3,28 +3,48 @@ import React from 'react';
 export const StarbucksLogo: React.FC = () => {
   return (
     <div className="w-full h-full relative">
-      {/* Create the glowing background effect */}
-      <div className="absolute inset-0 rounded-full bg-gradient-radial from-[#006241] via-[#006241] to-transparent opacity-80 blur-md"></div>
+      {/* Create the glowing effect based on the provided image */}
+      <div className="absolute inset-0 bg-gradient-radial from-[#006241] via-[#006241]/60 to-transparent opacity-80 blur-xl"></div>
       
-      <svg viewBox="0 0 500 500" className="w-full h-full relative z-10" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Transparent circle with Starbucks green stroke */}
-        <circle cx="250" cy="250" r="230" stroke="#006241" strokeWidth="2" fill="transparent"/>
-        
-        {/* Logo elements */}
-        <path d="M250 80C211.6 80 181.8 91.8 163.5 110.2c-17.7 17.7-23.5 38.7-23.7 60.1c-0.1 4.3 3.3 7.7 7.6 7.7h0.3
-          c4.1 0 7.4-3.2 7.6-7.3c0.4-8.8 1.2-15.9 3.4-22.1c1.7-5.3 4.3-10.1 7.7-14.4c3.3-4.3 7.4-8.2 12-11.9c4.5-3.6 9.6-6.8 14.9-9.6
-          c5.4-2.8 11.1-5 16.9-6.9c5.8-1.8 11.9-3.2 17.9-4.1c6-0.9 12.1-1.4 18-1.4c5.9 0 12 0.4 18 1.4c6 0.9 12.1 2.3 17.9 4.1
-          c5.8 1.8 11.6 4.1 16.9 6.9c5.4 2.8 10.4 6 14.9 9.6c4.5 3.6 8.6 7.6 12 11.9c3.3 4.3 5.9 9.1 7.7 14.4c2.1 6.2 2.9 13.4 3.4 22.1
-          c0.2 4.1 3.5 7.3 7.6 7.3h0.3c4.2 0 7.5-3.5 7.6-7.7c-0.3-21.4-6.1-42.4-23.7-60.1C318.2 91.8 288.4 80 250 80z" fill="#006241" fillOpacity="0.9"/>
-        <path d="M354.1 229.8c0 0-6.5 2.8-12.5 5.6c-6.1 2.8-11.6 5.6-16.8 7.1c-5.2 1.6-13.4 3.6-13.4 3.6s-6.1-0.7-10-1.7
-          c-4-1.1-8.6-2.7-14.3-3.4c-5.7-0.6-12.4-0.6-18.1 0c-5.7 0.6-10.3 2.3-14.3 3.4c-4 1.1-10 1.7-10 1.7s-8.3-2.1-13.4-3.6
-          c-5.2-1.6-10.7-4.3-16.8-7.1c-6-2.8-12.5-5.6-12.5-5.6c-7.7-3.5-14.1 4.5-8.9 11l0 0c4 4.9 8.3 9.5 12.5 13.4
-          c4.7 4.4 9.3 8.2 14 11.9c4.6 3.6 9.3 6.9 13.9 10.1c4.6 3.1 9.1 6.1 13.7 8.8c4.5 2.7 9.1 5.2 13.6 7.5c4.5 2.3 9 4.3 13.5 6.2
-          c0.8 0.3 1.6 0.7 2.4 1c1.7 4.4 3.1 17.1 3.7 33.8c0.1 2.7 2.1 4.8 4.8 4.8h1.4c2.6 0 4.7-2.2 4.8-4.8c0.6-16.9 2-29.6 3.7-33.8
-          c0.7-0.3 1.4-0.6 2.2-0.9c4.4-1.9 8.9-4 13.5-6.2c4.5-2.3 9.1-4.8 13.6-7.5c4.6-2.7 9.1-5.6 13.7-8.8c4.6-3.1 9.3-6.5 13.9-10.1
-          c4.7-3.6 9.3-7.5 14-11.9c4.2-4 8.5-8.5 12.5-13.4l0 0C368.2 234.3 361.9 226.3 354.1 229.8z" fill="#006241" fillOpacity="0.9"/>
-        <text x="455" y="470" fontSize="15" fontWeight="bold" fill="#006241" fillOpacity="0.9">®</text>
-      </svg>
+      {/* Starbucks logo with glow effect */}
+      <div className="relative w-full h-full flex items-center justify-center z-10">
+        <div className="w-[90%] h-[90%] rounded-full border-[1px] border-[#006241]/30 relative">
+          {/* Star */}
+          <div className="absolute top-[14%] left-[50%] transform -translate-x-1/2 w-[10%] h-[6%] border-t-[2px] border-l-[2px] border-r-[2px] border-[#006241]/60"></div>
+          
+          {/* Crown Left */}
+          <div className="absolute top-[18%] left-[35%] transform -translate-x-1/2 w-[15%] h-[8%] border-t-[2px] border-l-[2px] border-[#006241]/60"></div>
+          
+          {/* Crown Right */}
+          <div className="absolute top-[18%] right-[35%] transform translate-x-1/2 w-[15%] h-[8%] border-t-[2px] border-r-[2px] border-[#006241]/60"></div>
+          
+          {/* Face Outline */}
+          <div className="absolute top-[30%] left-[50%] transform -translate-x-1/2 w-[16%] h-[35%] rounded-b-[100px] border-l-[2px] border-r-[2px] border-b-[2px] border-[#006241]/60"></div>
+          
+          {/* Hair Strands */}
+          <div className="absolute top-[30%] left-[44%] h-[35%] border-l-[2px] border-[#006241]/60"></div>
+          <div className="absolute top-[30%] left-[48%] h-[38%] border-l-[2px] border-[#006241]/60"></div>
+          <div className="absolute top-[30%] left-[52%] h-[38%] border-l-[2px] border-[#006241]/60"></div>
+          <div className="absolute top-[30%] right-[44%] h-[35%] border-l-[2px] border-[#006241]/60"></div>
+          
+          {/* Left Side Fins */}
+          <div className="absolute top-[25%] left-[20%] w-[12%] h-[8%] border-t-[2px] border-l-[2px] border-[#006241]/60"></div>
+          <div className="absolute top-[38%] left-[16%] w-[10%] h-[4%] border-t-[2px] border-l-[2px] border-[#006241]/60"></div>
+          <div className="absolute top-[48%] left-[16%] w-[10%] h-[4%] border-t-[2px] border-l-[2px] border-[#006241]/60"></div>
+          <div className="absolute top-[58%] left-[17%] w-[9%] h-[4%] border-t-[2px] border-l-[2px] border-[#006241]/60"></div>
+          <div className="absolute top-[68%] left-[20%] w-[8%] h-[4%] border-t-[2px] border-l-[2px] border-[#006241]/60"></div>
+          
+          {/* Right Side Fins */}
+          <div className="absolute top-[25%] right-[20%] w-[12%] h-[8%] border-t-[2px] border-r-[2px] border-[#006241]/60"></div>
+          <div className="absolute top-[38%] right-[16%] w-[10%] h-[4%] border-t-[2px] border-r-[2px] border-[#006241]/60"></div>
+          <div className="absolute top-[48%] right-[16%] w-[10%] h-[4%] border-t-[2px] border-r-[2px] border-[#006241]/60"></div>
+          <div className="absolute top-[58%] right-[17%] w-[9%] h-[4%] border-t-[2px] border-r-[2px] border-[#006241]/60"></div>
+          <div className="absolute top-[68%] right-[20%] w-[8%] h-[4%] border-t-[2px] border-r-[2px] border-[#006241]/60"></div>
+          
+          {/* Registered Mark */}
+          <div className="absolute bottom-[15%] right-[15%] w-[4%] h-[4%] rounded-full border-[1px] border-[#006241]/60 flex items-center justify-center text-[8px] text-[#006241]/60">®</div>
+        </div>
+      </div>
     </div>
   );
 };
