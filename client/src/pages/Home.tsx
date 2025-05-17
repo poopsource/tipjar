@@ -135,8 +135,8 @@ export default function Home() {
               </div>
             </div>
             
-            {/* Quick Preview Widget - Hidden by default to match screenshot */}
-            <div className="hidden">
+            {/* Quick Preview Widget */}
+            <div>
               <QuickPreviewWidget />
             </div>
               
