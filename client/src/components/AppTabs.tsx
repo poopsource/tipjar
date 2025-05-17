@@ -1,33 +1,33 @@
-import { useLocation, Link } from "wouter";
+import { useLocation } from "wouter";
 
 export default function AppTabs() {
   const [location] = useLocation();
   
   return (
-    <div className="mb-8 border-b border-border">
-      <div className="flex space-x-4">
-        <Link href="/">
-          <a 
-            className={`px-4 py-3 font-medium text-sm relative transition-colors
-              ${location === '/' 
-                ? 'text-primary after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary' 
-                : 'text-muted-foreground hover:text-foreground hover:bg-primary hover:bg-opacity-8 rounded-t-sm'
-              }`}
-          >
-            Tip Distribution
-          </a>
-        </Link>
-        <Link href="/partners">
-          <a 
-            className={`px-4 py-3 font-medium text-sm relative transition-colors
-              ${location === '/partners' 
-                ? 'text-primary after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary' 
-                : 'text-muted-foreground hover:text-foreground hover:bg-primary hover:bg-opacity-8 rounded-t-sm'
-              }`}
-          >
-            Partners
-          </a>
-        </Link>
+    <div className="mb-8 border-b border-[#4c6767]">
+      <div className="flex space-x-2">
+        <a 
+          href="/"
+          onClick={(e) => { e.preventDefault(); window.location.href='/' }}
+          className={`px-4 py-3 border-b-2 ${
+            location === '/' 
+              ? 'border-[#93ec93] text-[#f5f5f5] font-semibold' 
+              : 'border-transparent text-[#bfbfbf] hover:text-[#f5f5f5] transition-colors'
+          }`}
+        >
+          Tip Distribution
+        </a>
+        <a 
+          href="/partners"
+          onClick={(e) => { e.preventDefault(); window.location.href='/partners' }}
+          className={`px-4 py-3 border-b-2 ${
+            location === '/partners' 
+              ? 'border-[#93ec93] text-[#f5f5f5] font-semibold' 
+              : 'border-transparent text-[#bfbfbf] hover:text-[#f5f5f5] transition-colors'
+          }`}
+        >
+          Partners
+        </a>
       </div>
     </div>
   );
