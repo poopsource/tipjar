@@ -239,13 +239,24 @@ export default function FileDropzone() {
   return (
     <>
       <div
-        className="mb-4 sm:mb-6 bg-transparent text-center border-2 border-dashed border-[#275343] rounded-xl p-4 sm:p-6 flex justify-center items-center min-h-[160px] sm:min-h-[180px] shadow-inner hover:border-[#f0e1c1] transition-colors duration-300"
+        className="bg-transparent text-center border-2 border-dashed border-[#275343] rounded-xl p-4 flex justify-center items-center shadow-inner hover:border-[#f0e1c1] transition-colors duration-300"
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         onClick={() => fileInputRef.current?.click()}
       >
-        {renderDropzoneContent()}
+        {state === DropzoneState.IDLE ? (
+          <button 
+            className="text-sm font-medium text-[#004324] bg-[#f0e1c1] hover:bg-[#e6d2a8] inline-flex h-10 justify-center items-center whitespace-nowrap border-0 rounded-full px-6 py-2 transition-all duration-300 shadow-md hover:shadow-lg"
+            onClick={(e) => {
+              e.stopPropagation();
+              fileInputRef.current?.click();
+            }}
+          >
+            <Upload className="h-4 w-4 mr-2" />
+            <span className="font-medium">Upload Report</span>
+          </button>
+        ) : renderDropzoneContent()}
       </div>
       <input
         type="file"
