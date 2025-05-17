@@ -5,54 +5,57 @@
 @tailwind utilities;
 
 :root {
-  /* Main color variables */
-  --app-bg: 180 25% 25%;           /* #2F4F4F - main background */
-  --app-card: 180 22% 30%;         /* #3A5C5C - card background */
-  --app-darker: 180 30% 17%;       /* #1E3535 - header/footer background */
-  --app-input: 180 35% 25%;        /* #364949 - input background */
-  --app-border: 180 20% 35%;       /* #4C6767 - border color */
+  /* Main color variables - Starbucks themed */
+  --app-bg: 153 40% 16%;           /* #164734 - dark forest green background */
+  --app-card: 153 39% 24%;         /* #1e5b45 - card background */
+  --app-darker: 153 45% 12%;       /* #0f2f22 - header/footer background */
+  --app-input: 153 41% 18%;        /* #143d2a - input background */
+  --app-border: 153 30% 28%;       /* #275343 - border color */
   
   /* Text colors */
   --text-white: 0 0% 96%;          /* #F5F5F5 - primary text */
-  --text-yellow: 35 100% 92%;      /* #FFEED6 - accent text */
+  --text-cream: 39 76% 83%;        /* #f0e1c1 - cream text */
   --text-gray: 0 0% 75%;           /* #BFBFBF - muted text */
   
+  /* Button colors - Starbucks cream */
+  --cream: 39 76% 83%;             /* #f0e1c1 - cream color */
+  --cream-darker: 39 70% 75%;      /* #e6d2a8 - darker cream */
+  --cream-darkest: 38 60% 65%;     /* #d1b887 - darkest cream */
+  
   /* Accent colors */
-  --spring-green: 120 70% 75%;     /* #93EC93 - primary accent */
-  --spring-blue: 196 63% 77%;      /* #9FD6E9 - secondary accent */
-  --spring-accent: 340 60% 67%;    /* #DD7895 - highlight accent */
-  --spring-lavender: 280 47% 79%;  /* #D2B0E3 - tertiary accent */
+  --starbucks-green: 153 39% 24%;  /* #1e5b45 - starbucks green */
+  --accent-color: 340 60% 67%;     /* #DD7895 - accent for highlights */
   
   /* ShadCN UI variables */
-  --background: 180 25% 25%;       /* #2F4F4F - app-bg */
+  --background: 153 40% 16%;       /* #164734 - app-bg */
   --foreground: 0 0% 96%;          /* #F5F5F5 - text-white */
   
-  --card: 180 22% 30%;             /* #3A5C5C - app-card */
+  --card: 153 39% 24%;             /* #1e5b45 - app-card */
   --card-foreground: 0 0% 96%;     /* #F5F5F5 - text-white */
   
-  --popover: 180 22% 30%;          /* #3A5C5C - app-card */
+  --popover: 153 39% 24%;          /* #1e5b45 - app-card */
   --popover-foreground: 0 0% 96%;  /* #F5F5F5 - text-white */
   
-  --primary: 120 70% 75%;          /* #93EC93 - spring-green */
-  --primary-foreground: 180 35% 25%; /* #364949 - app-input */
+  --primary: 39 76% 83%;           /* #f0e1c1 - cream */
+  --primary-foreground: 153 40% 16%; /* #164734 - dark green */
   
-  --secondary: 35 100% 92%;        /* #FFEED6 - text-yellow */
-  --secondary-foreground: 180 30% 17%; /* #1E3535 - app-darker */
+  --secondary: 39 76% 83%;         /* #f0e1c1 - cream */
+  --secondary-foreground: 153 40% 16%; /* #164734 - dark green */
   
-  --muted: 180 20% 30%;            /* #3C5D5D - slightly lighter than app-card */
-  --muted-foreground: 0 0% 75%;    /* #BFBFBF - text-gray */
+  --muted: 153 35% 28%;            /* #265743 - slightly lighter than app-card */
+  --muted-foreground: 39 76% 83%;  /* #f0e1c1 - cream */
   
-  --accent: 340 60% 67%;           /* #DD7895 - spring-accent */
+  --accent: 153 30% 35%;           /* #336754 - lighter green accent */
   --accent-foreground: 0 0% 96%;   /* #F5F5F5 - text-white */
   
   --destructive: 0 84% 60%;        /* Red for destructive actions */
   --destructive-foreground: 0 0% 96%; /* #F5F5F5 - text-white */
   
-  --border: 180 20% 35%;           /* #4C6767 - app-border */
-  --input: 180 35% 25%;            /* #364949 - app-input */
-  --ring: 120 70% 75%;             /* #93EC93 - spring-green */
+  --border: 153 30% 28%;           /* #275343 - border color */
+  --input: 153 41% 18%;            /* #143d2a - input background */
+  --ring: 39 76% 83%;              /* #f0e1c1 - cream for focus rings */
   
-  --radius: 0.25rem;
+  --radius: 0.75rem;               /* Increased border radius for rounded corners */
 }
 
 @layer base {
