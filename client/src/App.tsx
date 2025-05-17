@@ -10,17 +10,7 @@ import { TipContextProvider } from "@/context/TipContext";
 function AppNav() {
   const [location] = useLocation();
   
-  return (
-    <div className="mb-8 border-b border-[#f5f5f5]">
-      <div className="flex justify-center">
-        <a href="/" 
-           onClick={(e) => { e.preventDefault(); window.location.href='/' }}
-           className={location === "/" ? "nav-link-active" : "nav-link"}>
-          TipJar
-        </a>
-      </div>
-    </div>
-  );
+  return null;
 }
 
 function Router() {
