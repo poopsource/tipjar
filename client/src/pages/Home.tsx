@@ -3,6 +3,7 @@ import { useToast } from "@/hooks/use-toast";
 import FileDropzone from "@/components/FileDropzone";
 import ResultsSummaryCard from "@/components/ResultsSummaryCard";
 import PartnerPayoutsList from "@/components/PartnerPayoutsList";
+import QuickPreviewWidget from "@/components/QuickPreviewWidget";
 import { useTipContext } from "@/context/TipContext";
 import { apiRequest } from "@/lib/queryClient";
 import { calculateHourlyRate } from "@/lib/utils";
@@ -100,7 +101,7 @@ export default function Home() {
             </div>
 
             {/* Total Tip Amount */}
-            <div className="mb-6">
+            <div className="mb-4">
               <div className="flex items-center space-x-2 mb-2">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#f0e1c1]" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
@@ -124,6 +125,9 @@ export default function Home() {
                 />
               </div>
             </div>
+            
+            {/* Quick Preview Widget */}
+            <QuickPreviewWidget />
               
             {/* Calculate Button */}
             <button 
