@@ -37,17 +37,17 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <TipContextProvider>
-          <div className="flex-grow w-full bg-[#2F4F4F] text-[#f5f5f5] min-h-screen flex flex-col">
+          <div className="flex-grow w-full bg-[#164734] text-[#f5f5f5] min-h-screen flex flex-col">
             <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 flex-grow">
               <AppNav />
               <div className="flex-grow">
                 <Router />
               </div>
             </main>
-            <footer className="w-full border-t border-[#3A5F5F] mt-8 py-4">
+            <footer className="w-full border-t border-[#143d2a] mt-8 py-4">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center text-sm">
-                <div className="font-medium text-[#f5f5f5]">Made by William Walsh</div>
-                <div className="text-[#9fd6e9] text-xs mt-1">Starbucks Store# 69600</div>
+                <div className="font-medium text-[#f0e1c1]">Made by William Walsh</div>
+                <div className="text-[#f0e1c1] opacity-70 text-xs mt-1">Starbucks Store #66900</div>
               </div>
             </footer>
           </div>
