@@ -8,7 +8,7 @@ import { useTipContext } from "@/context/TipContext";
 import { apiRequest } from "@/lib/queryClient";
 import { calculateHourlyRate } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
-import StarbucksLogo from "@/components/StarbucksLogo";
+import starbucksLogoGlow from "../assets/starbucks-logo-glow.png";
 
 export default function Home() {
   const [tipAmount, setTipAmount] = useState<number | ''>('');
@@ -82,8 +82,12 @@ export default function Home() {
         <div className="bg-[#1e5b45] rounded-2xl shadow-xl overflow-hidden animate-fadeIn">
           {/* Starbucks Logo */}
           <div className="flex flex-col items-center justify-center pt-8 pb-4">
-            <div className="relative w-28 h-28 flex items-center justify-center">
-              <StarbucksLogo />
+            <div className="relative w-32 h-32 flex items-center justify-center">
+              <img 
+                src={starbucksLogoGlow} 
+                alt="Starbucks Logo" 
+                className="w-full h-full object-contain"
+              />
             </div>
             <h1 className="text-3xl font-bold mt-4 text-white">Tip Distribution</h1>
           </div>
