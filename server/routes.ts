@@ -16,7 +16,7 @@ const upload = multer({
   },
 });
 
-export async function registerRoutes(app: Express): Promise<Server> {
+export async function registerRoutes(app: Express, skipServer = false): Promise<Server | null> {
   // API routes
   
   // OCR Processing endpoint
@@ -155,6 +155,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ error: "Failed to retrieve partners" });
     }
   });
+  
+  // Skip HTTP server creation for serverless functions
+  if (skipServer) {
+    return null;
+  }
   
   const httpServer = createServer(app);
   return httpServer;
