@@ -19,8 +19,8 @@ export async function analyzeImage(imageBase64) {
       return { text: null, error: "API key missing. Please configure the Gemini API key in environment variables." };
     }
     
-    // Google Gemini API endpoint
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro-vision:generateContent?key=${apiKey}`;
+    // Google Gemini API endpoint - Updated to use Gemini 1.5 Flash
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
     
     // Construct the request body with the image and prompt
     const requestBody = {
@@ -28,7 +28,7 @@ export async function analyzeImage(imageBase64) {
         {
           parts: [
             {
-              text: "Extract and format all text from this image. Focus on any tabular data listing names and hours. Format as plain text."
+              text: "Extract and format all text from this image. Focus on any tabular data listing names and hours. Format as plain text with each entry on a new line in the format 'Name: Hours'"
             },
             {
               inline_data: {
@@ -38,7 +38,13 @@ export async function analyzeImage(imageBase64) {
             }
           ]
         }
-      ]
+      ],
+      generationConfig: {
+        temperature: 0.1,
+        topP: 0.8,
+        topK: 40,
+        maxOutputTokens: 2048,
+      }
     };
     
     // Make the API call
@@ -77,4 +83,4 @@ export async function analyzeImage(imageBase64) {
       error: error.message || "Failed to process image with Gemini API"
     };
   }
-} 
+}

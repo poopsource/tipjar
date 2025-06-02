@@ -74,8 +74,8 @@ export async function analyzeImage(imageBase64: string): Promise<{text: string |
         }
       ],
       generationConfig: {
-        temperature: 0.2,
-        topP: 0.9,
+        temperature: 0.1,
+        topP: 0.8,
         topK: 40,
         maxOutputTokens: 2048,
       }
