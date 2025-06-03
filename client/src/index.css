@@ -207,29 +207,6 @@
   animation: scaleIn 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .card-header,
-  .card-body,
-  .card-footer {
-    @apply p-4;
-  }
-  
-  .summary-value,
-  .summary-value-blue,
-  .summary-value-accent {
-    @apply text-xl;
-  }
-  
-  .btn {
-    @apply h-9 px-3 text-sm;
-  }
-  
-  .input-field {
-    @apply h-9;
-  }
-}
-
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
   * {
