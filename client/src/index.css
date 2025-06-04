@@ -5,7 +5,17 @@
 @tailwind utilities;
 
 :root {
-  /* Material Design 3 Color System */
+  /* iOS-optimized color system */
+  --ios-primary: 211 100% 50%;      /* iOS Blue */
+  --ios-secondary: 211 20% 50%;     /* Muted Blue */
+  --ios-success: 142 70% 45%;       /* iOS Green */
+  --ios-warning: 48 100% 50%;       /* iOS Yellow */
+  --ios-danger: 0 100% 50%;         /* iOS Red */
+  --ios-gray: 210 10% 23%;          /* iOS Gray */
+  --ios-background: 210 20% 98%;    /* Light Background */
+  --ios-surface: 0 0% 100%;         /* White Surface */
+  
+  /* Material Design 3 Color System - Dark Theme */
   --md-sys-color-primary: 120 70% 75%;      /* Spring green */
   --md-sys-color-on-primary: 180 35% 25%;   /* Dark text on primary */
   --md-sys-color-primary-container: 180 22% 30%;
@@ -29,71 +39,59 @@
   --md-sys-color-outline: 180 20% 35%;
   --md-sys-color-outline-variant: 180 20% 40%;
   
-  /* Material Design 3 Elevation */
-  --md-sys-elevation-level1: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-  --md-sys-elevation-level2: 0px 2px 6px rgba(0, 0, 0, 0.15), 0px 1px 2px rgba(0, 0, 0, 0.3);
-  --md-sys-elevation-level3: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px rgba(0, 0, 0, 0.3);
+  /* iOS-specific spacing */
+  --ios-spacing-2xs: 4px;
+  --ios-spacing-xs: 8px;
+  --ios-spacing-sm: 12px;
+  --ios-spacing-md: 16px;
+  --ios-spacing-lg: 24px;
+  --ios-spacing-xl: 32px;
+  --ios-spacing-2xl: 40px;
   
-  /* Material Design 3 Shape */
-  --md-sys-shape-corner-extra-small: 4px;
-  --md-sys-shape-corner-small: 8px;
-  --md-sys-shape-corner-medium: 12px;
-  --md-sys-shape-corner-large: 16px;
-  --md-sys-shape-corner-extra-large: 28px;
+  /* iOS-specific border radius */
+  --ios-radius-sm: 6px;
+  --ios-radius-md: 8px;
+  --ios-radius-lg: 12px;
+  --ios-radius-xl: 16px;
+  --ios-radius-full: 9999px;
   
-  /* ShadCN UI variables mapped to MD3 */
-  --background: var(--md-sys-color-surface);
-  --foreground: var(--md-sys-color-on-surface);
-  
-  --card: var(--md-sys-color-surface-variant);
-  --card-foreground: var(--md-sys-color-on-surface-variant);
-  
-  --popover: var(--md-sys-color-surface-variant);
-  --popover-foreground: var(--md-sys-color-on-surface-variant);
-  
-  --primary: var(--md-sys-color-primary);
-  --primary-foreground: var(--md-sys-color-on-primary);
-  
-  --secondary: var(--md-sys-color-secondary);
-  --secondary-foreground: var(--md-sys-color-on-secondary);
-  
-  --muted: var(--md-sys-color-surface-variant);
-  --muted-foreground: var(--md-sys-color-on-surface-variant);
-  
-  --accent: var(--md-sys-color-tertiary);
-  --accent-foreground: var(--md-sys-color-on-tertiary);
-  
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 96%;
-  
-  --border: var(--md-sys-color-outline);
-  --input: var(--md-sys-color-surface-variant);
-  --ring: var(--md-sys-color-primary);
-  
-  --radius: var(--md-sys-shape-corner-medium);
+  /* iOS Safe Areas */
+  --safe-area-inset-top: env(safe-area-inset-top, 0px);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-inset-left: env(safe-area-inset-left, 0px);
+  --safe-area-inset-right: env(safe-area-inset-right, 0px);
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  html {
+    -webkit-text-size-adjust: 100%;
   }
   
   body {
-    @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    @apply bg-background text-foreground min-h-screen;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+    padding-top: var(--safe-area-inset-top);
+    padding-bottom: var(--safe-area-inset-bottom);
+    padding-left: var(--safe-area-inset-left);
+    padding-right: var(--safe-area-inset-right);
   }
   
-  /* Typography Scale */
+  /* iOS Typography Scale */
   h1 {
-    @apply text-3xl font-semibold leading-tight tracking-tight;
+    @apply text-2xl sm:text-3xl font-semibold leading-tight tracking-tight;
   }
   
   h2 {
-    @apply text-2xl font-semibold leading-tight;
+    @apply text-xl sm:text-2xl font-semibold leading-tight;
   }
   
   h3 {
-    @apply text-xl font-medium leading-snug;
+    @apply text-lg sm:text-xl font-medium leading-snug;
   }
   
   p {
@@ -103,108 +101,103 @@
   small {
     @apply text-sm leading-normal;
   }
+  
+  /* iOS Touch Target Sizes */
+  button, 
+  [role="button"],
+  a {
+    @apply min-h-[44px] min-w-[44px] cursor-pointer select-none;
+    touch-action: manipulation;
+  }
+  
+  /* iOS Form Elements */
+  input,
+  select,
+  textarea {
+    @apply appearance-none;
+    font-size: 16px; /* Prevent iOS zoom on focus */
+  }
 }
 
 @layer components {
-  .card {
-    @apply bg-card text-card-foreground rounded-[var(--md-sys-shape-corner-medium)] shadow-md transition-shadow duration-200 hover:shadow-lg;
+  .ios-card {
+    @apply bg-card text-card-foreground rounded-[var(--ios-radius-lg)] shadow-sm;
+    min-height: 44px;
   }
   
-  .card-header {
-    @apply p-6 bg-[hsl(var(--md-sys-color-secondary-container))] rounded-t-[var(--md-sys-shape-corner-medium)] border-b border-[hsl(var(--md-sys-color-outline))] transition-colors;
+  .ios-button {
+    @apply flex items-center justify-center px-4 py-3 rounded-full font-medium 
+           transition-all duration-300 active:scale-95 disabled:opacity-50
+           min-h-[44px] min-w-[44px] select-none;
   }
   
-  .card-body {
-    @apply p-6 bg-[hsl(var(--md-sys-color-surface-variant))] transition-colors;
+  .ios-button-primary {
+    @apply ios-button bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))];
   }
   
-  .card-footer {
-    @apply p-6 bg-[hsl(var(--md-sys-color-secondary-container))] rounded-b-[var(--md-sys-shape-corner-medium)] border-t border-[hsl(var(--md-sys-color-outline))] transition-colors;
+  .ios-button-secondary {
+    @apply ios-button bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))];
   }
   
-  .btn {
-    @apply inline-flex h-10 items-center justify-center gap-2 rounded-[var(--md-sys-shape-corner-small)] px-4 py-2 text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--md-sys-color-primary))] focus:ring-offset-2 disabled:opacity-50;
+  .ios-input {
+    @apply h-11 w-full px-4 rounded-lg border border-input bg-background 
+           focus:outline-none focus:ring-2 focus:ring-ring text-base;
+    min-height: 44px;
   }
   
-  .btn-primary {
-    @apply bg-[hsl(var(--md-sys-color-primary))] text-[hsl(var(--md-sys-color-on-primary))] hover:opacity-90 shadow-sm hover:shadow;
+  .ios-label {
+    @apply block text-sm font-medium mb-2 select-none;
   }
   
-  .btn-secondary {
-    @apply bg-[hsl(var(--md-sys-color-secondary))] text-[hsl(var(--md-sys-color-on-secondary))] hover:opacity-90 shadow-sm hover:shadow;
-  }
-  
-  .btn-accent {
-    @apply bg-[hsl(var(--md-sys-color-tertiary))] text-[hsl(var(--md-sys-color-on-tertiary))] hover:opacity-90 shadow-sm hover:shadow;
-  }
-  
-  .input-field {
-    @apply h-10 w-full bg-[hsl(var(--md-sys-color-surface-variant))] text-[hsl(var(--md-sys-color-on-surface-variant))] rounded-[var(--md-sys-shape-corner-small)] border border-[hsl(var(--md-sys-color-outline))] px-3 py-2 text-sm transition-shadow focus:outline-none focus:ring-2 focus:ring-[hsl(var(--md-sys-color-primary))] focus:border-transparent;
-  }
-  
-  .input-label {
-    @apply block text-sm font-medium text-[hsl(var(--md-sys-color-on-surface-variant))] mb-1.5;
-  }
-  
-  .summary-box {
-    @apply bg-[hsl(var(--md-sys-color-surface-variant))] rounded-[var(--md-sys-shape-corner-medium)] p-4 shadow-sm transition-shadow hover:shadow-md;
-  }
-  
-  .summary-label {
-    @apply text-sm text-[hsl(var(--md-sys-color-secondary))] font-medium mb-1;
-  }
-  
-  .summary-value {
-    @apply text-2xl font-bold text-[hsl(var(--md-sys-color-on-surface-variant))];
-  }
-  
-  .summary-value-blue {
-    @apply text-2xl font-bold text-[hsl(var(--md-sys-color-secondary))];
-  }
-  
-  .summary-value-accent {
-    @apply text-2xl font-bold text-[hsl(var(--md-sys-color-tertiary))];
+  .ios-safe-area {
+    padding-top: var(--safe-area-inset-top);
+    padding-bottom: var(--safe-area-inset-bottom);
+    padding-left: var(--safe-area-inset-left);
+    padding-right: var(--safe-area-inset-right);
   }
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/* iOS-specific Animations */
+@keyframes ios-press {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
 }
 
-@keyframes fadeUp {
-  from { 
-    opacity: 0;
-    transform: translateY(10px);
+.animate-ios-press {
+  animation: ios-press 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* iOS-specific Shadows */
+.ios-shadow-sm {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.ios-shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+              0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.ios-shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+              0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* iOS-specific Media Queries */
+@media (max-width: 390px) {
+  /* iPhone 12/13/14 Mini */
+  :root {
+    --ios-spacing-md: 12px;
+    --ios-spacing-lg: 20px;
   }
-  to { 
-    opacity: 1;
-    transform: translateY(0);
+}
+
+@media (min-width: 391px) and (max-width: 428px) {
+  /* iPhone 12/13/14 Pro Max */
+  :root {
+    --ios-spacing-md: 16px;
+    --ios-spacing-lg: 24px;
   }
-}
-
-@keyframes scaleIn {
-  from { 
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to { 
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 300ms ease-out;
-}
-
-.animate-fadeUp {
-  animation: fadeUp 300ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.animate-scaleIn {
-  animation: scaleIn 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Accessibility */
@@ -215,18 +208,4 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-.focus-visible:focus {
-  @apply outline-none ring-2 ring-offset-2 ring-[hsl(var(--md-sys-color-primary))];
-}
-
-/* Scrollbar Styling */
-.scrollbar-hidden::-webkit-scrollbar {
-  display: none;
-}
-
-.scrollbar-hidden {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }
