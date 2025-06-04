@@ -7,8 +7,14 @@ export default {
     container: {
       center: true,
       padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
     },
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -43,28 +49,16 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        league: {
-          blue: "var(--league-blue)",
-          gold: "var(--league-gold)",
-          purple: "var(--league-purple)",
-          red: "var(--league-red)",
-          green: "var(--league-green)",
-        },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      fontFamily: {
-        sans: ["Inter", "sans-serif"],
-        display: ["Orbitron", "sans-serif"],
-        tech: ["Rajdhani", "sans-serif"],
-      },
       boxShadow: {
-        'glow-sm': '0 0 10px var(--gaming-glow)',
-        'glow-md': '0 0 20px var(--gaming-glow)',
-        'glow-lg': '0 0 30px var(--gaming-glow)',
+        'soft': '0 2px 4px rgba(0,0,0,0.05), 0 4px 8px rgba(0,0,0,0.1)',
+        'medium': '0 4px 6px rgba(0,0,0,0.1), 0 8px 16px rgba(0,0,0,0.1)',
+        'hard': '0 8px 16px rgba(0,0,0,0.15), 0 16px 32px rgba(0,0,0,0.15)',
       },
       keyframes: {
         "accordion-down": {
@@ -75,22 +69,47 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-10px)' },
+        fadeIn: {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
         },
-        'pulse-glow': {
-          '0%, 100%': { boxShadow: '0 0 5px var(--gaming-glow)' },
-          '50%': { boxShadow: '0 0 20px var(--gaming-glow)' },
+        fadeUp: {
+          from: { 
+            opacity: '0',
+            transform: 'translateY(10px)',
+          },
+          to: { 
+            opacity: '1',
+            transform: 'translateY(0)',
+          },
         },
+        scaleIn: {
+          from: {
+            opacity: '0',
+            transform: 'scale(0.95)',
+          },
+          to: {
+            opacity: '1',
+            transform: 'scale(1)',
+          },
+        },
+        shimmer: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' }
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        'float': 'float 3s ease-in-out infinite',
-        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+        "fade-in": "fadeIn 300ms ease-out",
+        "fade-up": "fadeUp 300ms cubic-bezier(0.4, 0, 0.2, 1)",
+        "scale-in": "scaleIn 300ms cubic-bezier(0.4, 0, 0.2, 1)",
+        "shimmer": "shimmer 2s infinite",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/typography"),
+  ],
 } satisfies Config;

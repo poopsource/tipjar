@@ -1,147 +1,232 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --primary-50: #eff6ff;
-    --primary-500: #3b82f6;
-    --primary-700: #1d4ed8;
-    --league-blue: #0596aa;
-    --league-gold: #c8aa6e;
-    --league-purple: #a855f7;
-    --league-red: #ef4444;
-    --league-green: #22c55e;
-    --gaming-bg: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-    --gaming-card: rgba(30, 41, 59, 0.5);
-    --gaming-border: rgba(148, 163, 184, 0.2);
-    --gaming-glow: rgba(59, 130, 246, 0.4);
-
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
-    
-    --card: 222 47% 11%;
-    --card-foreground: 210 40% 98%;
-    
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
-    
-    --primary: 221 83% 53%;
-    --primary-foreground: 210 40% 98%;
-    
-    --secondary: 217 91% 60%;
-    --secondary-foreground: 210 40% 98%;
-    
-    --muted: 215 25% 27%;
-    --muted-foreground: 215 20% 65%;
-    
-    --accent: 271 91% 65%;
-    --accent-foreground: 210 40% 98%;
-    
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-    
-    --border: 217 19% 27%;
-    --input: 215 25% 27%;
-    --ring: 221 83% 53%;
-
-    --radius: 0.75rem;
-  }
+:root {
+  /* Material Design 3 Color System */
+  --md-sys-color-primary: 120 70% 75%;      /* Spring green */
+  --md-sys-color-on-primary: 180 35% 25%;   /* Dark text on primary */
+  --md-sys-color-primary-container: 180 22% 30%;
+  --md-sys-color-on-primary-container: 0 0% 96%;
+  
+  --md-sys-color-secondary: 196 63% 77%;    /* Spring blue */
+  --md-sys-color-on-secondary: 180 35% 25%;
+  --md-sys-color-secondary-container: 180 30% 17%;
+  --md-sys-color-on-secondary-container: 0 0% 96%;
+  
+  --md-sys-color-tertiary: 340 60% 67%;     /* Spring accent */
+  --md-sys-color-on-tertiary: 180 35% 25%;
+  --md-sys-color-tertiary-container: 180 20% 35%;
+  --md-sys-color-on-tertiary-container: 0 0% 96%;
+  
+  --md-sys-color-surface: 180 25% 25%;      /* Main background */
+  --md-sys-color-on-surface: 0 0% 96%;
+  --md-sys-color-surface-variant: 180 22% 30%;
+  --md-sys-color-on-surface-variant: 0 0% 96%;
+  
+  --md-sys-color-outline: 180 20% 35%;
+  --md-sys-color-outline-variant: 180 20% 40%;
+  
+  /* Material Design 3 Elevation */
+  --md-sys-elevation-level1: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-level2: 0px 2px 6px rgba(0, 0, 0, 0.15), 0px 1px 2px rgba(0, 0, 0, 0.3);
+  --md-sys-elevation-level3: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px rgba(0, 0, 0, 0.3);
+  
+  /* Material Design 3 Shape */
+  --md-sys-shape-corner-extra-small: 4px;
+  --md-sys-shape-corner-small: 8px;
+  --md-sys-shape-corner-medium: 12px;
+  --md-sys-shape-corner-large: 16px;
+  --md-sys-shape-corner-extra-large: 28px;
+  
+  /* ShadCN UI variables mapped to MD3 */
+  --background: var(--md-sys-color-surface);
+  --foreground: var(--md-sys-color-on-surface);
+  
+  --card: var(--md-sys-color-surface-variant);
+  --card-foreground: var(--md-sys-color-on-surface-variant);
+  
+  --popover: var(--md-sys-color-surface-variant);
+  --popover-foreground: var(--md-sys-color-on-surface-variant);
+  
+  --primary: var(--md-sys-color-primary);
+  --primary-foreground: var(--md-sys-color-on-primary);
+  
+  --secondary: var(--md-sys-color-secondary);
+  --secondary-foreground: var(--md-sys-color-on-secondary);
+  
+  --muted: var(--md-sys-color-surface-variant);
+  --muted-foreground: var(--md-sys-color-on-surface-variant);
+  
+  --accent: var(--md-sys-color-tertiary);
+  --accent-foreground: var(--md-sys-color-on-tertiary);
+  
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 96%;
+  
+  --border: var(--md-sys-color-outline);
+  --input: var(--md-sys-color-surface-variant);
+  --ring: var(--md-sys-color-primary);
+  
+  --radius: var(--md-sys-shape-corner-medium);
 }
 
 @layer base {
   * {
-    @apply border-border antialiased;
+    @apply border-border;
   }
   
   body {
-    @apply bg-background text-foreground min-h-screen font-[Inter];
-    background: var(--gaming-bg);
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
   
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-[Orbitron] font-bold tracking-wide;
+  /* Typography Scale */
+  h1 {
+    @apply text-3xl font-semibold leading-tight tracking-tight;
   }
   
-  code, pre {
-    @apply font-[Rajdhani];
+  h2 {
+    @apply text-2xl font-semibold leading-tight;
+  }
+  
+  h3 {
+    @apply text-xl font-medium leading-snug;
+  }
+  
+  p {
+    @apply text-base leading-relaxed;
+  }
+  
+  small {
+    @apply text-sm leading-normal;
   }
 }
 
 @layer components {
+  .card {
+    @apply bg-card text-card-foreground rounded-[var(--md-sys-shape-corner-medium)] shadow-md transition-shadow duration-200 hover:shadow-lg;
+  }
+  
+  .card-header {
+    @apply p-6 bg-[hsl(var(--md-sys-color-secondary-container))] rounded-t-[var(--md-sys-shape-corner-medium)] border-b border-[hsl(var(--md-sys-color-outline))] transition-colors;
+  }
+  
+  .card-body {
+    @apply p-6 bg-[hsl(var(--md-sys-color-surface-variant))] transition-colors;
+  }
+  
+  .card-footer {
+    @apply p-6 bg-[hsl(var(--md-sys-color-secondary-container))] rounded-b-[var(--md-sys-shape-corner-medium)] border-t border-[hsl(var(--md-sys-color-outline))] transition-colors;
+  }
+  
   .btn {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-medium text-sm rounded-lg transition-all duration-200;
-    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900;
+    @apply inline-flex h-10 items-center justify-center gap-2 rounded-[var(--md-sys-shape-corner-small)] px-4 py-2 text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--md-sys-color-primary))] focus:ring-offset-2 disabled:opacity-50;
   }
   
   .btn-primary {
-    @apply bg-blue-500 text-white border border-blue-600 hover:bg-blue-600;
-    @apply shadow-lg hover:shadow-xl hover:shadow-blue-500/25;
+    @apply bg-[hsl(var(--md-sys-color-primary))] text-[hsl(var(--md-sys-color-on-primary))] hover:opacity-90 shadow-sm hover:shadow;
   }
   
-  .card-glass {
-    background: var(--gaming-card);
-    backdrop-filter: blur(16px);
-    border: 1px solid var(--gaming-border);
-    border-radius: 0.75rem;
-    padding: 1.5rem;
+  .btn-secondary {
+    @apply bg-[hsl(var(--md-sys-color-secondary))] text-[hsl(var(--md-sys-color-on-secondary))] hover:opacity-90 shadow-sm hover:shadow;
   }
   
-  .glass-dark {
-    background: rgba(30, 41, 59, 0.5);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(148, 163, 184, 0.2);
+  .btn-accent {
+    @apply bg-[hsl(var(--md-sys-color-tertiary))] text-[hsl(var(--md-sys-color-on-tertiary))] hover:opacity-90 shadow-sm hover:shadow;
   }
   
-  .gaming-gradient {
-    background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #8b5cf6 100%);
+  .input-field {
+    @apply h-10 w-full bg-[hsl(var(--md-sys-color-surface-variant))] text-[hsl(var(--md-sys-color-on-surface-variant))] rounded-[var(--md-sys-shape-corner-small)] border border-[hsl(var(--md-sys-color-outline))] px-3 py-2 text-sm transition-shadow focus:outline-none focus:ring-2 focus:ring-[hsl(var(--md-sys-color-primary))] focus:border-transparent;
   }
   
-  .ai-gradient {
-    background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c084fc 100%);
+  .input-label {
+    @apply block text-sm font-medium text-[hsl(var(--md-sys-color-on-surface-variant))] mb-1.5;
   }
   
-  .glow-blue {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  .summary-box {
+    @apply bg-[hsl(var(--md-sys-color-surface-variant))] rounded-[var(--md-sys-shape-corner-medium)] p-4 shadow-sm transition-shadow hover:shadow-md;
   }
   
-  .glow-purple {
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+  .summary-label {
+    @apply text-sm text-[hsl(var(--md-sys-color-secondary))] font-medium mb-1;
   }
   
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    @apply w-2;
+  .summary-value {
+    @apply text-2xl font-bold text-[hsl(var(--md-sys-color-on-surface-variant))];
   }
   
-  ::-webkit-scrollbar-track {
-    @apply bg-slate-900;
+  .summary-value-blue {
+    @apply text-2xl font-bold text-[hsl(var(--md-sys-color-secondary))];
   }
   
-  ::-webkit-scrollbar-thumb {
-    @apply bg-slate-700 rounded-full hover:bg-slate-600 transition-colors;
+  .summary-value-accent {
+    @apply text-2xl font-bold text-[hsl(var(--md-sys-color-tertiary))];
   }
-  
-  /* Animations */
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
   }
-  
-  @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .animate-pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes scaleIn {
+  from { 
+    opacity: 0;
+    transform: scale(0.95);
   }
-  
-  @keyframes pulse-glow {
-    0% { box-shadow: 0 0 5px var(--gaming-glow); }
-    50% { box-shadow: 0 0 20px var(--gaming-glow); }
-    100% { box-shadow: 0 0 5px var(--gaming-glow); }
+  to { 
+    opacity: 1;
+    transform: scale(1);
   }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 300ms ease-out;
+}
+
+.animate-fadeUp {
+  animation: fadeUp 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-scaleIn {
+  animation: scaleIn 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.focus-visible:focus {
+  @apply outline-none ring-2 ring-offset-2 ring-[hsl(var(--md-sys-color-primary))];
+}
+
+/* Scrollbar Styling */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
