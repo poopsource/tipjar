@@ -117,7 +117,7 @@
   }
   
   .input-label {
-    @apply block text-sm font-medium text-[hsl(var(--md-sys-color-on-surface-variant)] mb-2;
+    @apply block text-sm font-medium text-[hsl(var(--md-sys-color-on-surface-variant))] mb-2;
   }
   
   .summary-box {
@@ -129,7 +129,7 @@
   }
   
   .summary-value {
-    @apply text-2xl font-bold text-[hsl(var(--md-sys-color-on-surface-variant)] tracking-tight;
+    @apply text-2xl font-bold text-[hsl(var(--md-sys-color-on-surface-variant))] tracking-tight;
   }
   
   .summary-value-blue {
