@@ -3,11 +3,12 @@ import { useToast } from "@/hooks/use-toast";
 import { useTipContext } from "@/context/TipContext";
 import { readFileAsDataURL } from "@/lib/utils";
 import {
-  UploadCloudIcon,
-  Loader2Icon,
-  CheckCircleIcon,
-  XCircleIcon,
-  FileTextIcon
+  Upload,
+  Loader2,
+  CheckCircle,
+  XCircle,
+  FileText,
+  Image as ImageIcon
 } from "lucide-react";
 
 enum DropzoneState {
@@ -50,13 +51,11 @@ export default function FileDropzone() {
     }
   };
   
-
-  
   const processFile = async (file: File) => {
     if (!file.type.startsWith('image/')) {
       toast({
         title: "Invalid file type",
-        description: "Please select a report image file",
+        description: "Please select an image file",
         variant: "destructive"
       });
       return;
@@ -69,7 +68,6 @@ export default function FileDropzone() {
     try {
       const dataUrl = await readFileAsDataURL(file);
       
-      // Send the image to the server for OCR processing
       const formData = new FormData();
       formData.append('image', file);
       
@@ -81,13 +79,11 @@ export default function FileDropzone() {
       const result = await response.json();
       
       if (!response.ok) {
-        // Extract specific error message from the server response
         const errorMsg = result.error || 'OCR processing failed';
         setErrorMessage(errorMsg);
         throw new Error(errorMsg);
       }
       
-      // Always set the extracted text if available to show everything OCR found
       if (result.extractedText) {
         setExtractedText(result.extractedText);
       }
@@ -101,12 +97,11 @@ export default function FileDropzone() {
         }, 3000);
         
         toast({
-          title: "Report processed",
+          title: "Schedule processed",
           description: `Successfully extracted ${result.partnerHours.length} partners`,
         });
       } else {
-        // No partners found in the report
-        setErrorMessage("No partner information detected in the report. Please try a different file.");
+        setErrorMessage("No partner information detected in the schedule. Please try a different file.");
         setState(DropzoneState.ERROR);
         
         toast({
@@ -119,9 +114,7 @@ export default function FileDropzone() {
       console.error(error);
       setState(DropzoneState.ERROR);
       
-      // If we have a specific error message from the API, use it
-      // Otherwise use a generic message
-      const errorMsg = errorMessage || "Failed to extract partner information from the report";
+      const errorMsg = errorMessage || "Failed to extract partner information from the schedule";
       
       toast({
         title: "Processing failed",
@@ -139,44 +132,38 @@ export default function FileDropzone() {
     switch (state) {
       case DropzoneState.DRAGGING:
         return (
-          <>
-            <div className="mb-4 h-16 w-16 text-[#93ec93] mx-auto animate-pulse">
-              <div className="h-full w-full rounded-full bg-[#364949] p-3 shadow-[0_0_15px_rgba(147,236,147,0.4)]">
-                <UploadCloudIcon className="h-full w-full" />
-              </div>
+          <div className="starbucks-scale-in">
+            <div className="w-16 h-16 bg-starbucks-forest/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <Upload className="w-8 h-8 text-starbucks-forest animate-bounce" />
             </div>
-            <p className="text-[#f5f5f5] m-0 mb-2 text-sm sm:text-base font-medium">Release to upload</p>
-          </>
+            <p className="text-starbucks-forest font-medium">Drop your schedule here</p>
+          </div>
         );
         
       case DropzoneState.PROCESSING:
         return (
-          <>
-            <div className="mb-4 h-16 w-16 text-[#9fd6e9] mx-auto">
-              <div className="h-full w-full rounded-full bg-[#364949] p-3 shadow-[0_0_15px_rgba(159,214,233,0.4)]">
-                <Loader2Icon className="h-full w-full animate-spin" />
-              </div>
+          <div className="starbucks-fade-in">
+            <div className="w-16 h-16 bg-starbucks-gold/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <Loader2 className="w-8 h-8 text-starbucks-coffee animate-spin" />
             </div>
-            <p className="text-[#f5f5f5] m-0 mb-2 text-sm sm:text-base font-medium">Processing report...</p>
-            <div className="w-48 h-2 bg-[#364949] rounded-full overflow-hidden mt-2">
-              <div className="h-full bg-[#9fd6e9] shimmer"></div>
+            <p className="text-starbucks-coffee font-medium mb-2">Processing schedule...</p>
+            <div className="w-48 h-2 bg-starbucks-beige rounded-full overflow-hidden mx-auto">
+              <div className="h-full bg-starbucks-gold animate-starbucks-shimmer"></div>
             </div>
-          </>
+          </div>
         );
         
       case DropzoneState.SUCCESS:
         return (
-          <div className="animate-scaleIn">
-            <div className="mb-4 h-16 w-16 text-[#93ec93] mx-auto">
-              <div className="h-full w-full rounded-full bg-[#364949] p-3 shadow-[0_0_15px_rgba(147,236,147,0.5)]">
-                <CheckCircleIcon className="h-full w-full" />
-              </div>
+          <div className="starbucks-scale-in">
+            <div className="w-16 h-16 bg-starbucks-forest/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <CheckCircle className="w-8 h-8 text-starbucks-forest" />
             </div>
-            <p className="text-[#f5f5f5] m-0 mb-2 text-sm sm:text-base font-medium">File processed successfully!</p>
+            <p className="text-starbucks-forest font-medium mb-3">Schedule processed successfully!</p>
             {fileName && (
-              <div className="flex items-center justify-center bg-[#364949] rounded-full px-4 py-2 mx-auto max-w-max">
-                <FileTextIcon className="h-4 w-4 text-[#ffeed6] mr-2" />
-                <p className="text-xs sm:text-sm text-[#ffeed6] m-0 truncate max-w-[180px]">{fileName}</p>
+              <div className="starbucks-status-success inline-flex items-center gap-2">
+                <FileText className="w-4 h-4" />
+                <span className="text-sm truncate max-w-[180px]">{fileName}</span>
               </div>
             )}
           </div>
@@ -184,16 +171,14 @@ export default function FileDropzone() {
         
       case DropzoneState.ERROR:
         return (
-          <div className="animate-scaleIn">
-            <div className="mb-4 h-16 w-16 text-red-500 mx-auto">
-              <div className="h-full w-full rounded-full bg-[#364949] p-3 shadow-[0_0_15px_rgba(220,38,38,0.4)]">
-                <XCircleIcon className="h-full w-full" />
-              </div>
+          <div className="starbucks-scale-in">
+            <div className="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <XCircle className="w-8 h-8 text-red-600" />
             </div>
-            <p className="text-[#f5f5f5] m-0 mb-2 text-sm sm:text-base font-medium">Processing failed</p>
-            <div className="bg-[#364949] rounded-lg p-3 mb-3 max-w-[280px] mx-auto">
-              <p className="text-xs sm:text-sm text-[#ffeed6] m-0">
-                {errorMessage || "Please try again with a different report"}
+            <p className="text-red-600 font-medium mb-3">Processing failed</p>
+            <div className="bg-red-50 border border-red-200 rounded-lg p-3 mb-4 max-w-[280px] mx-auto">
+              <p className="text-sm text-red-700">
+                {errorMessage || "Please try again with a different schedule"}
               </p>
             </div>
             <button 
@@ -201,11 +186,8 @@ export default function FileDropzone() {
                 e.stopPropagation();
                 setState(DropzoneState.IDLE);
               }}
-              className="text-sm font-medium text-[#364949] bg-[#93ec93] hover:bg-opacity-90 inline-flex h-10 justify-center items-center whitespace-nowrap border-0 rounded-full px-6 py-2 transition-all duration-300 shadow-md hover:shadow-lg"
+              className="starbucks-btn starbucks-btn-secondary"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-              </svg>
               Try Again
             </button>
           </div>
@@ -213,37 +195,53 @@ export default function FileDropzone() {
         
       default:
         return (
-          <div className="animate-fadeIn w-full">
-            <div className="flex flex-col items-center">
-              <div className="mb-4 h-16 w-16 text-[#93ec93] mx-auto">
-                <div className="h-full w-full rounded-full bg-[#364949] p-3 group-hover:shadow-[0_0_25px_rgba(147,236,147,0.4)] transition-all duration-300">
-                  <UploadCloudIcon className="h-full w-full" />
-                </div>
-              </div>
-              <p className="text-[#ffeed6] m-0 mb-4 text-sm opacity-80">Upload your partner hours report</p>
-              <button 
-                className="text-sm font-medium text-[#364949] bg-[#93ec93] hover:bg-opacity-90 inline-flex h-10 sm:h-12 justify-center items-center whitespace-nowrap border-0 rounded-full px-6 sm:px-8 py-2 sm:py-3 transition-all duration-300 shadow-md hover:shadow-lg group file-dropzone-btn"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  fileInputRef.current?.click();
-                }}
-              >
-                <UploadCloudIcon className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform duration-300" />
-                <span className="font-medium">Upload Report</span>
-              </button>
+          <div className="starbucks-fade-in">
+            <div className="w-16 h-16 bg-starbucks-sage/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <ImageIcon className="w-8 h-8 text-starbucks-sage" />
             </div>
-            <div className="text-xs text-[#9fd6e9] mt-4 opacity-70">
-              Supported formats: PNG, JPG, JPEG, GIF
-            </div>
+            <h3 className="text-lg font-medium text-starbucks-forest mb-2">Upload Partner Schedule</h3>
+            <p className="text-muted-foreground text-sm mb-6 max-w-xs mx-auto">
+              Drag and drop your schedule image here, or click to browse
+            </p>
+            <button 
+              className="starbucks-btn starbucks-btn-primary"
+              onClick={(e) => {
+                e.stopPropagation();
+                fileInputRef.current?.click();
+              }}
+            >
+              <Upload className="w-4 h-4" />
+              Choose File
+            </button>
+            <p className="text-xs text-muted-foreground mt-4">
+              Supports PNG, JPG, JPEG, GIF
+            </p>
           </div>
         );
+    }
+  };
+  
+  const getDropzoneClasses = () => {
+    const baseClasses = "starbucks-upload-zone";
+    
+    switch (state) {
+      case DropzoneState.DRAGGING:
+        return `${baseClasses} dragover border-starbucks-forest bg-starbucks-forest/5`;
+      case DropzoneState.PROCESSING:
+        return `${baseClasses} border-starbucks-gold/50 bg-starbucks-gold/5`;
+      case DropzoneState.SUCCESS:
+        return `${baseClasses} border-starbucks-forest/50 bg-starbucks-forest/5`;
+      case DropzoneState.ERROR:
+        return `${baseClasses} border-red-300 bg-red-50`;
+      default:
+        return baseClasses;
     }
   };
   
   return (
     <>
       <div
-        className="gradient-border mb-4 sm:mb-6 bg-[#3a5c5c] text-center rounded-lg p-4 sm:p-6 flex justify-center items-center min-h-[200px] sm:min-h-[220px] shadow-soft"
+        className={getDropzoneClasses()}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
@@ -252,7 +250,6 @@ export default function FileDropzone() {
       </div>
       <input
         type="file"
-        id="fileInput"
         ref={fileInputRef}
         className="hidden"
         accept="image/*"
