@@ -49,7 +49,7 @@ export async function analyzeImageWithMoondream(imageBase64: string): Promise<{t
     `;
     
     const requestBody = {
-      image: `data:image/jpeg;base64,${imageBase64}`,
+      image_url: `data:image/jpeg;base64,${imageBase64}`,
       question: promptText
     };
     
