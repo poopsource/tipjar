@@ -24,7 +24,7 @@ export async function analyzeImage(imageBase64) {
     
     // Construct the request body with the image and prompt
     const requestBody = {
-      image_url: `data:image/jpeg;base64,${imageBase64}`,
+      image: `data:image/jpeg;base64,${imageBase64}`,
       question: `
         Analyze this image and extract ALL partner names and their corresponding hours worked.
         
