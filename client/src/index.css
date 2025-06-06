@@ -222,7 +222,7 @@
 
 /* State Layers */
 .state-layer-hover {
-  @apply relative after:absolute after:inset-0 after:rounded-[inherit] after:bg-current after:opacity-0 hover:after:opacity-5 transition-all duration-200;
+  @apply relative after:absolute after:inset-0 after:rounded-[inherit] after:bg-current after:opacity-0 hover:after:opacity-8 transition-all duration-200;
 }
 
 .state-layer-active {
