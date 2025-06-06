@@ -4,11 +4,11 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "dev": "export NODE_ENV=development && export MOONDREAM_API_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlfaWQiOiIxOGViZDU0OC00NmQ5LTQwODUtOTUxYy0zZGQxZWJjNWI5ZDgiLCJvcmdfaWQiOiJXTVU2Q0NmQlJkclpDVXQyY1pobldFVnFHUXNhV1JBNSIsImlhdCI6MTc0OTIwNzAzNSwidmVyIjoxfQ.ZpzygljyiO0JiHsYjl5gAxnqpM3FbtlbuUKgKc88-9s && tsx server/index.ts",
+    "dev": "export NODE_ENV=development && export GEMINI_API_KEY=AIzaSyC5UtVvP94WG2GjmgSvDsEkC4IPIfy6JsI && tsx server/index.ts",
     "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
     "build:netlify": "vite build && npm run build:functions",
     "build:functions": "esbuild netlify/functions/api.js --platform=node --packages=external --bundle --format=esm --outfile=netlify/functions/api.mjs",
-    "start": "export NODE_ENV=production && export MOONDREAM_API_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlfaWQiOiIxOGViZDU0OC00NmQ5LTQwODUtOTUxYy0zZGQxZWJjNWI5ZDgiLCJvcmdfaWQiOiJXTVU2Q0NmQlJkclpDVXQyY1pobldFVnFHUXNhV1JBNSIsImlhdCI6MTc0OTIwNzAzNSwidmVyIjoxfQ.ZpzygljyiO0JiHsYjl5gAxnqpM3FbtlbuUKgKc88-9s && export SESSION_SECRET=mysecret123 && node dist/index.js",
+    "start": "export NODE_ENV=production && export GEMINI_API_KEY=AIzaSyC5UtVvP94WG2GjmgSvDsEkC4IPIfy6JsI && export SESSION_SECRET=mysecret123 && node dist/index.js",
     "check": "tsc",
     "db:push": "drizzle-kit push"
   },
