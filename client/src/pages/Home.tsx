@@ -6,7 +6,6 @@ import PartnerPayoutsList from "@/components/PartnerPayoutsList";
 import { useTipContext } from "@/context/TipContext";
 import { apiRequest } from "@/lib/queryClient";
 import { calculateHourlyRate } from "@/lib/utils";
-import { Coffee, Calculator, Users, DollarSign } from "lucide-react";
 
 export default function Home() {
   const [tipAmount, setTipAmount] = useState<number | ''>('');
@@ -23,7 +22,7 @@ export default function Home() {
     if (!partnerHours.length) {
       toast({
         title: "No partner data",
-        description: "Please upload a schedule with partner information",
+        description: "Please upload a report with partner information",
         variant: "destructive"
       });
       return;
@@ -75,139 +74,104 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="starbucks-container py-6 border-b border-border/30">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-starbucks-forest rounded-xl flex items-center justify-center shadow-medium">
-              <Coffee className="w-6 h-6 text-starbucks-warm-white" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold text-starbucks-forest">TipJar</h1>
-              <p className="text-sm text-muted-foreground">Smart tip distribution for partners</p>
-            </div>
-          </div>
-          
-          <div className="hidden md:flex items-center gap-4 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <Users className="w-4 h-4" />
-              <span>{partnerHours.length} partners</span>
-            </div>
-            {distributionData && (
-              <div className="flex items-center gap-2">
-                <DollarSign className="w-4 h-4" />
-                <span>${distributionData.totalAmount.toFixed(2)} total</span>
+    <main className="px-2 sm:px-4 max-w-full overflow-hidden">
+      <div className="mt-4 sm:mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+        {/* Left Column - Input Section */}
+        <div className="md:col-span-1">
+          <div className="card animate-fadeIn shadow-soft">
+            <div className="card-header">
+              <div className="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-[#93EC93]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <div className="text-lg font-semibold tracking-tight text-[#f5f5f5]">
+                  TipJar
+                </div>
               </div>
-            )}
-          </div>
-        </div>
-      </header>
-
-      <main className="starbucks-container py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Input Section */}
-          <div className="lg:col-span-1">
-            <div className="starbucks-card starbucks-fade-in">
-              <div className="starbucks-card-header">
-                <div className="flex items-center gap-3">
-                  <Calculator className="w-5 h-5 text-starbucks-forest" />
-                  <div>
-                    <h2 className="text-lg font-semibold text-starbucks-forest">Calculate Distribution</h2>
-                    <p className="text-sm text-muted-foreground">Upload schedule and enter tip amount</p>
+            </div>
+            <div className="card-body">
+              <FileDropzone />
+              
+              <div className="mb-4 sm:mb-6 mt-4">
+                <label htmlFor="tipAmount" className="flex items-center text-sm font-medium text-[#ffeed6] mb-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1 text-[#93EC93]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  Total Tip Amount
+                </label>
+                <div className="relative">
+                  <div className="pointer-events-none absolute top-0 bottom-0 left-0 flex items-center pl-4">
+                    <span className="text-[#9fd6e9] font-medium">$</span>
                   </div>
+                  <input
+                    id="tipAmount"
+                    type="number"
+                    value={tipAmount}
+                    onChange={(e) => setTipAmount(e.target.value ? Number(e.target.value) : '')}
+                    className="h-12 w-full bg-[#364949] text-[#f5f5f5] border-[1.11111px] border-[#415858] rounded-md py-2 px-3 pl-8 focus:outline-none focus:ring-2 focus:ring-[#93ec93] focus:border-transparent transition-all"
+                    placeholder="0.00"
+                    min="0"
+                    step="0.01"
+                  />
                 </div>
               </div>
               
-              <div className="starbucks-card-body space-y-6">
-                <FileDropzone />
-                
-                <div className="space-y-3">
-                  <label htmlFor="tipAmount" className="starbucks-label">
-                    <DollarSign className="w-4 h-4 inline mr-2" />
-                    Total Tip Amount
-                  </label>
-                  <div className="relative">
-                    <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground">
-                      $
-                    </div>
-                    <input
-                      id="tipAmount"
-                      type="number"
-                      value={tipAmount}
-                      onChange={(e) => setTipAmount(e.target.value ? Number(e.target.value) : '')}
-                      className="starbucks-input pl-8"
-                      placeholder="0.00"
-                      min="0"
-                      step="0.01"
-                    />
+              <button 
+                onClick={handleCalculate} 
+                className="text-[#364949] bg-[#93ec93] hover:bg-opacity-90 transition-all duration-300 inline-flex h-12 w-full justify-center items-center gap-2 whitespace-nowrap font-medium rounded-md px-4 py-3 shadow-md hover:shadow-lg file-dropzone-btn"
+                disabled={isCalculating}
+              >
+                {isCalculating ? (
+                  <div className="flex items-center justify-center">
+                    <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-[#364949]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Calculating...
                   </div>
-                </div>
-                
-                <button 
-                  onClick={handleCalculate} 
-                  className="starbucks-btn starbucks-btn-primary w-full"
-                  disabled={isCalculating}
-                >
-                  {isCalculating ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                      Calculating...
-                    </>
-                  ) : (
-                    <>
-                      <Calculator className="w-4 h-4" />
-                      Calculate Distribution
-                    </>
-                  )}
-                </button>
-              </div>
+                ) : (
+                  <div className="flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                    Calculate Distribution
+                  </div>
+                )}
+              </button>
               
-              <div className="starbucks-card-footer border-t border-border/30 text-center text-sm text-muted-foreground">
-                <div className="font-medium text-starbucks-forest">Made by William Walsh</div>
-                <div className="text-xs">Starbucks Store #66900</div>
+              <div className="mt-3 text-center text-[#f5f5f5]">
+                <div className="font-medium">Made by William Walsh</div>
+                <div className="text-xs text-[#9fd6e9]">Starbucks Store# 66900</div>
               </div>
             </div>
-            
-            {/* Mobile Results Indicator */}
-            {distributionData && (
-              <div className="lg:hidden mt-6 starbucks-card p-4 text-center starbucks-slide-up">
-                <div className="flex items-center justify-center gap-2 text-starbucks-forest">
-                  <div className="w-2 h-2 bg-starbucks-gold rounded-full animate-pulse" />
-                  <span className="text-sm font-medium">Scroll down to see distribution results</span>
-                </div>
-              </div>
-            )}
           </div>
           
-          {/* Results Section */}
-          <div className="lg:col-span-2">
-            {distributionData ? (
-              <div className="space-y-8 starbucks-slide-up">
-                <ResultsSummaryCard 
-                  totalHours={distributionData.totalHours}
-                  hourlyRate={distributionData.hourlyRate}
-                  totalAmount={distributionData.totalAmount}
-                />
-                
-                <PartnerPayoutsList distributionData={distributionData} />
-              </div>
-            ) : (
-              <div className="starbucks-card h-full flex items-center justify-center">
-                <div className="text-center py-12">
-                  <div className="w-16 h-16 bg-starbucks-beige rounded-xl flex items-center justify-center mx-auto mb-4">
-                    <Coffee className="w-8 h-8 text-starbucks-sage" />
-                  </div>
-                  <h3 className="text-lg font-medium text-starbucks-forest mb-2">Ready to Calculate</h3>
-                  <p className="text-muted-foreground max-w-md">
-                    Upload your partner schedule and enter the total tip amount to get started with the distribution calculation.
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
+          {/* Mobile-only results instruction */}
+          {distributionData && (
+            <div className="block md:hidden mt-4 p-3 rounded-md bg-[#364949] text-[#ffeed6] text-sm text-center animate-fadeIn">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-auto mb-1 text-[#93EC93]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
+              </svg>
+              Scroll down to see your distribution results
+            </div>
+          )}
         </div>
-      </main>
-    </div>
+        
+        {/* Middle/Right Column - Results Section */}
+        <div className="md:col-span-2">
+          {distributionData && (
+            <div className="results-container">
+              <ResultsSummaryCard 
+                totalHours={distributionData.totalHours}
+                hourlyRate={distributionData.hourlyRate}
+                totalAmount={distributionData.totalAmount}
+              />
+              
+              <PartnerPayoutsList distributionData={distributionData} />
+            </div>
+          )}
+        </div>
+      </div>
+    </main>
   );
 }

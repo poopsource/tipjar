@@ -13,23 +13,6 @@ export default {
     },
     extend: {
       colors: {
-        // Starbucks Color System
-        'starbucks-forest': '#00704A',
-        'starbucks-forest-light': '#1E8A5F',
-        'starbucks-forest-dark': '#004D33',
-        'starbucks-cream': '#F7F5F3',
-        'starbucks-cream-dark': '#F0EDE8',
-        'starbucks-coffee': '#8B4513',
-        'starbucks-coffee-light': '#A0522D',
-        'starbucks-beige': '#E8E2D5',
-        'starbucks-beige-dark': '#D4C7B8',
-        'starbucks-gold': '#D4AF37',
-        'starbucks-gold-light': '#E6C547',
-        'starbucks-sage': '#9CAF88',
-        'starbucks-charcoal': '#2C2C2C',
-        'starbucks-warm-white': '#FEFCFA',
-        
-        // ShadCN UI compatibility
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -64,30 +47,18 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
       },
-      fontFamily: {
-        'primary': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-        'accent': ['Lora', 'Georgia', 'serif'],
-      },
-      spacing: {
-        'xs': '4px',
-        'sm': '8px',
-        'md': '16px',
-        'lg': '24px',
-        'xl': '32px',
-        '2xl': '48px',
+      opacity: {
+        '12': '0.12'
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
-        xl: "12px",
-        '2xl': "16px",
       },
       boxShadow: {
-        'soft': '0 2px 8px rgba(0, 112, 74, 0.08)',
-        'medium': '0 4px 16px rgba(0, 112, 74, 0.12)',
-        'strong': '0 8px 32px rgba(0, 112, 74, 0.16)',
-        'glow': '0 0 20px rgba(212, 175, 55, 0.3)',
+        'elevation-1': 'var(--md-sys-elevation-level1)',
+        'elevation-2': 'var(--md-sys-elevation-level2)',
+        'elevation-3': 'var(--md-sys-elevation-level3)',
       },
       keyframes: {
         "accordion-down": {
@@ -98,48 +69,43 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "starbucks-fade-in": {
+        fadeIn: {
           from: { 
             opacity: '0',
-            transform: 'translateY(-8px)',
+            transform: 'translateY(-4px)',
           },
           to: { 
             opacity: '1',
             transform: 'translateY(0)',
           },
         },
-        "starbucks-slide-up": {
+        fadeUp: {
           from: { 
             opacity: '0',
-            transform: 'translateY(16px)',
+            transform: 'translateY(8px)',
           },
           to: { 
             opacity: '1',
             transform: 'translateY(0)',
           },
         },
-        "starbucks-scale-in": {
+        scaleIn: {
           from: {
             opacity: '0',
-            transform: 'scale(0.95)',
+            transform: 'scale(0.97)',
           },
           to: {
             opacity: '1',
             transform: 'scale(1)',
           },
         },
-        "starbucks-shimmer": {
-          '0%': { transform: 'translateX(-100%)' },
-          '100%': { transform: 'translateX(100%)' },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "starbucks-fade-in": "starbucks-fade-in 0.5s ease-out",
-        "starbucks-slide-up": "starbucks-slide-up 0.6s ease-out",
-        "starbucks-scale-in": "starbucks-scale-in 0.4s ease-out",
-        "starbucks-shimmer": "starbucks-shimmer 1.5s infinite",
+        "fade-in": "fadeIn 0.4s cubic-bezier(0.2, 0, 0, 1)",
+        "fade-up": "fadeUp 0.5s cubic-bezier(0.2, 0, 0, 1)",
+        "scale-in": "scaleIn 0.4s cubic-bezier(0.2, 0, 0, 1)",
       },
     },
   },

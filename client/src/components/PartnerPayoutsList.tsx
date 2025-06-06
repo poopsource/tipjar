@@ -1,18 +1,18 @@
 import { DistributionData } from "@shared/schema";
 import PartnerCard from "./PartnerCard";
-import { Calculator, Banknote, Users } from "lucide-react";
 
 type PartnerPayoutsListProps = {
   distributionData: DistributionData;
 };
 
+// Map each bill denomination to a color
 const getBillClass = (billStr: string): string => {
   switch(billStr) {
-    case "$20": return "starbucks-bill-20";
-    case "$10": return "starbucks-bill-10";
-    case "$5": return "starbucks-bill-5";
-    case "$1": return "starbucks-bill-1";
-    default: return "starbucks-bill-1";
+    case "$20": return "bg-[#d2b0e3] text-[#364949]"; // Purple for $20
+    case "$10": return "bg-[#dd7895] text-[#364949]"; // Pink for $10
+    case "$5": return "bg-[#ffd1ba] text-[#364949]";  // Orange for $5
+    case "$1": return "bg-[#ffeed6] text-[#364949]";  // Yellow for $1
+    default: return "bg-[#93ec93] text-[#364949]";    // Green fallback
   }
 };
 
@@ -34,84 +34,89 @@ export default function PartnerPayoutsList({ distributionData }: PartnerPayoutsL
   });
   
   return (
-    <div className="space-y-8">
-      {/* Calculation Overview */}
-      <div className="starbucks-card starbucks-fade-in">
-        <div className="starbucks-card-header">
-          <div className="flex items-center gap-3">
-            <Calculator className="w-5 h-5 text-starbucks-forest" />
-            <div>
-              <h2 className="text-xl font-semibold text-starbucks-forest">Calculation Details</h2>
-              <p className="text-sm text-muted-foreground">Formula breakdown and bill requirements</p>
+    <div className="animate-fadeIn">
+      <div className="card mb-8 shadow-soft">
+        <div className="card-header">
+          <div className="flex items-center justify-center w-full">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-[#93EC93]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div className="text-xl font-semibold tracking-tight text-[#f5f5f5]">
+              Calculation Details
             </div>
           </div>
         </div>
         
-        <div className="starbucks-card-body space-y-6">
-          <div className="starbucks-calculation">
-            <h3 className="font-medium text-starbucks-forest mb-3 flex items-center gap-2">
-              <Calculator className="w-4 h-4" />
-              Distribution Formula
-            </h3>
-            <div className="starbucks-calculation-formula">
-              <span className="starbucks-calculation-value">
-                Total Tips: ${totalAmount.toFixed(2)}
-              </span>
-              <span className="starbucks-calculation-operator">÷</span>
-              <span className="starbucks-calculation-value">
-                Total Hours: {totalHours}
-              </span>
-              <span className="starbucks-calculation-operator">=</span>
-              <span className="starbucks-calculation-value font-bold text-starbucks-forest">
-                ${(Math.floor(hourlyRate * 100) / 100).toFixed(2)} per hour
-              </span>
+        <div className="card-body">
+          <div className="p-5 rounded-lg mb-5 bg-[#364949] gradient-border animate-fadeUp">
+            <div className="text-xs text-[#9fd6e9] mb-2">Formula</div>
+            <div className="flex flex-wrap items-center">
+              <div className="bg-[#1E3535] px-4 py-2 rounded-md mr-3 mb-2 formula-item">
+                <span className="text-[#ffeed6] text-sm mr-1">Total Tips:</span> 
+                <span className="font-bold text-[#dd7895]">${totalAmount.toFixed(2)}</span>
+              </div>
+              
+              <span className="mx-2 text-[#ffeed6] text-lg mb-2">÷</span>
+              
+              <div className="bg-[#1E3535] px-4 py-2 rounded-md mr-3 mb-2 formula-item">
+                <span className="text-[#ffeed6] text-sm mr-1">Total Hours:</span>
+                <span className="font-bold text-[#f5f5f5]">{totalHours}</span>
+              </div>
+              
+              <span className="mx-2 text-[#ffeed6] text-lg mb-2">=</span>
+              
+              <div className="bg-[#1E3535] px-4 py-2 rounded-md mb-2 formula-item">
+                <span className="font-bold text-[#9fd6e9]">
+                  ${(Math.floor(hourlyRate * 100) / 100).toFixed(2)}
+                </span>
+                <span className="text-[#ffeed6] text-sm ml-1">per hour</span>
+              </div>
             </div>
           </div>
           
-          <div className="starbucks-calculation">
-            <h3 className="font-medium text-starbucks-forest mb-3 flex items-center gap-2">
-              <Banknote className="w-4 h-4" />
-              Total Bills Needed
+          <div className="animate-fadeUp" style={{animationDelay: "0.1s"}}>
+            <h3 className="flex items-center font-medium mb-3 text-[#f5f5f5]">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1 text-[#93EC93]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              Total Bills Needed:
             </h3>
-            <div className="flex flex-wrap gap-3">
-              {Object.entries(billsNeeded)
-                .sort(([billA], [billB]) => {
-                  const denominationA = parseInt(billA.replace('$', ''));
-                  const denominationB = parseInt(billB.replace('$', ''));
-                  return denominationB - denominationA;
-                })
-                .map(([bill, count], index) => {
-                  const billClass = getBillClass(bill);
-                  return (
-                    <div 
-                      key={index} 
-                      className={`starbucks-bill-badge ${billClass} text-base px-4 py-2`}
-                      style={{animationDelay: `${0.1 + (index * 0.05)}s`}}
-                    >
-                      <span className="font-bold">{count}</span> × {bill}
-                    </div>
-                  );
-                })}
+            <div className="p-5 rounded-lg bg-[#364949] shadow-soft">
+              <div className="flex flex-wrap gap-3">
+                {Object.entries(billsNeeded)
+                  .sort(([billA], [billB]) => {
+                    // Extract denominationA and denominationB from the keys (e.g., "$20" -> 20)
+                    const denominationA = parseInt(billA.replace('$', ''));
+                    const denominationB = parseInt(billB.replace('$', ''));
+                    // Sort in descending order (largest denomination first)
+                    return denominationB - denominationA;
+                  })
+                  .map(([bill, count], index) => {
+                    const billClass = getBillClass(bill);
+                    return (
+                      <div 
+                        key={index} 
+                        className={`px-4 py-2 rounded-full text-sm font-medium shadow-sm transition-all hover:shadow-md hover:scale-105 ${billClass}`}
+                        style={{animationDelay: `${0.1 + (index * 0.05)}s`}}
+                      >
+                        <div className="flex items-center">
+                          <span className="font-bold mr-1">{count}</span> × {bill}
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
           </div>
         </div>
       </div>
       
-      {/* Partner Cards */}
-      <div>
-        <div className="flex items-center gap-3 mb-6">
-          <Users className="w-5 h-5 text-starbucks-forest" />
-          <h2 className="text-xl font-semibold text-starbucks-forest">Partner Payouts</h2>
-          <span className="starbucks-status-success">{partnerPayouts.length} partners</span>
-        </div>
-        
-        <div className="starbucks-grid-responsive">
-          {partnerPayouts.map((partner, index) => (
-            <div key={index} style={{animationDelay: `${0.1 + (index * 0.05)}s`}}>
-              <PartnerCard partner={partner} hourlyRate={hourlyRate} />
-            </div>
-          ))}
-        </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-6">
+        {partnerPayouts.map((partner, index) => (
+          <div key={index} style={{animationDelay: `${0.1 + (index * 0.05)}s`}}>
+            <PartnerCard partner={partner} hourlyRate={hourlyRate} />
+          </div>
+        ))}
       </div>
     </div>
   );
