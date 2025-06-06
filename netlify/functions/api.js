@@ -2,7 +2,7 @@ import express from 'express';
 import serverless from 'serverless-http';
 import multer from 'multer';
 import { storage } from '../../server/storage';
-import { analyzeImage } from '../../server/api/gemini.netlify';
+import { analyzeImage } from '../../server/api/moondream.netlify';
 import { extractPartnerHours, formatOCRResult } from '../../client/src/lib/formatUtils';
 import { calculatePayout } from '../../client/src/lib/utils';
 import { roundAndCalculateBills } from '../../client/src/lib/billCalc';
@@ -31,7 +31,7 @@ app.post("/api/ocr", upload.single("image"), async (req, res) => {
     // Convert image buffer to base64
     const imageBase64 = req.file.buffer.toString("base64");
     
-    // Use Gemini API to analyze the image
+    // Use Moondream API to analyze the image
     const result = await analyzeImage(imageBase64);
     
     if (!result.text) {
@@ -159,4 +159,4 @@ app.get("/api/partners", async (req, res) => {
 });
 
 // Export the serverless handler
-export const handler = serverless(app); 
+export const handler = serverless(app);

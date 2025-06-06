@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import multer from "multer";
-import { analyzeImage } from "./api/gemini";
+import { analyzeImageWithMoondream } from "./api/moondream";
 import { extractPartnerHours, formatOCRResult } from "../client/src/lib/formatUtils";
 import { calculatePayout } from "../client/src/lib/utils";
 import { roundAndCalculateBills } from "../client/src/lib/billCalc";
@@ -29,8 +29,8 @@ export async function registerRoutes(app: Express, skipServer = false): Promise<
       // Convert image buffer to base64
       const imageBase64 = req.file.buffer.toString("base64");
       
-      // Use Gemini API to analyze the image
-      const result = await analyzeImage(imageBase64);
+      // Use Moondream API to analyze the image
+      const result = await analyzeImageWithMoondream(imageBase64);
       
       if (!result.text) {
         // Return a specific error message from the API if available
